@@ -10,13 +10,13 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-template`:
+Next, install `eslint-plugin-ember-template`:
 
 ```
-$ npm install eslint-plugin-template --save-dev
+$ npm install eslint-plugin-ember-template --save-dev
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-hbs` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-ember-template` globally.
 
 ## Usage
 
@@ -27,10 +27,9 @@ Add `hbs` to the plugins section of your `.eslintrc` configuration file. You can
 ```js
 // .eslintrc.js
 module.exports = {
-  plugins: ['hbs-template'],
   extends: [
     'eslint:recommended',
-    'plugin:hbs-template/recommended'
+    'plugin:ember-template/recommended'
   ]
 };
 ```

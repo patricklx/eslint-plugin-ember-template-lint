@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-hbs-template",
+  "name": "eslint-plugin-ember-template",
   "version": "1.0.1",
-  "description": "Provide linting for hbs template",
+  "description": "Provide linting for ember template",
   "keywords": [
     "eslint",
     "eslintplugin",
