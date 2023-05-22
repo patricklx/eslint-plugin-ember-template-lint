@@ -1,6 +1,6 @@
 ISC License (ISC)
 
-Copyright 2017, Peter Banka
+Copyright 2017, Patrick Pircher
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
