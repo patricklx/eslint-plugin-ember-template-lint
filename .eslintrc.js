@@ -1,4 +1,9 @@
 module.exports = {
+  parserOptions: {
+    'ecmaVersion': 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['node', 'jest'],
   'env': {
     'browser': true,
     'commonjs': true,
