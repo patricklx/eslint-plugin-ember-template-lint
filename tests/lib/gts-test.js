@@ -48,13 +48,23 @@ describe('runs template-lint on gts', () => {
     const code = `
       const x = <template>
         <div class='x' class='b'></div>
-      </template>      
+      </template>
+      
+      class A {
+        <template>
+          <div class='x' class='b'></div>
+        </template>
+      }      
     `;
     const results = await eslint.lintText(code, { filePath: 'my-component.gts' });
     const resultErrors = results.flatMap((result) => result.messages);
-    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors).toHaveLength(2);
     expect(resultErrors[0].message).toBe('Duplicate attribute \'class\' found in the Element.');
-    expect(resultErrors[0].line).toBe(2);
+    expect(resultErrors[0].line).toBe(3);
     expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
+
+    expect(resultErrors[1].message).toBe('Duplicate attribute \'class\' found in the Element.');
+    expect(resultErrors[1].line).toBe(7);
+    expect(resultErrors[1].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
   });
 });
