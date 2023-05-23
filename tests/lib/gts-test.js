@@ -22,7 +22,7 @@ function initESLint(options) {
   return new ESLint({
     ignore: false,
     useEslintrc: false,
-    plugins: { 'ember-template': plugin },
+    plugins: { 'ember-template-lint': plugin },
     overrideConfig: {
       root: true,
       env: {
@@ -32,8 +32,8 @@ function initESLint(options) {
         ecmaVersion: 2020,
         sourceType: 'module',
       },
-      plugins: ['ember-template'],
-      extends: ['plugin:ember-template/recommended', 'plugin:ember-template/ember-template-lint-plugin-prettier:recommended'],
+      plugins: ['ember-template-lint'],
+      extends: ['plugin:ember-template-lint/recommended', 'plugin:ember-template-lint/ember-template-lint-plugin-prettier:recommended'],
       rules: {
       },
     },
@@ -55,6 +55,6 @@ describe('runs template-lint on gts', () => {
     expect(resultErrors).toHaveLength(1);
     expect(resultErrors[0].message).toBe('Duplicate attribute \'class\' found in the Element.');
     expect(resultErrors[0].line).toBe(2);
-    expect(resultErrors[0].ruleId).toBe('ember-template/no-duplicate-attributes');
+    expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
   });
 });
