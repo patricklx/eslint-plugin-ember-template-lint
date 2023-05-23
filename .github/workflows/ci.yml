@@ -26,10 +26,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        cache: 'npm'
 
-    - run: yarn install --frozen-lockfile --non-interactive
+    - run: npm install
 
-    - run: yarn lint:js
+    - run: npm run lint:js
 
-    - run: yarn test --runInBand
+    - run: npm run test -- --runInBand
