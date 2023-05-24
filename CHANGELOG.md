@@ -1,4 +1,11 @@
 # Changelog
 
-For every release of eslint-plugin-hbs-template we provide notes as to what to expect.
+
+## 0.1.0 (2023-05-24)
+
+#### :rocket: Release
+* first release
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
 
