@@ -64,7 +64,7 @@ describe('runs template-lint on gts', () => {
     expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
 
     expect(resultErrors[1].message).toBe('Duplicate attribute \'class\' found in the Element.');
-    expect(resultErrors[1].line).toBe(7);
+    expect(resultErrors[1].line).toBe(8);
     expect(resultErrors[1].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
   });
 });
