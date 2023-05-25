@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember-template-lint",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Provide linting for ember template",
   "keywords": [
     "eslint",
@@ -17,13 +17,14 @@
   },
   "dependencies": {
     "@glimmer/syntax": "^0.84.3",
-    "typescript": "^5.0.4",
     "@typescript-eslint/parser": "^5.59.7",
     "@typescript-eslint/typescript-estree": "^5.59.7",
     "ember-template-imports": "^3.4.2",
-    "prettier-linter-helpers": "^1.0.0",
     "ember-template-lint": "^5.7.3",
-    "synckit": "^0.8.5"
+    "ember-template-recast": "^6.1.4",
+    "prettier-linter-helpers": "^1.0.0",
+    "synckit": "^0.8.5",
+    "typescript": "^5.0.4"
   },
   "peerDependencies": {
     "ember-template-lint": "^5.7.3"
