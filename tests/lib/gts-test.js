@@ -33,7 +33,7 @@ function initESLint(options) {
         sourceType: 'module',
       },
       plugins: ['ember-template-lint'],
-      extends: ['plugin:ember-template-lint/recommended', 'plugin:ember-template-lint/ember-template-lint-plugin-prettier:recommended'],
+      extends: ['plugin:ember-template-lint/recommended'],
       rules: {
       },
     },
