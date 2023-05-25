@@ -1,6 +1,17 @@
 # Changelog
 
 
+## 0.5.0 (2023-05-25)
+
+#### :bug: Bug Fix
+* [#5](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/5) fix inline templates ([@patricklx](https://github.com/patricklx))
+* [#4](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/4) fix inline templates ([@patricklx](https://github.com/patricklx))
+* [#3](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/3) fix range of fixable rules ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## 0.2.0 (2023-05-25)
 
 #### :bug: Bug Fix
