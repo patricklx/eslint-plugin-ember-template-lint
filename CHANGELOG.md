@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.6.0 (2023-05-26)
+
+#### :bug: Bug Fix
+* [#6](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/6) fix inline templates for prettier ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## 0.5.0 (2023-05-25)
 
 #### :bug: Bug Fix
