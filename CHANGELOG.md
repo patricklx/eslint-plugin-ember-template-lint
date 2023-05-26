@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.7.0 (2023-05-26)
+
+#### :bug: Bug Fix
+* [#7](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/7) fix hbs lint ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## 0.6.0 (2023-05-26)
 
 #### :bug: Bug Fix
