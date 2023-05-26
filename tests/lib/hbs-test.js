@@ -43,6 +43,18 @@ function initESLint(options) {
 
 
 describe('runs template-lint', () => {
+  it('correctly reports errors, no inital spaces', async () => {
+    const eslint = initESLint();
+    const code = '<div class=\'x\' class=\'b\'></div>';
+    const results = await eslint.lintText(code, { filePath: 'my-component.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(1);
+    expect(resultErrors[0].message).toBe('Duplicate attribute \'class\' found in the Element.');
+    expect(resultErrors[0].line).toBe(1);
+    expect(resultErrors[0].column).toBe(16);
+    expect(resultErrors[0].fix.range[1]).toBe(24);
+    expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
+  });
   it('correctly reports errors', async () => {
     const eslint = initESLint();
     const code = `
@@ -53,6 +65,8 @@ describe('runs template-lint', () => {
     expect(resultErrors).toHaveLength(1);
     expect(resultErrors[0].message).toBe('Duplicate attribute \'class\' found in the Element.');
     expect(resultErrors[0].line).toBe(2);
+    expect(resultErrors[0].column).toBe(22);
+    expect(resultErrors[0].fix.range[0]).toBe(22);
     expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
   });
 });
