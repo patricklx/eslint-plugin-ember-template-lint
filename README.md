@@ -29,7 +29,7 @@ $ npm install eslint-plugin-ember-template-lint --save-dev
 
 ## Usage
 
-Add `hbs` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `ember-template-lint` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ### 2. Modify your `.eslintrc.js`
 
