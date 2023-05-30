@@ -1,6 +1,6 @@
 # eslint-plugin-hbs-template
 
-Provide linting for hbs templates files, template string literals and gts,gjs.
+Provide linting (via [ember-template-lint](https://github.com/ember-template-lint/ember-template-lint)) for hbs templates files, template string literals and gts,gjs 
 * no extra config file needed
 
 * no need to run extra tool for linting
