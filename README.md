@@ -1,6 +1,6 @@
 # eslint-plugin-hbs-template
 
-Provide linting for hbs templates files
+Provide linting for hbs templates files, template string literals and gts,gjs.
 * no extra config file needed
 
 * no need to run extra tool for linting
