@@ -1,6 +1,15 @@
 # eslint-plugin-hbs-template
 
 Provide linting for hbs templates files
+* no extra config file needed
+
+* no need to run extra tool for linting
+
+* no need to run extra tool to fix lint issues
+
+* no need to implement & maintain editor support for ember-template-lint
+
+* it also has the advantage that it can know the scope for some template-lint rules, like no-implicit-this, and remove those messages
 
 ## Installation
 
