@@ -66,7 +66,23 @@ describe('runs template-lint', () => {
     expect(resultErrors[0].message).toBe('Duplicate attribute \'class\' found in the Element.');
     expect(resultErrors[0].line).toBe(2);
     expect(resultErrors[0].column).toBe(22);
-    expect(resultErrors[0].fix.range[0]).toBe(22);
+    expect(resultErrors[0].fix.range[0]).toBe(21);
     expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
+  });
+  it('correctly fix template', async () => {
+    const eslint = initESLint({fix: true});
+    const code = `
+      {{#test name='test'}}
+        <div></div>
+      {{/test}}
+    `;
+    const results = await eslint.lintText(code, { filePath: 'my-component.hbs' });
+    const resultErrors = results.flatMap((result) => result.messages);
+    expect(resultErrors).toHaveLength(0);
+    expect(results[0].output).toBe(`
+      <Test @name="test">
+        <div></div>
+      </Test>
+    `);
   });
 });
