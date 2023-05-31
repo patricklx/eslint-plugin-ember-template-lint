@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.8.0 (2023-05-31)
+
+#### :bug: Bug Fix
+* [#9](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/9) fix missing body in hbs program node ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## 0.7.0 (2023-05-26)
 
 #### :bug: Bug Fix
