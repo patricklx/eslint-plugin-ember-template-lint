@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.10.0 (2023-06-06)
+
+#### :bug: Bug Fix
+* [#15](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/15) fix wrong fix range ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 ## 0.9.0 (2023-05-31)
 
 #### :bug: Bug Fix
