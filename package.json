@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember-template-lint",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Provide linting for ember template",
   "keywords": [
     "eslint",
