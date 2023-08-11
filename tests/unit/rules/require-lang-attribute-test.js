@@ -1,44 +1,35 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-lang-attribute",
-
   config: true,
-  good: [
-    '<html lang="en"></html>',
-    '<html lang="en-US"></html>',
-    "<html lang={{lang}}></html>",
-    {
-      config: {
-        validateValues: true,
-      },
-      template: '<html lang="de"></html>',
+  good: ['<html lang="en"></html>', '<html lang="en-US"></html>', "<html lang={{lang}}></html>", {
+    config: {
+      validateValues: true
     },
-    {
-      config: {
-        validateValues: true,
-      },
-      template: "<html lang={{this.language}}></html>",
+    template: '<html lang="de"></html>'
+  }, {
+    config: {
+      validateValues: true
     },
-    {
-      config: {
-        validateValues: false,
-      },
-      template: '<html lang="hurrah"></html>',
+    template: "<html lang={{this.language}}></html>"
+  }, {
+    config: {
+      validateValues: false
     },
-    {
-      config: {
-        validateValues: false,
-      },
-      template: "<html lang={{this.blah}}></html>",
+    template: '<html lang="hurrah"></html>'
+  }, {
+    config: {
+      validateValues: false
     },
-  ],
-
-  bad: [
-    {
-      template: "<html></html>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<html lang={{this.blah}}></html>"
+  }],
+  bad: [{
+    template: "<html></html>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -52,12 +43,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<html lang=""></html>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<html lang=""></html>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -71,15 +61,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: "<html></html>",
+    config: {
+      validateValues: true
     },
-    {
-      template: "<html></html>",
-      config: {
-        validateValues: true,
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -93,15 +82,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '<html lang=""></html>',
+    config: {
+      validateValues: true
     },
-    {
-      template: '<html lang=""></html>',
-      config: {
-        validateValues: true,
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -115,13 +103,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // no config, allows validateValues to default to true
-      template: '<html lang="gibberish"></html>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // no config, allows validateValues to default to true
+    template: '<html lang="gibberish"></html>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -135,15 +122,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '<html lang="gibberish"></html>',
+    config: {
+      validateValues: true
     },
-    {
-      template: '<html lang="gibberish"></html>',
-      config: {
-        validateValues: true,
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -157,15 +143,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: "<html></html>",
+    config: {
+      validateValues: false
     },
-    {
-      template: "<html></html>",
-      config: {
-        validateValues: false,
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -179,15 +164,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '<html lang=""></html>',
+    config: {
+      validateValues: false
     },
-    {
-      template: '<html lang=""></html>',
-      config: {
-        validateValues: false,
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -201,7 +185,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

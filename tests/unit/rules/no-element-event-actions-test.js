@@ -1,35 +1,25 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-element-event-actions",
-
   config: true,
-
-  good: [
-    "<button></button>",
-    '<button type="button" on={{action "myAction"}}></button>',
-    '<button type="button" onclick="myFunction()"></button>',
-    '<button type="button" {{action "myAction"}}></button>',
-    '<button type="button" value={{value}}></button>',
-    '{{my-component onclick=(action "myAction") someProperty=true}}',
-    '<SiteHeader @someFunction={{action "myAction"}} @user={{this.user}} />',
-    {
-      config: { requireActionHelper: true },
-      template: '<button type="button" onclick={{this.myAction}}></button>',
+  good: ["<button></button>", '<button type="button" on={{action "myAction"}}></button>', '<button type="button" onclick="myFunction()"></button>', '<button type="button" {{action "myAction"}}></button>', '<button type="button" value={{value}}></button>', '{{my-component onclick=(action "myAction") someProperty=true}}', '<SiteHeader @someFunction={{action "myAction"}} @user={{this.user}} />', {
+    config: {
+      requireActionHelper: true
     },
-    {
-      config: { requireActionHelper: false },
-      template: '<button type="button" onclick="myFunction()"></button>',
+    template: '<button type="button" onclick={{this.myAction}}></button>'
+  }, {
+    config: {
+      requireActionHelper: false
     },
-  ],
-
-  bad: [
-    {
-      template:
-        '<button onclick={{action "myAction"}} ONFOCUS={{action "myAction"}} otherProperty=true></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<button type="button" onclick="myFunction()"></button>'
+  }],
+  bad: [{
+    template: '<button onclick={{action "myAction"}} ONFOCUS={{action "myAction"}} otherProperty=true></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -53,15 +43,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template:
-        '<SiteHeader onclick={{action "myAction"}} @user={{this.user}} />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SiteHeader onclick={{action "myAction"}} @user={{this.user}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -75,15 +61,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      requireActionHelper: false
     },
-
-    {
-      config: { requireActionHelper: false },
-      template: '<button type="button" onclick={{this.myAction}}></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<button type="button" onclick={{this.myAction}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -97,13 +82,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button type="button" onclick={{this.myAction}}></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type="button" onclick={{this.myAction}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -117,46 +100,39 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }],
+  error: [{
+    config: null,
+    template: "test",
+    result: {
+      fatal: true,
+      message: "You specified `null`"
+    }
+  }, {
+    config: "true",
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `"true"`'
+    }
+  }, {
+    config: {
+      invalidOption: true
     },
-  ],
-
-  error: [
-    {
-      config: null,
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: "You specified `null`",
-      },
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `{"invalidOption":true}`'
+    }
+  }, {
+    config: {
+      requireActionHelper: "true"
     },
-    {
-      config: "true",
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `"true"`',
-      },
-    },
-    {
-      config: { invalidOption: true },
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `{"invalidOption":true}`',
-      },
-    },
-    {
-      config: { requireActionHelper: "true" },
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `{"requireActionHelper":"true"}`',
-      },
-    },
-  ],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `{"requireActionHelper":"true"}`'
+    }
+  }]
 });

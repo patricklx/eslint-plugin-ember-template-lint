@@ -1,23 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-each-key",
-
   config: true,
-
-  good: [
-    '{{#each this.items key="id" as |item|}} {{item.name}} {{/each}}',
-    '{{#each this.items key="deeply.nested.id" as |item|}} {{item.name}} {{/each}}',
-    '{{#each this.items key="@index" as |item|}} {{item.name}} {{/each}}',
-    '{{#each this.items key="@identity" as |item|}} {{item.name}} {{/each}}',
-    "{{#if foo}}{{/if}}",
-  ],
-
-  bad: [
-    {
-      template: "{{#each this.items as |item|}} {{item.name}} {{/each}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['{{#each this.items key="id" as |item|}} {{item.name}} {{/each}}', '{{#each this.items key="deeply.nested.id" as |item|}} {{item.name}} {{/each}}', '{{#each this.items key="@index" as |item|}} {{item.name}} {{/each}}', '{{#each this.items key="@identity" as |item|}} {{item.name}} {{/each}}', "{{#if foo}}{{/if}}"],
+  bad: [{
+    template: "{{#each this.items as |item|}} {{item.name}} {{/each}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -31,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#each this.items key="@invalid" as |item|}} {{item.name}} {{/each}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#each this.items key="@invalid" as |item|}} {{item.name}} {{/each}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -51,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#each this.items key="" as |item|}} {{item.name}} {{/each}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#each this.items key="" as |item|}} {{item.name}} {{/each}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -70,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

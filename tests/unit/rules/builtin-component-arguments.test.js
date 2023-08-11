@@ -1,23 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "builtin-component-arguments",
-
   config: true,
-
-  good: [
-    "<Input/>",
-    '<input type="text" size="10" />',
-    '<Input @type="text" size="10" />',
-    '<Input @type="checkbox" @checked={{true}} />',
-    '<Textarea @value="Tomster" />',
-  ],
-
-  bad: [
-    {
-      template: '<Input type="text" size="10" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<Input/>", '<input type="text" size="10" />', '<Input @type="text" size="10" />', '<Input @type="checkbox" @checked={{true}} />', '<Textarea @value="Tomster" />'],
+  bad: [{
+    template: '<Input type="text" size="10" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -31,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Input @type="checkbox" checked />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Input @type="checkbox" checked />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 25,
@@ -50,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Textarea value="Tomster" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Textarea value="Tomster" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -69,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,38 +1,16 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const setterAlternative = "`{{set}}`";
-
-generateRuleTests({
+(0, _ruleTestHarness.default)({
   name: "no-mut-helper",
-
   config: true,
-
-  good: [
-    "<MyComponent @toggled={{this.showAggregatedLine}}/>",
-    '<MyComponent @toggle={{set this "isDropdownOpen"}}/>',
-    '<MyComponent @onFocusOut={{action "onFocusOutKeySkillsInput" value="target.value"}}/>',
-    '<MyComponent {{on "click" (set this "isDropdownOpen" false)}}/>',
-    '<MyComponent {{on "change" this.setContactUsSectionDescription}}/>',
-    '<MyComponent {{on "change" (fn this.setContactUsSectionDescription true)}}/>',
-    '<MyComponent {{on "change" (action "setContactUsSectionDescription")}}/>',
-    '<MyComponent {{on "change" (action "setContactUsSectionDescription" true)}}/>',
-    '<MyComponent {{action "setIsDropdownOpen" false}}/>',
-    '<MyComponent @dismissModal={{set this "isRequestExpiredModalOpen" false}}/>',
-    "<MyComponent onclick={{set this “expandVoluntarySelfIdHelpText” true}}/>",
-    '<MyComponent @click={{set this "isCardCollapsed" (if this.isCardCollapsed false true)}}/>',
-    '{{my-component click=(set this "isOpen" false)}}',
-    '{{my-component click=(set this "isLegalTextExpanded" (not this.isLegalTextExpanded))}}',
-    "{{my-component onVisibilityChange=(set this “isDropdownOpen”)}}",
-    "{{my-component click=(set this “expandVoluntarySelfIdHelpText” true)}}",
-    "{{my-component value=this.secondaryProfileHeadline}}",
-    '<div {{mutate this.isDropdownOpen}} class="muted mut">Non-helper substrings with mut in them should not violate this rule.</div>',
-  ],
-
-  bad: [
-    {
-      template: "<MyComponent @toggled={{mut this.showAggregatedLine}}/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<MyComponent @toggled={{this.showAggregatedLine}}/>", '<MyComponent @toggle={{set this "isDropdownOpen"}}/>', '<MyComponent @onFocusOut={{action "onFocusOutKeySkillsInput" value="target.value"}}/>', '<MyComponent {{on "click" (set this "isDropdownOpen" false)}}/>', '<MyComponent {{on "change" this.setContactUsSectionDescription}}/>', '<MyComponent {{on "change" (fn this.setContactUsSectionDescription true)}}/>', '<MyComponent {{on "change" (action "setContactUsSectionDescription")}}/>', '<MyComponent {{on "change" (action "setContactUsSectionDescription" true)}}/>', '<MyComponent {{action "setIsDropdownOpen" false}}/>', '<MyComponent @dismissModal={{set this "isRequestExpiredModalOpen" false}}/>', "<MyComponent onclick={{set this “expandVoluntarySelfIdHelpText” true}}/>", '<MyComponent @click={{set this "isCardCollapsed" (if this.isCardCollapsed false true)}}/>', '{{my-component click=(set this "isOpen" false)}}', '{{my-component click=(set this "isLegalTextExpanded" (not this.isLegalTextExpanded))}}', "{{my-component onVisibilityChange=(set this “isDropdownOpen”)}}", "{{my-component click=(set this “expandVoluntarySelfIdHelpText” true)}}", "{{my-component value=this.secondaryProfileHeadline}}", '<div {{mutate this.isDropdownOpen}} class="muted mut">Non-helper substrings with mut in them should not violate this rule.</div>'],
+  bad: [{
+    template: "<MyComponent @toggled={{mut this.showAggregatedLine}}/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -46,12 +24,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{my-component value=(mut this.secondaryProfileHeadline)}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{my-component value=(mut this.secondaryProfileHeadline)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 22,
@@ -65,12 +42,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<MyComponent {{action (mut this.isDropdownOpen) false}}/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<MyComponent {{action (mut this.isDropdownOpen) false}}/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -84,13 +60,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<MyComponent @dismissModal={{action (mut this.isRequestExpiredModalOpen) false}}/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<MyComponent @dismissModal={{action (mut this.isRequestExpiredModalOpen) false}}/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 37,
@@ -104,13 +78,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<MyComponent @click={{action (mut this.isCardCollapsed) (if this.isCardCollapsed false true)}}/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<MyComponent @click={{action (mut this.isCardCollapsed) (if this.isCardCollapsed false true)}}/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 30,
@@ -124,13 +96,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<MyComponent onclick={{fn (mut this.expandVoluntarySelfIdHelpText) true}}/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<MyComponent onclick={{fn (mut this.expandVoluntarySelfIdHelpText) true}}/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 27,
@@ -144,13 +114,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<MyComponent @onVisibilityChange={{fn (mut this.isDropdownOpen)}}/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<MyComponent @onVisibilityChange={{fn (mut this.isDropdownOpen)}}/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 39,
@@ -164,12 +132,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{my-component click=(action (mut this.isOpen) false)}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{my-component click=(action (mut this.isOpen) false)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 30,
@@ -183,13 +150,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "{{my-component click=(action (mut this.isLegalTextExpanded) (not this.isLegalTextExpanded))}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{my-component click=(action (mut this.isLegalTextExpanded) (not this.isLegalTextExpanded))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 30,
@@ -203,13 +168,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "{{my-component onVisibilityChange=(action (mut this.isDropdownOpen))}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{my-component onVisibilityChange=(action (mut this.isDropdownOpen))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 43,
@@ -223,13 +186,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "{{my-component click=(fn (mut this.showManageEventsModal) true)}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{my-component click=(fn (mut this.showManageEventsModal) true)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 26,
@@ -243,16 +204,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `<MyComponent
+    }
+  }, {
+    template: `<MyComponent
           @onVisibilityChange={{action
             (mut this.isDemographicsDropdownOpen)
           }}
         />`,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -266,17 +226,16 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `<MyComponent
+    }
+  }, {
+    template: `<MyComponent
           @dismissModal={{action
             (mut this.isNotificationsPostApprovalModalOpen)
             false
           }}
         />`,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -290,13 +249,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<MyComponent onchange={{action (mut this.contactUsSection.description) value="target.value"}}/>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<MyComponent onchange={{action (mut this.contactUsSection.description) value="target.value"}}/>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 32,
@@ -310,16 +267,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      setterAlternative
     },
-    {
-      config: {
-        setterAlternative,
-      },
-      template:
-        '<MyComponent onchange={{action (mut this.contactUsSection.description) value="target.value"}}/>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<MyComponent onchange={{action (mut this.contactUsSection.description) value="target.value"}}/>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 32,
@@ -333,7 +288,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

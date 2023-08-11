@@ -1,28 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-yield-to-default",
-
   config: true,
-
-  good: [
-    "{{yield}}",
-    '{{yield to="title"}}',
-    "{{has-block}}",
-    '{{has-block "title"}}',
-    "{{has-block-params}}",
-    '{{has-block-params "title"}}',
-    "{{hasBlock}}",
-    '{{hasBlock "title"}}',
-    "{{hasBlockParams}}",
-    '{{hasBlockParams "title"}}',
-  ],
-
-  bad: [
-    {
-      template: '{{yield to="default"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{yield}}", '{{yield to="title"}}', "{{has-block}}", '{{has-block "title"}}', "{{has-block-params}}", '{{has-block-params "title"}}', "{{hasBlock}}", '{{hasBlock "title"}}', "{{hasBlockParams}}", '{{hasBlockParams "title"}}'],
+  bad: [{
+    template: '{{yield to="default"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -36,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{has-block "default"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{has-block "default"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -55,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{has-block-params "default"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{has-block-params "default"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -74,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{hasBlock "default"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{hasBlock "default"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -93,12 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{hasBlockParams "default"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{hasBlockParams "default"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -112,12 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (has-block "default")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (has-block "default")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -131,12 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (has-block "default")}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (has-block "default")}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -150,12 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (has-block-params "default")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (has-block-params "default")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 24,
@@ -169,12 +149,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (has-block-params "default")}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (has-block-params "default")}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 25,
@@ -188,12 +167,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (hasBlock "default")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (hasBlock "default")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 16,
@@ -207,12 +185,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (hasBlock "default")}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (hasBlock "default")}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -226,12 +203,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (hasBlockParams "default")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (hasBlockParams "default")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 22,
@@ -245,12 +221,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (hasBlockParams "default")}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (hasBlockParams "default")}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -264,7 +239,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

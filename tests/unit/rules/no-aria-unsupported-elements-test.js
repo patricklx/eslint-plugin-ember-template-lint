@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-aria-unsupported-elements",
-
   config: true,
-
-  good: [
-    '<meta charset="UTF-8" />',
-    '<html lang="en"></html>',
-    "<script></script>",
-    "<div></div>",
-    '<div aria-foo="true"></div>',
-    '<div role="foo"></div>',
-  ],
-
-  bad: [
-    {
-      template: '<meta charset="UTF-8" aria-hidden="false" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<meta charset="UTF-8" />', '<html lang="en"></html>', "<script></script>", "<div></div>", '<div aria-foo="true"></div>', '<div role="foo"></div>'],
+  bad: [{
+    template: '<meta charset="UTF-8" aria-hidden="false" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -32,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<html lang="en" role="application"></html>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<html lang="en" role="application"></html>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -51,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<script aria-hidden="false"></script>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<script aria-hidden="false"></script>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -70,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

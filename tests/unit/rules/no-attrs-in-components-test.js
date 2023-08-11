@@ -1,25 +1,20 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-attrs-in-components',
-
   config: 'true',
-  good: [
-    '<div></div>',
-    '{{foo}}',
-    '<div>{{foo.bar}}</div>',
-    '{{attrs.foo}}', // defaults to layout.hbs
+  good: ['<div></div>', '{{foo}}', '<div>{{foo.bar}}</div>', '{{attrs.foo}}' // defaults to layout.hbs
   ],
-  bad: [
-    {
-      template: '{{attrs.foo}}',
 
-      meta: {
-        filePath: 'templates/components/layout.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  bad: [{
+    template: '{{attrs.foo}}',
+    meta: {
+      filePath: 'templates/components/layout.hbs'
+    },
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -34,17 +29,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '<div class={{attrs.foo}}></div>',
+    meta: {
+      filePath: 'templates/components/layout.hbs'
     },
-    {
-      template: '<div class={{attrs.foo}}></div>',
-
-      meta: {
-        filePath: 'templates/components/layout.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -59,17 +51,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '{{#if attrs.foo}}bar{{/if}}',
+    meta: {
+      filePath: 'templates/components/layout.hbs'
     },
-    {
-      template: '{{#if attrs.foo}}bar{{/if}}',
-
-      meta: {
-        filePath: 'templates/components/layout.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -84,17 +73,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '{{bar foo=attrs.foo}}',
+    meta: {
+      filePath: 'templates/components/layout.hbs'
     },
-    {
-      template: '{{bar foo=attrs.foo}}',
-
-      meta: {
-        filePath: 'templates/components/layout.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -109,17 +95,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '{{component attrs.foo}}',
+    meta: {
+      filePath: 'templates/components/layout.hbs'
     },
-    {
-      template: '{{component attrs.foo}}',
-
-      meta: {
-        filePath: 'templates/components/layout.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -134,17 +117,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '{{bar/baz (hash foo=attrs.foo)}}',
+    meta: {
+      filePath: 'templates/components/layout.hbs'
     },
-    {
-      template: '{{bar/baz (hash foo=attrs.foo)}}',
-
-      meta: {
-        filePath: 'templates/components/layout.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -159,17 +139,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '{{attrs.foo}}',
+    meta: {
+      filePath: 'components/comment/template.hbs'
     },
-    {
-      template: '{{attrs.foo}}',
-
-      meta: {
-        filePath: 'components/comment/template.hbs',
-      },
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -184,7 +161,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

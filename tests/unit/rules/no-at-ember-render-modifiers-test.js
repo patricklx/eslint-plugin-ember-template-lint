@@ -1,26 +1,20 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-at-ember-render-modifiers",
-
   config: true,
-
-  good: [
-    "<div {{this.someModifier}}></div>",
-    "<div {{someModifier}}></div>",
-    "<div {{did-foo}}></div>",
-    // helper -- a different rule should prevent this
-    // https://github.com/buschtoens/ember-render-helpers (depending on usage)
-    "{{did-insert}}",
-    "{{did-update}}",
-    "{{will-destroy}}",
-  ],
-
-  bad: [
-    {
-      template: "<div {{did-insert}}></div>",
-      verifyResults(results) {
-        expect({ results }).toMatchInlineSnapshot(`
+  good: ["<div {{this.someModifier}}></div>", "<div {{someModifier}}></div>", "<div {{did-foo}}></div>",
+  // helper -- a different rule should prevent this
+  // https://github.com/buschtoens/ember-render-helpers (depending on usage)
+  "{{did-insert}}", "{{did-update}}", "{{will-destroy}}"],
+  bad: [{
+    template: "<div {{did-insert}}></div>",
+    verifyResults(results) {
+      expect({
+        results
+      }).toMatchInlineSnapshot(`
           {
             "results": [
               {
@@ -36,12 +30,13 @@ generateRuleTests({
             ],
           }
         `);
-      },
-    },
-    {
-      template: "<div {{did-update}}></div>",
-      verifyResults(results) {
-        expect({ results }).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div {{did-update}}></div>",
+    verifyResults(results) {
+      expect({
+        results
+      }).toMatchInlineSnapshot(`
           {
             "results": [
               {
@@ -57,12 +52,13 @@ generateRuleTests({
             ],
           }
         `);
-      },
-    },
-    {
-      template: "<div {{will-destroy}}></div>",
-      verifyResults(results) {
-        expect({ results }).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div {{will-destroy}}></div>",
+    verifyResults(results) {
+      expect({
+        results
+      }).toMatchInlineSnapshot(`
           {
             "results": [
               {
@@ -78,7 +74,6 @@ generateRuleTests({
             ],
           }
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

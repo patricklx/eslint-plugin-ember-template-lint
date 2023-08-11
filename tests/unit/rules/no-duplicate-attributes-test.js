@@ -1,33 +1,27 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-duplicate-attributes',
-
   config: true,
-
   good: [
+  // MustacheStatement
+  '{{my-component firstName=firstName lastName=lastName}}',
+  // BlockStatement
+  '{{#my-component firstName=firstName  lastName=lastName as |fullName|}}' + ' {{fullName}}' + '{{/my-component}}',
+  // Element Node
+  '<a class="btn">{{btnLabel}}</a>',
+  // SubExpression
+  '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}',
+  // SubExpression within a SubExpression
+  '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}'],
+  bad: [{
     // MustacheStatement
-    '{{my-component firstName=firstName lastName=lastName}}',
-    // BlockStatement
-    '{{#my-component firstName=firstName  lastName=lastName as |fullName|}}' +
-      ' {{fullName}}' +
-      '{{/my-component}}',
-    // Element Node
-    '<a class="btn">{{btnLabel}}</a>',
-    // SubExpression
-    '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}',
-    // SubExpression within a SubExpression
-    '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
-  ],
-
-  bad: [
-    {
-      // MustacheStatement
-      template: '{{my-component firstName=firstName lastName=lastName firstName=firstName}}',
-      fixedTemplate: '{{my-component firstName=firstName lastName=lastName}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{my-component firstName=firstName lastName=lastName firstName=firstName}}',
+    fixedTemplate: '{{my-component firstName=firstName lastName=lastName}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 53,
@@ -43,21 +37,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // BlockStatement
-      template:
-        '{{#my-component firstName=firstName  lastName=lastName firstName=firstName as |fullName|}}' +
-        ' {{fullName}}' +
-        '{{/my-component}}',
-      fixedTemplate:
-        '{{#my-component firstName=firstName  lastName=lastName as |fullName|}}' +
-        ' {{fullName}}' +
-        '{{/my-component}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // BlockStatement
+    template: '{{#my-component firstName=firstName  lastName=lastName firstName=firstName as |fullName|}}' + ' {{fullName}}' + '{{/my-component}}',
+    fixedTemplate: '{{#my-component firstName=firstName  lastName=lastName as |fullName|}}' + ' {{fullName}}' + '{{/my-component}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 55,
@@ -73,15 +59,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // ElementNode
-      template: '<a class="btn" class="btn">{{btnLabel}}</a>',
-      fixedTemplate: '<a class="btn">{{btnLabel}}</a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // ElementNode
+    template: '<a class="btn" class="btn">{{btnLabel}}</a>',
+    fixedTemplate: '<a class="btn">{{btnLabel}}</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -97,17 +81,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // SubExpression
-      template:
-        '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age firstName=firstName)}}',
-      fixedTemplate:
-        '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // SubExpression
+    template: '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age firstName=firstName)}}',
+    fixedTemplate: '{{employee-profile employee=(hash firstName=firstName lastName=lastName age=age)}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 80,
@@ -123,16 +103,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // SubExpression within a SubExpression
-      template:
-        '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName firstName=firstName) age=age)}}',
-      fixedTemplate:
-        '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // SubExpression within a SubExpression
+    template: '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName firstName=firstName) age=age)}}',
+    fixedTemplate: '{{employee-profile employee=(hash fullName=(hash firstName=firstName lastName=lastName) age=age)}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 87,
@@ -148,7 +125,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

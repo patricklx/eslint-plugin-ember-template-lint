@@ -1,25 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-link-to-tagname",
-
   config: true,
-
-  good: [
-    '<Foo @route="routeName" @tagName="button">Link text</Foo>',
-    '<LinkTo @route="routeName">Link text</LinkTo>',
-    '{{#link-to "routeName"}}Link text{{/link-to}}',
-    '{{#foo "routeName" tagName="button"}}Link text{{/foo}}',
-    '{{link-to "Link text" "routeName"}}',
-    '{{foo "Link text" "routeName" tagName="button"}}',
-  ],
-
-  bad: [
-    {
-      template:
-        '<LinkTo @route="routeName" @tagName="button">Link text</LinkTo>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<Foo @route="routeName" @tagName="button">Link text</Foo>', '<LinkTo @route="routeName">Link text</LinkTo>', '{{#link-to "routeName"}}Link text{{/link-to}}', '{{#foo "routeName" tagName="button"}}Link text{{/foo}}', '{{link-to "Link text" "routeName"}}', '{{foo "Link text" "routeName" tagName="button"}}'],
+  bad: [{
+    template: '<LinkTo @route="routeName" @tagName="button">Link text</LinkTo>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 28,
@@ -33,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#link-to "routeName" tagName="button"}}Link text{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to "routeName" tagName="button"}}Link text{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 24,
@@ -53,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{link-to "Link text" "routeName" tagName="button"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to "Link text" "routeName" tagName="button"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 35,
@@ -72,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

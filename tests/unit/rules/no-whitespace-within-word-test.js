@@ -1,33 +1,21 @@
+"use strict";
+
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 // no-whitespace-within-word-test.js
 
-import generateRuleTests from "../../helpers/rule-test-harness.js";
-
-generateRuleTests({
+(0, _ruleTestHarness.default)({
   name: "no-whitespace-within-word",
   config: true,
-
-  good: [
-    "Welcome",
-    "Hey - I like this!",
-    "Expected: 5-10 guests",
-    "Expected: 5 - 10 guests",
-    "It is possible to get some examples of in-word emph a sis past this rule.",
-    "However, I do not want a rule that flags annoying false positives for correctly-used single-character words.",
-    "<div>Welcome</div>",
-    '<div enable-background="a b c d e f g h i j k l m">We want to ignore values of HTML attributes</div>',
-    `<style>
+  good: ["Welcome", "Hey - I like this!", "Expected: 5-10 guests", "Expected: 5 - 10 guests", "It is possible to get some examples of in-word emph a sis past this rule.", "However, I do not want a rule that flags annoying false positives for correctly-used single-character words.", "<div>Welcome</div>", '<div enable-background="a b c d e f g h i j k l m">We want to ignore values of HTML attributes</div>', `<style>
   .my-custom-class > * {
     border: 2px dotted red;
   }
-</style>`,
-  ],
-
-  bad: [
-    {
-      template: "W e l c o m e",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+</style>`],
+  bad: [{
+    template: "W e l c o m e",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -41,12 +29,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "W&nbsp;e&nbsp;l&nbsp;c&nbsp;o&nbsp;m&nbsp;e",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "W&nbsp;e&nbsp;l&nbsp;c&nbsp;o&nbsp;m&nbsp;e",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -60,12 +47,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "Wel c o me",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "Wel c o me",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -79,12 +65,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "Wel&nbsp;c&emsp;o&nbsp;me",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "Wel&nbsp;c&emsp;o&nbsp;me",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -98,12 +83,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<div>W e l c o m e</div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div>W e l c o m e</div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -117,12 +101,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<div>Wel c o me</div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div>Wel c o me</div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -136,13 +119,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "A  B&nbsp;&nbsp; C ",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "A  B&nbsp;&nbsp; C ",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -156,7 +137,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

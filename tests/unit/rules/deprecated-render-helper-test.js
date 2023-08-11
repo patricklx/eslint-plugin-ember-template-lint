@@ -1,28 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "deprecated-render-helper",
-
   config: true,
-
-  good: [
-    "{{valid-compoennt}}",
-    '{{input placeholder=(t "email") value=email}}',
-    '{{title "CrossCheck Web" prepent=true separator=" | "}}',
-    '{{hockey-player teamName="Boston Bruins"}}',
-    "{{false}}",
-    '{{"foo"}}',
-    "{{42}}",
-    "{{null}}",
-    "{{undefined}}",
-  ],
-
-  bad: [
-    {
-      template: "{{render 'ken-griffey'}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{valid-compoennt}}", '{{input placeholder=(t "email") value=email}}', '{{title "CrossCheck Web" prepent=true separator=" | "}}', '{{hockey-player teamName="Boston Bruins"}}', "{{false}}", '{{"foo"}}', "{{42}}", "{{null}}", "{{undefined}}"],
+  bad: [{
+    template: "{{render 'ken-griffey'}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -36,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{render 'baseball-player' pitcher}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{render 'baseball-player' pitcher}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -56,7 +41,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

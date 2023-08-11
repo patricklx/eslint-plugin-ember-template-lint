@@ -1,40 +1,32 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-model-argument-in-route-templates',
-
   config: true,
   meta: {
     filePath: 'app/templates/foo.hbs',
-    moduleId: 'app/templates/foo',
+    moduleId: 'app/templates/foo'
   },
-
-  good: [
-    '{{model}}',
-    '{{this.model}}',
-    '{{@modelythingy}}',
-    {
-      template: '{{@model}}',
-      meta: {
-        filePath: 'app/components/foo.hbs',
-        moduleId: 'app/components/foo',
-      },
-    },
-    {
-      template: '{{@model}}',
-      meta: {
-        filePath: 'app/templates/components/foo.hbs',
-        moduleId: 'app/templates/components/foo',
-      },
-    },
-  ],
-
-  bad: [
-    {
-      template: '{{@model}}',
-      fixedTemplate: '{{this.model}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['{{model}}', '{{this.model}}', '{{@modelythingy}}', {
+    template: '{{@model}}',
+    meta: {
+      filePath: 'app/components/foo.hbs',
+      moduleId: 'app/components/foo'
+    }
+  }, {
+    template: '{{@model}}',
+    meta: {
+      filePath: 'app/templates/components/foo.hbs',
+      moduleId: 'app/templates/components/foo'
+    }
+  }],
+  bad: [{
+    template: '{{@model}}',
+    fixedTemplate: '{{this.model}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -50,13 +42,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{@model.foo}}',
-      fixedTemplate: '{{this.model.foo}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{@model.foo}}',
+    fixedTemplate: '{{this.model.foo}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -72,13 +63,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{@model.foo.bar}}',
-      fixedTemplate: '{{this.model.foo.bar}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{@model.foo.bar}}',
+    fixedTemplate: '{{this.model.foo.bar}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -94,7 +84,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

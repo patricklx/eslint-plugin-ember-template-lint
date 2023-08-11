@@ -1,29 +1,18 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-action-modifiers",
-
   config: true,
-
-  good: [
-    '<button onclick={{action "foo"}}></button>',
-    '<a href="#" onclick={{action "foo"}}></a>',
-    "<div action></div>",
-    '{{foo-bar (action "foo")}}',
-    "{{foo-bar action}}",
-
-    {
-      config: ["button"],
-      template: '<button {{action "foo"}}></button>',
-    },
-  ],
-
-  bad: [
-    {
-      template: '<button {{action "foo"}}></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<button onclick={{action "foo"}}></button>', '<a href="#" onclick={{action "foo"}}></a>', "<div action></div>", '{{foo-bar (action "foo")}}', "{{foo-bar action}}", {
+    config: ["button"],
+    template: '<button {{action "foo"}}></button>'
+  }],
+  bad: [{
+    template: '<button {{action "foo"}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -37,13 +26,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="#" {{action "foo"}}></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="#" {{action "foo"}}></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -57,14 +44,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: ["button"],
-      template: '<a href="#" {{action "foo"}}></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: ["button"],
+    template: '<a href="#" {{action "foo"}}></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -78,7 +63,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

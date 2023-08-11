@@ -1,19 +1,14 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-trailing-spaces',
-
   config: true,
-
-  good: [
-    'test',
-    '   test',
-    'test\n',
-    'test\n' + '\n',
-    // test the re-entering of yielded content
-    '{{#my-component}}\n' + '  test\n' + '{{/my-component}}',
-    {
-      template: `import { hbs } from 'ember-cli-htmlbars';
+  good: ['test', '   test', 'test\n', 'test\n' + '\n',
+  // test the re-entering of yielded content
+  '{{#my-component}}\n' + '  test\n' + '{{/my-component}}', {
+    template: `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
   await render(hbs\`
@@ -22,18 +17,15 @@ test('it renders', async (assert) => {
     </div>
   \`);
 );`,
-      meta: {
-        filePath: 'layout.js',
-      },
-    },
-  ],
-
-  bad: [
-    {
-      template: 'test ',
-      fixedTemplate: 'test',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    meta: {
+      filePath: 'layout.js'
+    }
+  }],
+  bad: [{
+    template: 'test ',
+    fixedTemplate: 'test',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -49,13 +41,12 @@ test('it renders', async (assert) => {
             },
           ]
         `);
-      },
-    },
-    {
-      template: 'test \n',
-      fixedTemplate: 'test\n',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: 'test \n',
+    fixedTemplate: 'test\n',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -71,13 +62,12 @@ test('it renders', async (assert) => {
             },
           ]
         `);
-      },
-    },
-    {
-      template: 'test\n' + ' \n',
-      fixedTemplate: 'test\n' + '\n',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: 'test\n' + ' \n',
+    fixedTemplate: 'test\n' + '\n',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -93,15 +83,15 @@ test('it renders', async (assert) => {
             },
           ]
         `);
-      },
-    },
-    // test the re-entering of yielded content
-    // only generates one error instead of two
-    {
-      template: '{{#my-component}}\n' + '  test \n' + '{{/my-component}}',
-      fixedTemplate: '{{#my-component}}\n' + '  test\n' + '{{/my-component}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // test the re-entering of yielded content
+  // only generates one error instead of two
+  {
+    template: '{{#my-component}}\n' + '  test \n' + '{{/my-component}}',
+    fixedTemplate: '{{#my-component}}\n' + '  test\n' + '{{/my-component}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -117,10 +107,9 @@ test('it renders', async (assert) => {
             },
           ]
         `);
-      },
-    },
-    {
-      template: `import { hbs } from 'ember-cli-htmlbars';
+    }
+  }, {
+    template: `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
   await render(hbs\`  
@@ -129,7 +118,7 @@ test('it renders', async (assert) => {
     </div>
   \`);
 );`,
-      fixedTemplate: `import { hbs } from 'ember-cli-htmlbars';
+    fixedTemplate: `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
   await render(hbs\`
@@ -138,11 +127,11 @@ test('it renders', async (assert) => {
     </div>
   \`);
 );`,
-      meta: {
-        filePath: 'layout.js',
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    meta: {
+      filePath: 'layout.js'
+    },
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -158,10 +147,9 @@ test('it renders', async (assert) => {
             },
           ]
         `);
-      },
-    },
-    {
-      template: `import { hbs } from 'ember-cli-htmlbars';
+    }
+  }, {
+    template: `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
   await render(hbs\`
@@ -170,7 +158,7 @@ test('it renders', async (assert) => {
     <div></div>
   \`);
 );`,
-      fixedTemplate: `import { hbs } from 'ember-cli-htmlbars';
+    fixedTemplate: `import { hbs } from 'ember-cli-htmlbars';
 
 test('it renders', async (assert) => {
   await render(hbs\`
@@ -179,11 +167,11 @@ test('it renders', async (assert) => {
     <div></div>
   \`);
 );`,
-      meta: {
-        filePath: 'layout.js',
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    meta: {
+      filePath: 'layout.js'
+    },
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -199,7 +187,6 @@ test('it renders', async (assert) => {
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

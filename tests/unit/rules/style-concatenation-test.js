@@ -1,25 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "style-concatenation",
-
   config: true,
-
-  good: [
-    "<img>",
-    "<img style={{myStyle}}>",
-    "<img style={{background-image url}}>",
-    '<img style="background-image: url(/foo.png)"}}>',
-    '<img style={{html-safe (concat "background-image: url(" url ")")}}>',
-    '<img style={{html-safe (concat knownSafeStyle1 ";" knownSafeStyle2)}}>',
-  ],
-
-  bad: [
-    {
-      template: '<img style="{{myStyle}}">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<img>", "<img style={{myStyle}}>", "<img style={{background-image url}}>", '<img style="background-image: url(/foo.png)"}}>', '<img style={{html-safe (concat "background-image: url(" url ")")}}>', '<img style={{html-safe (concat knownSafeStyle1 ";" knownSafeStyle2)}}>'],
+  bad: [{
+    template: '<img style="{{myStyle}}">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -33,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img style="background-image: {{url}}">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img style="background-image: {{url}}">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -53,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img style="{{background-image url}}">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img style="{{background-image url}}">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -73,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img style={{concat knownSafeStyle1 ";" knownSafeStyle2}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img style={{concat knownSafeStyle1 ";" knownSafeStyle2}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -93,7 +77,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

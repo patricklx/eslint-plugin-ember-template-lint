@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-args-paths",
-
   config: "true",
-  good: [
-    "<div @foo={{cleanup this.args}}></div>",
-    "{{foo (name this.args)}}",
-    "{{foo name=this.args}}",
-    "{{foo name=(extract this.args)}}",
-    "<Foo @params={{this.args}} />",
-    "<Foo {{mod this.args}} />",
-    "<Foo {{mod items=this.args}} />",
-    "<Foo {{mod items=(extract this.args)}} />",
-  ],
-  bad: [
-    {
-      template: "{{hello (format value=args.foo)}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<div @foo={{cleanup this.args}}></div>", "{{foo (name this.args)}}", "{{foo name=this.args}}", "{{foo name=(extract this.args)}}", "<Foo @params={{this.args}} />", "<Foo {{mod this.args}} />", "<Foo {{mod items=this.args}} />", "<Foo {{mod items=(extract this.args)}} />"],
+  bad: [{
+    template: "{{hello (format value=args.foo)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -32,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{hello value=args.foo}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{hello value=args.foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -51,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{hello (format args.foo.bar)}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{hello (format args.foo.bar)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -70,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<br {{hello args.foo.bar}}>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<br {{hello args.foo.bar}}>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -89,12 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{hello args.foo.bar}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{hello args.foo.bar}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -108,12 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{args.foo.bar}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{args.foo.bar}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -127,12 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{args.foo}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{args.foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -146,12 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{this.args.foo}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{this.args.foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -165,7 +149,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

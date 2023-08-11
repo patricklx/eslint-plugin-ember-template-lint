@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-yield-only",
-
   config: true,
-
-  good: [
-    "{{yield (hash someProp=someValue)}}",
-    "{{field}}",
-    "{{#yield}}{{/yield}}",
-    "<Yield/>",
-    "<yield/>",
-  ],
-
-  bad: [
-    {
-      template: "{{yield}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{yield (hash someProp=someValue)}}", "{{field}}", "{{#yield}}{{/yield}}", "<Yield/>", "<yield/>"],
+  bad: [{
+    template: "{{yield}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -32,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "     {{yield}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "     {{yield}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -52,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "\n  {{yield}}\n     ",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "\n  {{yield}}\n     ",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -72,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,31 +1,20 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'require-button-type',
-
   config: true,
-
   good: [
-    // valid static values
-    '<button type="button" />',
-    '<button type="button">label</button>',
-    '<button type="submit" />',
-    '<button type="reset" />',
-    // dynamic values
-    '<button type="{{buttonType}}" />',
-    '<button type={{buttonType}} />',
-    '<div/>',
-    '<div></div>',
-    '<div type="randomType"></div>',
-  ],
-
-  bad: [
-    {
-      template: '<button/>',
-      fixedTemplate: '<button type="button" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  // valid static values
+  '<button type="button" />', '<button type="button">label</button>', '<button type="submit" />', '<button type="reset" />',
+  // dynamic values
+  '<button type="{{buttonType}}" />', '<button type={{buttonType}} />', '<div/>', '<div></div>', '<div type="randomType"></div>'],
+  bad: [{
+    template: '<button/>',
+    fixedTemplate: '<button type="button" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -41,14 +30,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button>label</button>',
-      fixedTemplate: '<button type="button">label</button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button>label</button>',
+    fixedTemplate: '<button type="button">label</button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -64,14 +51,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button type="" />',
-      fixedTemplate: '<button type="button" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type="" />',
+    fixedTemplate: '<button type="button" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -87,14 +72,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button type="foo" />',
-      fixedTemplate: '<button type="button" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type="foo" />',
+    fixedTemplate: '<button type="button" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -110,14 +93,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button type=42 />',
-      fixedTemplate: '<button type="button" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type=42 />',
+    fixedTemplate: '<button type="button" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -133,23 +114,19 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '<form><button></button></form>',
+    fixedTemplate: '<form><button type="submit"></button></form>'
+  }, {
+    template: '/** silly example <button> usage */ <template><button></button></template>',
+    meta: {
+      filePath: 'layout.gjs'
     },
-    {
-      template: '<form><button></button></form>',
-      fixedTemplate: '<form><button type="submit"></button></form>',
-    },
-    {
-      template: '/** silly example <button> usage */ <template><button></button></template>',
-      meta: {
-        filePath: 'layout.gjs',
-      },
-      fixedTemplate:
-        '/** silly example <button> usage */ <template><button type="button"></button></template>',
-      skipDisabledTests: true,
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    fixedTemplate: '/** silly example <button> usage */ <template><button type="button"></button></template>',
+    skipDisabledTests: true,
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 46,
@@ -165,28 +142,26 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         import { hbs } from 'ember-template-imports';
         import { setComponentTemplate } from '@ember/component';
         import templateOnly from '@ember/component/template-only';
         /** silly example <button> usage */
         export const SomeComponent = setComponentTemplate(hbs\`<button></button>\`, templateOnly());`,
-      meta: {
-        filePath: 'layout.js',
-      },
-      fixedTemplate: `
+    meta: {
+      filePath: 'layout.js'
+    },
+    fixedTemplate: `
         import { hbs } from 'ember-template-imports';
         import { setComponentTemplate } from '@ember/component';
         import templateOnly from '@ember/component/template-only';
         /** silly example <button> usage */
         export const SomeComponent = setComponentTemplate(hbs\`<button type="button"></button>\`, templateOnly());`,
-      skipDisabledTests: true,
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    skipDisabledTests: true,
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 62,
@@ -202,7 +177,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,32 +1,22 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const RULE_NAME = 'no-obscure-array-access';
-generateRuleTests({
+(0, _ruleTestHarness.default)({
   name: RULE_NAME,
-
   config: true,
-
-  good: [
-    "{{foo bar=(get this 'list.0' )}}",
-    "<Foo @bar={{get this 'list.0'}}",
-    "{{get this 'list.0'}}",
-    '{{foo bar @list}}',
-    'Just a regular text in the template bar.[1] bar.1',
-    '<Foo foo="bar.[1]" />',
-    `<FooBar
+  good: ["{{foo bar=(get this 'list.0' )}}", "<Foo @bar={{get this 'list.0'}}", "{{get this 'list.0'}}", '{{foo bar @list}}', 'Just a regular text in the template bar.[1] bar.1', '<Foo foo="bar.[1]" />', `<FooBar
     @subHeaderText={{if
       this.isFooBarV2Enabled
       "foobar"
     }}
-  />`,
-  ],
-
-  bad: [
-    {
-      template: '{{foo bar=this.list.[0]}}',
-      fixedTemplate: '{{foo bar=(get this.list "0")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  />`],
+  bad: [{
+    template: '{{foo bar=this.list.[0]}}',
+    fixedTemplate: '{{foo bar=(get this.list "0")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -42,13 +32,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{foo bar=@list.[1]}}',
-      fixedTemplate: '{{foo bar=(get @list "1")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{foo bar=@list.[1]}}',
+    fixedTemplate: '{{foo bar=(get @list "1")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -64,13 +53,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{this.list.[0]}}',
-      fixedTemplate: '{{get this.list "0"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{this.list.[0]}}',
+    fixedTemplate: '{{get this.list "0"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -86,13 +74,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{this.list.[0].name}}',
-      fixedTemplate: '{{get this.list "0.name"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{this.list.[0].name}}',
+    fixedTemplate: '{{get this.list "0.name"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -108,13 +95,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Foo @bar={{this.list.[0]}} />',
-      fixedTemplate: '<Foo @bar={{get this.list "0"}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Foo @bar={{this.list.[0]}} />',
+    fixedTemplate: '<Foo @bar={{get this.list "0"}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -130,13 +116,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Foo @bar={{this.list.[0].name.[1].foo}} />',
-      fixedTemplate: '<Foo @bar={{get this.list "0.name.1.foo"}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Foo @bar={{this.list.[0].name.[1].foo}} />',
+    fixedTemplate: '<Foo @bar={{get this.list "0.name.1.foo"}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -152,7 +137,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

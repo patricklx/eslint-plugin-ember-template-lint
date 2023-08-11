@@ -1,15 +1,13 @@
-import { createTableGroupsErrorMessage } from "../../../lib/rules/table-groups.js";
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
+var _tableGroups = require("../../../lib/rules/table-groups.js");
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 describe("", function () {});
-
-generateRuleTests({
+(0, _ruleTestHarness.default)({
   name: "table-groups",
-
   config: true,
-
-  good: [
-    `
+  good: [`
     <table>
     {{#if showCaption}}
       <caption>Some Name</caption>
@@ -25,8 +23,7 @@ generateRuleTests({
       </tbody>
     {{/if}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#if foo}}
       <tfoot>
@@ -34,8 +31,7 @@ generateRuleTests({
       </tfoot>
     {{/if}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#unless foo}}
       <tfoot>
@@ -43,8 +39,7 @@ generateRuleTests({
       </tfoot>
     {{/unless}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#each foo as |bar|}}
       <tfoot>
@@ -52,8 +47,7 @@ generateRuleTests({
       </tfoot>
     {{/each}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#each-in foo as |bar|}}
       <tfoot>
@@ -61,8 +55,7 @@ generateRuleTests({
       </tfoot>
     {{/each-in}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#let foo as |bar|}}
       <tfoot>
@@ -70,8 +63,7 @@ generateRuleTests({
       </tfoot>
     {{/let}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#with foo as |bar|}}
       <tfoot>
@@ -79,8 +71,7 @@ generateRuleTests({
       </tfoot>
     {{/with}}
     </table>
-    `,
-    `
+    `, `
     <table>
     {{#each foo as |bar|}}
       {{#if bar}}
@@ -93,72 +84,24 @@ generateRuleTests({
     {{/each}}
     </table>
     `,
-
-    // Component with tag:
-    '<table>{{some-component tagName="tbody"}}</table>',
-    '<table>{{some-component tagName="thead"}}</table>',
-    '<table>{{some-component tagName="tfoot"}}</table>',
-
-    // Block statement component with tag:
-    '<table>{{#some-component tagName="tbody"}}{{/some-component}}</table>',
-    '<table>{{#some-component tagName="thead"}}{{/some-component}}</table>',
-    '<table>{{#some-component tagName="tfoot"}}{{/some-component}}</table>',
-
-    // Component helper with tag:
-    '<table>{{component "some-component" tagName="tbody"}}</table>',
-    '<table>{{component "some-component" tagName="thead"}}</table>',
-    '<table>{{component "some-component" tagName="tfoot"}}</table>',
-
-    // Angle bracket component (self-closing) with tag:
-    '<table><SomeComponent @tagName="tbody" /></table>',
-    '<table><SomeComponent @tagName="thead" /></table>',
-    '<table><SomeComponent @tagName="tfoot" /></table>',
-
-    // Angle bracket component (NOT self-closing) with tag:
-    '<table><SomeComponent @tagName="tbody"></SomeComponent></table>',
-    '<table><SomeComponent @tagName="thead"></SomeComponent></table>',
-    '<table><SomeComponent @tagName="tfoot"></SomeComponent></table>',
-
-    " <table>{{yield}}</table> ",
-    "<table><!-- this --></table>",
-    "<table>{{! or this }}</table>",
-    "<table> </table>",
-    "<table> <caption>Foo</caption></table>",
-    '<table><colgroup><col style="background-color: red"></colgroup></table>',
-    "<table><thead><tr><td>Header</td></tr></thead></table>",
-    "<table><tbody><tr><td>Body</td></tr></tbody></table>",
-    "<table><tfoot><tr><td>Footer</td></tr></tfoot></table>",
-    "<table>" +
-      "{{! this is a comment }}" +
-      "<thead>" +
-      "<tr><td>Header</td></tr>" +
-      "</thead>" +
-      "<tbody>" +
-      "<tr><td>Body</td></tr>" +
-      "</tbody>" +
-      "<tfoot>" +
-      "<tr><td>Footer</td></tr>" +
-      "</tfoot>" +
-      "</table>",
-    "<table>" +
-      "<colgroup>" +
-      '<col style="background-color: red">' +
-      "</colgroup>" +
-      "<tbody>" +
-      "<tr><td>Body</td></tr>" +
-      "</tbody>" +
-      "</table>",
-    "<table>\n" + "<tbody>\n" + "</tbody>\n" + "</table>",
-    "<table><colgroup></colgroup><colgroup></colgroup><tbody></tbody></table>",
-    {
-      config: {
-        "allowed-caption-components": ["nested/my-caption"],
-        "allowed-colgroup-components": ["nested/my-colgroup"],
-        "allowed-thead-components": ["nested/my-thead"],
-        "allowed-tbody-components": ["nested/my-tbody"],
-        "allowed-tfoot-components": ["nested/my-tfoot"],
-      },
-      template: `
+  // Component with tag:
+  '<table>{{some-component tagName="tbody"}}</table>', '<table>{{some-component tagName="thead"}}</table>', '<table>{{some-component tagName="tfoot"}}</table>',
+  // Block statement component with tag:
+  '<table>{{#some-component tagName="tbody"}}{{/some-component}}</table>', '<table>{{#some-component tagName="thead"}}{{/some-component}}</table>', '<table>{{#some-component tagName="tfoot"}}{{/some-component}}</table>',
+  // Component helper with tag:
+  '<table>{{component "some-component" tagName="tbody"}}</table>', '<table>{{component "some-component" tagName="thead"}}</table>', '<table>{{component "some-component" tagName="tfoot"}}</table>',
+  // Angle bracket component (self-closing) with tag:
+  '<table><SomeComponent @tagName="tbody" /></table>', '<table><SomeComponent @tagName="thead" /></table>', '<table><SomeComponent @tagName="tfoot" /></table>',
+  // Angle bracket component (NOT self-closing) with tag:
+  '<table><SomeComponent @tagName="tbody"></SomeComponent></table>', '<table><SomeComponent @tagName="thead"></SomeComponent></table>', '<table><SomeComponent @tagName="tfoot"></SomeComponent></table>', " <table>{{yield}}</table> ", "<table><!-- this --></table>", "<table>{{! or this }}</table>", "<table> </table>", "<table> <caption>Foo</caption></table>", '<table><colgroup><col style="background-color: red"></colgroup></table>', "<table><thead><tr><td>Header</td></tr></thead></table>", "<table><tbody><tr><td>Body</td></tr></tbody></table>", "<table><tfoot><tr><td>Footer</td></tr></tfoot></table>", "<table>" + "{{! this is a comment }}" + "<thead>" + "<tr><td>Header</td></tr>" + "</thead>" + "<tbody>" + "<tr><td>Body</td></tr>" + "</tbody>" + "<tfoot>" + "<tr><td>Footer</td></tr>" + "</tfoot>" + "</table>", "<table>" + "<colgroup>" + '<col style="background-color: red">' + "</colgroup>" + "<tbody>" + "<tr><td>Body</td></tr>" + "</tbody>" + "</table>", "<table>\n" + "<tbody>\n" + "</tbody>\n" + "</table>", "<table><colgroup></colgroup><colgroup></colgroup><tbody></tbody></table>", {
+    config: {
+      "allowed-caption-components": ["nested/my-caption"],
+      "allowed-colgroup-components": ["nested/my-colgroup"],
+      "allowed-thead-components": ["nested/my-thead"],
+      "allowed-tbody-components": ["nested/my-tbody"],
+      "allowed-tfoot-components": ["nested/my-tfoot"]
+    },
+    template: `
       <table>
         <Nested::MyCaption />
         <Nested::MyColgroup />
@@ -166,17 +109,16 @@ generateRuleTests({
         <Nested::MyTbody />
         <Nested::MyTfoot />
       </table>
-      `,
+      `
+  }, {
+    config: {
+      "allowed-caption-components": ["nested/my-caption"],
+      "allowed-colgroup-components": ["nested/my-colgroup"],
+      "allowed-thead-components": ["nested/my-thead"],
+      "allowed-tbody-components": ["nested/my-tbody"],
+      "allowed-tfoot-components": ["nested/my-tfoot"]
     },
-    {
-      config: {
-        "allowed-caption-components": ["nested/my-caption"],
-        "allowed-colgroup-components": ["nested/my-colgroup"],
-        "allowed-thead-components": ["nested/my-thead"],
-        "allowed-tbody-components": ["nested/my-tbody"],
-        "allowed-tfoot-components": ["nested/my-tfoot"],
-      },
-      template: `
+    template: `
       <table>
         {{nested/my-caption}}
         {{nested/my-colgroup}}
@@ -184,40 +126,35 @@ generateRuleTests({
         {{nested/my-tbody}}
         {{nested/my-tfoot}}
       </table>
-      `,
+      `
+  }, {
+    config: {
+      "allowed-thead-components": ["nested/head-or-foot"],
+      "allowed-tbody-components": ["nested/body"],
+      "allowed-tfoot-components": ["nested/head-or-foot"]
     },
-    {
-      config: {
-        "allowed-thead-components": ["nested/head-or-foot"],
-        "allowed-tbody-components": ["nested/body"],
-        "allowed-tfoot-components": ["nested/head-or-foot"],
-      },
-      template: `
+    template: `
       <table>
         <Nested::HeadOrFoot />
         <Nested::Body />
         <Nested::HeadOrFoot/>
       </table>
-      `,
+      `
+  }, {
+    config: {
+      "allowed-caption-components": ["nested/my-caption"]
     },
-    {
-      config: {
-        "allowed-caption-components": ["nested/my-caption"],
-      },
-      template: `
+    template: `
       <table>
         <Nested::MyCaption />
         <thead />
         <Nested::MyCaption @tagName="tbody" />
         <tfoot />
       </table>
-      `,
-    },
-  ],
-
-  bad: [
-    {
-      template: `
+      `
+  }],
+  bad: [{
+    template: `
       <table>
       {{#if showCaption}}
         <thead>Some Name</thead>
@@ -230,8 +167,8 @@ generateRuleTests({
       <colgroup></colgroup>
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -245,10 +182,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <table>
       {{#if showCaption}}
         <div>Some Name</div>
@@ -261,8 +197,8 @@ generateRuleTests({
       <colgroup></colgroup>
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -276,10 +212,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <table>
       {{#if foo}}
         {{else}}
@@ -287,8 +222,8 @@ generateRuleTests({
       {{/if}}
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -302,10 +237,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <table>
       {{#unless foo}}
         <div>
@@ -314,8 +248,8 @@ generateRuleTests({
       {{/unless}}
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -329,10 +263,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <table>
       {{#if foo}}
         <div>
@@ -341,8 +274,8 @@ generateRuleTests({
       {{/if}}
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -356,18 +289,17 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <table>
       {{#unless foo}}
         {{some-component}}
       {{/unless}}
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -381,18 +313,17 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <table>
       {{#something foo}}
         <tbody></tbody>
       {{/something}}
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -406,13 +337,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table><tr><td>Foo</td></tr></table>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table><tr><td>Foo</td></tr></table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -426,13 +355,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table>{{some-component}}</table>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table>{{some-component}}</table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -446,13 +373,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table>{{#each foo as |bar|}}{{bar}}{{/each}}</table>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table>{{#each foo as |bar|}}{{bar}}{{/each}}</table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -466,17 +391,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<table>" +
-        "<tr></tr>" +
-        "<tbody><tr><td>Foo</td></tr></tbody>" +
-        "</table>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table>" + "<tr></tr>" + "<tbody><tr><td>Foo</td></tr></tbody>" + "</table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -490,13 +409,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table> whitespace<thead></thead></table>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table> whitespace<thead></thead></table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -510,12 +427,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<table>{{some-component tagName="div"}}</table>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<table>{{some-component tagName="div"}}</table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -529,12 +445,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<table>{{some-component otherProp="tbody"}}</table>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<table>{{some-component otherProp="tbody"}}</table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -548,12 +463,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<table><SomeComponent @tagName="div" /></table>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<table><SomeComponent @tagName="div" /></table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -567,12 +481,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<table><SomeComponent @otherProp="tbody" /></table>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<table><SomeComponent @otherProp="tbody" /></table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -586,12 +499,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table>some text</table>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table>some text</table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -605,12 +517,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table><tfoot /><thead /></table>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table><tfoot /><thead /></table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -624,12 +535,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<table><tbody /><caption /></table>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<table><tbody /><caption /></table>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -643,17 +553,16 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         <table>
           <tbody />
           <colgroup />
         </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -667,19 +576,18 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "allowed-caption-components": ["nested/allowed"]
     },
-    {
-      config: {
-        "allowed-caption-components": ["nested/allowed"],
-      },
-      template: `
+    template: `
       <table>
         <Nested::SomethingElse />
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -693,21 +601,20 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "allowed-thead-components": ["nested/my-thead"],
+      "allowed-tfoot-components": ["nested/my-tfoot"]
     },
-    {
-      config: {
-        "allowed-thead-components": ["nested/my-thead"],
-        "allowed-tfoot-components": ["nested/my-tfoot"],
-      },
-      template: `
+    template: `
       <table>
         <Nested::MyTfoot />
         <Nested::MyThead />
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -721,15 +628,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "allowed-thead-components": ["nested/head-or-foot"],
+      "allowed-tbody-components": ["nested/body"],
+      "allowed-tfoot-components": ["nested/head-or-foot"]
     },
-    {
-      config: {
-        "allowed-thead-components": ["nested/head-or-foot"],
-        "allowed-tbody-components": ["nested/body"],
-        "allowed-tfoot-components": ["nested/head-or-foot"],
-      },
-      template: `
+    template: `
       <table>
         <Nested::HeadOrFoot />
         <Nested::Body />
@@ -737,8 +643,8 @@ generateRuleTests({
         <Nested::Body />
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -752,21 +658,20 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "allowed-tbody-components": ["nested/my-tbody"]
     },
-    {
-      config: {
-        "allowed-tbody-components": ["nested/my-tbody"],
-      },
-      template: `
+    template: `
       <table>
         <thead />
         <Nested::MyTbody @tagName="caption" />
         <tbody />
       </table>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -780,64 +685,57 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }],
+  error: [{
+    // If none of the keys are recognized, they should just use `true`.
+    config: {
+      "invalid-key": ["nested/my-component"]
     },
-  ],
-
-  error: [
-    {
-      // If none of the keys are recognized, they should just use `true`.
-      config: {
-        "invalid-key": ["nested/my-component"],
-      },
-      template: "test",
-      result: {
-        fatal: true,
-        message: createTableGroupsErrorMessage("table-groups", {
-          "invalid-key": ["nested/my-component"],
-        }),
-      },
+    template: "test",
+    result: {
+      fatal: true,
+      message: (0, _tableGroups.createTableGroupsErrorMessage)("table-groups", {
+        "invalid-key": ["nested/my-component"]
+      })
+    }
+  }, {
+    // The allowed components needs to be wrapped in an array.
+    config: {
+      "allowed-thead-components": "string"
     },
-    {
-      // The allowed components needs to be wrapped in an array.
-      config: {
-        "allowed-thead-components": "string",
-      },
-      template: "test",
-      result: {
-        fatal: true,
-        message: createTableGroupsErrorMessage("table-groups", {
-          "allowed-thead-components": "string",
-        }),
-      },
+    template: "test",
+    result: {
+      fatal: true,
+      message: (0, _tableGroups.createTableGroupsErrorMessage)("table-groups", {
+        "allowed-thead-components": "string"
+      })
+    }
+  }, {
+    // The allowed components needs to be an array of strings.
+    config: {
+      "allowed-thead-components": [5]
     },
-    {
-      // The allowed components needs to be an array of strings.
-      config: {
-        "allowed-thead-components": [5],
-      },
-      template: "test",
-      result: {
-        fatal: true,
-        message: createTableGroupsErrorMessage("table-groups", {
-          "allowed-thead-components": [5],
-        }),
-      },
+    template: "test",
+    result: {
+      fatal: true,
+      message: (0, _tableGroups.createTableGroupsErrorMessage)("table-groups", {
+        "allowed-thead-components": [5]
+      })
+    }
+  }, {
+    // The allowed components should be dasherized (nested/my-thead).
+    config: {
+      "allowed-thead-components": ["Nested::MyThead"],
+      "allowed-tfoot-components": ["Nested::MyTfoot"]
     },
-    {
-      // The allowed components should be dasherized (nested/my-thead).
-      config: {
+    template: "test",
+    result: {
+      fatal: true,
+      message: (0, _tableGroups.createTableGroupsErrorMessage)("table-groups", {
         "allowed-thead-components": ["Nested::MyThead"],
-        "allowed-tfoot-components": ["Nested::MyTfoot"],
-      },
-      template: "test",
-      result: {
-        fatal: true,
-        message: createTableGroupsErrorMessage("table-groups", {
-          "allowed-thead-components": ["Nested::MyThead"],
-          "allowed-tfoot-components": ["Nested::MyTfoot"],
-        }),
-      },
-    },
-  ],
+        "allowed-tfoot-components": ["Nested::MyTfoot"]
+      })
+    }
+  }]
 });

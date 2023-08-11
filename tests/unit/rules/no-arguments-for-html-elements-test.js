@@ -1,28 +1,17 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-arguments-for-html-elements",
-
   config: true,
-
-  good: [
-    "<Input @name=1 />",
-    "{{#let (component 'foo') as |bar|}} <bar @name=\"1\" as |n|><n/></bar> {{/let}}",
-    "<@externalComponent />",
-    `<MyComponent>
+  good: ["<Input @name=1 />", "{{#let (component 'foo') as |bar|}} <bar @name=\"1\" as |n|><n/></bar> {{/let}}", "<@externalComponent />", `<MyComponent>
     <:slot @name="Header"></:slot>
-  </MyComponent>`,
-    '<@foo.bar @name="2" />',
-    '<this.name @boo="bar"></this.name>',
-    '<@foo @name="2" />',
-    '<foo.some.name @name="1" />',
-  ],
-
-  bad: [
-    {
-      template: '<div @value="1"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  </MyComponent>`, '<@foo.bar @name="2" />', '<this.name @boo="bar"></this.name>', '<@foo @name="2" />', '<foo.some.name @name="1" />'],
+  bad: [{
+    template: '<div @value="1"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -36,12 +25,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<div @value></div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div @value></div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -55,12 +43,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img @src="12">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img @src="12">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -74,7 +61,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,21 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-abstract-roles",
-
   config: true,
-
-  good: [
-    '<img alt="" role="none" src="zoey.jpg">',
-    '<img alt="" role="presentation" src="zoey.jpg">',
-  ],
-
-  bad: [
-    {
-      template: '<img role="command">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<img alt="" role="none" src="zoey.jpg">', '<img alt="" role="presentation" src="zoey.jpg">'],
+  bad: [{
+    template: '<img role="command">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -29,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="composite">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="composite">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -49,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input role="input">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input role="input">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -69,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="landmark">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="landmark">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -89,13 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input role="range">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input role="range">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -109,13 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="roletype">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="roletype">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -129,13 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="section">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="section">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -149,13 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="sectionhead">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="sectionhead">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -169,13 +149,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<select role="select"></select>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<select role="select"></select>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -189,13 +167,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="structure"></div>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="structure"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -209,13 +185,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="widget">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="widget">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -229,13 +203,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img role="window">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img role="window">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -249,7 +221,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

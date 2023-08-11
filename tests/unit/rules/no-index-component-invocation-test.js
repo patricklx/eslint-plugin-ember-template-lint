@@ -1,29 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-index-component-invocation",
-
   config: "true",
-  good: [
-    "<Foo::Bar />",
-    "<Foo::IndexItem />",
-    "<Foo::MyIndex />",
-    "<Foo::MyIndex></Foo::MyIndex>",
-    "{{foo/index-item}}",
-    "{{foo/my-index}}",
-    "{{foo/bar}}",
-    "{{#foo/bar}}{{/foo/bar}}",
-    '{{component "foo/bar"}}',
-    '{{component "foo/my-index"}}',
-    '{{component "foo/index-item"}}',
-    '{{#component "foo/index-item"}}{{/component}}',
-  ],
-
-  bad: [
-    {
-      template: "{{foo/index}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<Foo::Bar />", "<Foo::IndexItem />", "<Foo::MyIndex />", "<Foo::MyIndex></Foo::MyIndex>", "{{foo/index-item}}", "{{foo/my-index}}", "{{foo/bar}}", "{{#foo/bar}}{{/foo/bar}}", '{{component "foo/bar"}}', '{{component "foo/my-index"}}', '{{component "foo/index-item"}}', '{{#component "foo/index-item"}}{{/component}}'],
+  bad: [{
+    template: "{{foo/index}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -37,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component "foo/index"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component "foo/index"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -56,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#foo/index}}{{/foo/index}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#foo/index}}{{/foo/index}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -75,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#component "foo/index"}}{{/component}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#component "foo/index"}}{{/component}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -94,12 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{foo/bar (component "foo/index")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{foo/bar (component "foo/index")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 22,
@@ -113,12 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{foo/bar name=(component "foo/index")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{foo/bar name=(component "foo/index")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 27,
@@ -132,12 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo::Index />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo::Index />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -151,12 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo::Bar::Index />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo::Bar::Index />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -170,12 +149,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo::Index></Foo::Index>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo::Index></Foo::Index>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -189,7 +167,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

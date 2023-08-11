@@ -1,34 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-invalid-aria-attributes",
-
   config: true,
-
-  good: [
-    '<h1 aria-hidden="true">Valid Heading</h1>',
-    "<h1 aria-hidden={{true}}>Second valid Heading</h1>",
-    '<input type="email" aria-required="true" />',
-    '<input type="text" aria-labelledby="label1 label2" />',
-    '<div role="checkbox" aria-checked="true" onclick="handleCheckbox()" tabindex="0"></div>',
-    '<button aria-haspopup="true"></button>',
-    '<button aria-haspopup="dialog"></button>',
-    '<div role="slider" aria-valuenow="50" aria-valuemax="100" aria-valuemin="0" />',
-    '<div role="heading" aria-level={{2}}></div>',
-    '<input type="text" id="name" aria-invalid="grammar" />',
-    '<div role="region" aria-live="polite" aria-relevant="additions text">Valid live region</div>',
-    '<div aria-label="{{@foo.bar}} baz"></div>',
-    '<CustomComponent @ariaRequired={{this.ariaRequired}} aria-errormessage="errorId" />',
-    '<button type="submit" aria-disabled={{this.isDisabled}}>Submit</button>',
-    '<div role="textbox" aria-sort={{if this.hasCustomSort "other" "ascending"}}></div>',
-    '<div role="combobox" aria-expanded="undefined"></div>',
-    '<button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button>',
-  ],
-  bad: [
-    {
-      template: '<input aria-text="inaccessible text" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<h1 aria-hidden="true">Valid Heading</h1>', "<h1 aria-hidden={{true}}>Second valid Heading</h1>", '<input type="email" aria-required="true" />', '<input type="text" aria-labelledby="label1 label2" />', '<div role="checkbox" aria-checked="true" onclick="handleCheckbox()" tabindex="0"></div>', '<button aria-haspopup="true"></button>', '<button aria-haspopup="dialog"></button>', '<div role="slider" aria-valuenow="50" aria-valuemax="100" aria-valuemin="0" />', '<div role="heading" aria-level={{2}}></div>', '<input type="text" id="name" aria-invalid="grammar" />', '<div role="region" aria-live="polite" aria-relevant="additions text">Valid live region</div>', '<div aria-label="{{@foo.bar}} baz"></div>', '<CustomComponent @ariaRequired={{this.ariaRequired}} aria-errormessage="errorId" />', '<button type="submit" aria-disabled={{this.isDisabled}}>Submit</button>', '<div role="textbox" aria-sort={{if this.hasCustomSort "other" "ascending"}}></div>', '<div role="combobox" aria-expanded="undefined"></div>', '<button aria-label={{if @isNew (t "actions.add") (t "actions.edit")}}></button>'],
+  bad: [{
+    template: '<input aria-text="inaccessible text" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -42,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="slider" aria-valuenow={{this.foo}} aria-valuemax={{this.bar}} aria-value-min={{this.baz}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="slider" aria-valuenow={{this.foo}} aria-valuemax={{this.bar}} aria-value-min={{this.baz}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -62,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<h1 aria--hidden="true">Broken heading</h1>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<h1 aria--hidden="true">Broken heading</h1>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -81,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<CustomComponent role="region" aria-alert="polite" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<CustomComponent role="region" aria-alert="polite" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -100,13 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<span role="checkbox" aria-checked="bad-value" tabindex="0" aria-label="Forget me"></span>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<span role="checkbox" aria-checked="bad-value" tabindex="0" aria-label="Forget me"></span>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -120,13 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<button type="submit" disabled="true" aria-disabled="123">Submit</button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type="submit" disabled="true" aria-disabled="123">Submit</button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -140,13 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<input type="text" disabled="true" aria-errormessage="false" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input type="text" disabled="true" aria-errormessage="false" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -160,13 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<button type="submit" aria-describedby="blah false">Continue at your own risk</button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type="submit" aria-describedby="blah false">Continue at your own risk</button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -180,13 +149,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="heading" aria-level="bogus">Inaccessible heading</div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="heading" aria-level="bogus">Inaccessible heading</div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -200,13 +167,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="heading" aria-level="true">Another inaccessible heading</div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="heading" aria-level="true">Another inaccessible heading</div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -220,13 +185,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="slider" aria-valuenow=(2*2)  aria-valuemax="100" aria-valuemin="30">Broken slider</div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="slider" aria-valuenow=(2*2)  aria-valuemax="100" aria-valuemin="30">Broken slider</div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -240,13 +203,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="region" aria-live="no-such-value">Inaccessible live region</div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="region" aria-live="no-such-value">Inaccessible live region</div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -260,13 +221,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="region" aria-live="polite" aria-relevant="additions errors">Inaccessible live region</div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="region" aria-live="polite" aria-relevant="additions errors">Inaccessible live region</div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -280,12 +239,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input type="text" aria-required="undefined" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input type="text" aria-required="undefined" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -299,7 +257,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

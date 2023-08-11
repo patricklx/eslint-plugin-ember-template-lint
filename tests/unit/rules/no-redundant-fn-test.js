@@ -1,25 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-redundant-fn',
-
   config: true,
-
-  good: [
-    '<button {{on "click" this.handleClick}}>Click Me</button>',
-    '<button {{on "click" (fn this.handleClick "foo")}}>Click Me</button>',
-    '<SomeComponent @onClick={{this.handleClick}} />',
-    '<SomeComponent @onClick={{fn this.handleClick "foo"}} />',
-    '{{foo bar=this.handleClick}}>',
-    '{{foo bar=(fn this.handleClick "foo")}}>',
-  ],
-
-  bad: [
-    {
-      template: '<button {{on "click" (fn this.handleClick)}}>Click Me</button>',
-      fixedTemplate: '<button {{on "click" this.handleClick}}>Click Me</button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<button {{on "click" this.handleClick}}>Click Me</button>', '<button {{on "click" (fn this.handleClick "foo")}}>Click Me</button>', '<SomeComponent @onClick={{this.handleClick}} />', '<SomeComponent @onClick={{fn this.handleClick "foo"}} />', '{{foo bar=this.handleClick}}>', '{{foo bar=(fn this.handleClick "foo")}}>'],
+  bad: [{
+    template: '<button {{on "click" (fn this.handleClick)}}>Click Me</button>',
+    fixedTemplate: '<button {{on "click" this.handleClick}}>Click Me</button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -35,13 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<SomeComponent @onClick={{fn this.handleClick}} />',
-      fixedTemplate: '<SomeComponent @onClick={{this.handleClick}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SomeComponent @onClick={{fn this.handleClick}} />',
+    fixedTemplate: '<SomeComponent @onClick={{this.handleClick}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 24,
@@ -57,13 +47,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{foo bar=(fn this.handleClick)}}>',
-      fixedTemplate: '{{foo bar=this.handleClick}}>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{foo bar=(fn this.handleClick)}}>',
+    fixedTemplate: '{{foo bar=this.handleClick}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -79,7 +68,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

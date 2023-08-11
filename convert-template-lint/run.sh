@@ -1,0 +1,1 @@
+../node_modules/.bin/babel --config-file ./.babelrc.js  rules/ --out-dir=rules-tr

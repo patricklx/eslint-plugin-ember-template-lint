@@ -1,32 +1,20 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-invalid-link-text",
-
   config: true,
-
-  good: [
-    '<a href="https://myurl.com">Click here to read more about this amazing adventure</a>',
-    "{{#link-to}} click here to read more about our company{{/link-to}}",
-    "<LinkTo>Read more about ways semantic HTML can make your code more accessible.</LinkTo>",
-    "<LinkTo>{{foo}} more</LinkTo>",
-    '<a href="https://myurl.com" aria-labelledby="some-id"></a>',
-    '<a href="https://myurl.com" aria-label="click here to read about our company"></a>',
-    '<a href="https://myurl.com" aria-hidden="true"></a>',
-    '<a href="https://myurl.com" hidden></a>',
-    '<LinkTo aria-label={{t "some-translation"}}>A link with translation</LinkTo>',
-    '<a href="#" aria-label={{this.anAriaLabel}}>A link with a variable as aria-label</a>',
-    {
-      config: { allowEmptyLinks: true },
-      template: '<a href="https://myurl.com"></a>',
+  good: ['<a href="https://myurl.com">Click here to read more about this amazing adventure</a>', "{{#link-to}} click here to read more about our company{{/link-to}}", "<LinkTo>Read more about ways semantic HTML can make your code more accessible.</LinkTo>", "<LinkTo>{{foo}} more</LinkTo>", '<a href="https://myurl.com" aria-labelledby="some-id"></a>', '<a href="https://myurl.com" aria-label="click here to read about our company"></a>', '<a href="https://myurl.com" aria-hidden="true"></a>', '<a href="https://myurl.com" hidden></a>', '<LinkTo aria-label={{t "some-translation"}}>A link with translation</LinkTo>', '<a href="#" aria-label={{this.anAriaLabel}}>A link with a variable as aria-label</a>', {
+    config: {
+      allowEmptyLinks: true
     },
-  ],
-
-  bad: [
-    {
-      template: '<a href="https://myurl.com">click here</a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<a href="https://myurl.com"></a>'
+  }],
+  bad: [{
+    template: '<a href="https://myurl.com">click here</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -40,12 +28,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<LinkTo>click here</LinkTo>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<LinkTo>click here</LinkTo>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -59,12 +46,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#link-to}}click here{{/link-to}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#link-to}}click here{{/link-to}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -78,12 +64,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="https://myurl.com"></a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="https://myurl.com"></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -97,12 +82,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="https://myurl.com"> </a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="https://myurl.com"> </a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -116,12 +100,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="https://myurl.com"> &nbsp; \n</a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="https://myurl.com"> &nbsp; \n</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -135,12 +118,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a aria-labelledby="" href="https://myurl.com">Click here</a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a aria-labelledby="" href="https://myurl.com">Click here</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -154,13 +136,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<a aria-labelledby=" " href="https://myurl.com">Click here</a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a aria-labelledby=" " href="https://myurl.com">Click here</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -174,13 +154,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<a aria-label="Click here" href="https://myurl.com">Click here</a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a aria-label="Click here" href="https://myurl.com">Click here</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -194,12 +172,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<LinkTo></LinkTo>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<LinkTo></LinkTo>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -213,12 +190,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<LinkTo> &nbsp; \n</LinkTo>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<LinkTo> &nbsp; \n</LinkTo>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -232,12 +208,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#link-to}}{{/link-to}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#link-to}}{{/link-to}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -251,12 +226,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#link-to}} &nbsp; \n{{/link-to}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#link-to}} &nbsp; \n{{/link-to}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -270,13 +244,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      allowEmptyLinks: false
     },
-    {
-      config: { allowEmptyLinks: false },
-      template: "{{#link-to}} &nbsp; \n{{/link-to}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "{{#link-to}} &nbsp; \n{{/link-to}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -290,7 +265,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

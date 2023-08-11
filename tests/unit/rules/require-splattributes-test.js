@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-splattributes",
-
   config: true,
-
-  good: [
-    "<div ...attributes></div>",
-    "<Foo ...attributes></Foo>",
-    "<div ...attributes />",
-    "<div><Foo ...attributes /></div>",
-    "<div ...attributes></div><div></div>",
-    "<div></div><div ...attributes></div><div></div>",
-  ],
-
-  bad: [
-    {
-      template: "<div></div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<div ...attributes></div>", "<Foo ...attributes></Foo>", "<div ...attributes />", "<div><Foo ...attributes /></div>", "<div ...attributes></div><div></div>", "<div></div><div ...attributes></div><div></div>"],
+  bad: [{
+    template: "<div></div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -32,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo></Foo>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo></Foo>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -51,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<div></div><div></div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div></div><div></div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -70,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<div/>\n\n",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div/>\n\n",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -89,7 +77,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

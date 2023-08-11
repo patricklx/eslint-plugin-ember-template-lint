@@ -1,11 +1,15 @@
-import { createAttributesOrderErrorMessage } from '../../../lib/rules/attribute-order.js';
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+'use strict';
 
-generateRuleTests({
+var _attributeOrder = require('../../../lib/rules/attribute-order.js');
+var _ruleTestHarness = _interopRequireDefault(
+  require('../../helpers/rule-test-harness.js')
+);
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+(0, _ruleTestHarness.default)({
   name: 'attribute-order',
-
   config: true,
-
   good: [
     '<MyComponent @a="1" {{on "change" this.click}} ...attributes />',
     '<MyComponent @name="1" bar="baz" {{did-render this.someAction}} ...attributes aria-role="button" />',
@@ -42,7 +46,6 @@ generateRuleTests({
     },
     '<MyComponent @bar="2" @z="1" bar="2"></MyComponent>',
   ],
-
   bad: [
     {
       template:
@@ -53,16 +56,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 60,
-              "endColumn": 103,
+              "column": 61,
+              "endColumn": 104,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  103,
+                ],
+                "text": "{{did-update this.loadMore this.activeTab}} {{in-viewport onEnter=this.loadMore viewportSpy=true}}",
+              },
               "line": 1,
               "message": "Modifier {{did-update this.loadMore this.activeTab}} is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "{{did-update this.loadMore this.activeTab}}",
             },
           ]
         `);
@@ -75,16 +83,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 11,
-              "endColumn": 27,
+              "column": 12,
+              "endColumn": 28,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  27,
+                ],
+                "text": "aria-label="foo" b="1"",
+              },
               "line": 1,
-              "message": "Attribute aria-label=\\"foo\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Attribute aria-label="foo" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "aria-label=\\"foo\\"",
             },
           ]
         `);
@@ -97,28 +110,38 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 34,
-              "endColumn": 47,
+              "column": 14,
+              "endColumn": 34,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  13,
+                  47,
+                ],
+                "text": "@name="World" data-test-id="Hello"",
+              },
               "line": 1,
-              "message": "Argument @name=\\"World\\" must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "message": "Attribute data-test-id="Hello" must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@name=\\"World\\"",
             },
             {
-              "column": 13,
-              "endColumn": 33,
+              "column": 35,
+              "endColumn": 48,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  13,
+                  47,
+                ],
+                "text": "@name="World" data-test-id="Hello"",
+              },
               "line": 1,
-              "message": "Attribute data-test-id=\\"Hello\\" must go after arguments",
-              "rule": "attribute-order",
+              "message": "Argument @name="World" must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "data-test-id=\\"Hello\\"",
             },
           ]
         `);
@@ -129,33 +152,44 @@ generateRuleTests({
         order: ['attributes', 'arguments', 'modifiers'],
       },
       template: '<div @foo="1" {{did-render this.ok}} aria-label="foo"></div>',
-      fixedTemplate: '<div aria-label="foo" @foo="1" {{did-render this.ok}}></div>',
+      fixedTemplate:
+        '<div aria-label="foo" @foo="1" {{did-render this.ok}}></div>',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 37,
-              "endColumn": 53,
+              "column": 6,
+              "endColumn": 14,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  53,
+                ],
+                "text": "aria-label="foo" {{did-render this.ok}} @foo="1"",
+              },
               "line": 1,
-              "message": "Attribute aria-label=\\"foo\\" must go before arguments and modifiers",
-              "rule": "attribute-order",
+              "message": "Argument @foo="1" must go after attributes",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "aria-label=\\"foo\\"",
             },
             {
-              "column": 5,
-              "endColumn": 13,
+              "column": 38,
+              "endColumn": 54,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  53,
+                ],
+                "text": "aria-label="foo" {{did-render this.ok}} @foo="1"",
+              },
               "line": 1,
-              "message": "Argument @foo=\\"1\\" must go after attributes",
-              "rule": "attribute-order",
+              "message": "Attribute aria-label="foo" must go before arguments and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@foo=\\"1\\"",
             },
           ]
         `);
@@ -166,45 +200,61 @@ generateRuleTests({
         order: ['modifiers', 'attributes', 'arguments'],
       },
       template: '<div @foo="1" {{did-render this.ok}} aria-label="foo"></div>',
-      fixedTemplate: '<div {{did-render this.ok}} aria-label="foo" @foo="1"></div>',
+      fixedTemplate:
+        '<div {{did-render this.ok}} aria-label="foo" @foo="1"></div>',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 14,
-              "endColumn": 36,
+              "column": 6,
+              "endColumn": 14,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  36,
+                ],
+                "text": "{{did-render this.ok}} @foo="1"",
+              },
+              "line": 1,
+              "message": "Argument @foo="1" must go after attributes",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
+              "severity": 2,
+            },
+            {
+              "column": 15,
+              "endColumn": 37,
+              "endLine": 1,
+              "fix": {
+                "range": [
+                  5,
+                  36,
+                ],
+                "text": "{{did-render this.ok}} @foo="1"",
+              },
               "line": 1,
               "message": "Modifier {{did-render this.ok}} must go before attributes and arguments",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "{{did-render this.ok}}",
             },
             {
-              "column": 37,
-              "endColumn": 53,
+              "column": 38,
+              "endColumn": 54,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  36,
+                ],
+                "text": "{{did-render this.ok}} @foo="1"",
+              },
               "line": 1,
-              "message": "Attribute aria-label=\\"foo\\" must go after modifiers",
-              "rule": "attribute-order",
+              "message": "Attribute aria-label="foo" must go after modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "aria-label=\\"foo\\"",
-            },
-            {
-              "column": 5,
-              "endColumn": 13,
-              "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 1,
-              "message": "Argument @foo=\\"1\\" must go after attributes",
-              "rule": "attribute-order",
-              "severity": 2,
-              "source": "@foo=\\"1\\"",
             },
           ]
         `);
@@ -217,16 +267,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 38,
-              "endColumn": 43,
+              "column": 39,
+              "endColumn": 44,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  32,
+                  43,
+                ],
+                "text": "a="2" b="1"",
+              },
               "line": 1,
-              "message": "Attribute a=\\"2\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Attribute a="2" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "a=\\"2\\"",
             },
           ]
         `);
@@ -239,16 +294,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 20,
-              "endColumn": 26,
+              "column": 21,
+              "endColumn": 27,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  13,
+                  26,
+                ],
+                "text": "@a="2" @b="1"",
+              },
               "line": 1,
-              "message": "Argument @a=\\"2\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Argument @a="2" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@a=\\"2\\"",
             },
           ]
         `);
@@ -263,16 +323,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 50,
-              "endColumn": 75,
+              "column": 51,
+              "endColumn": 76,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  13,
+                  75,
+                ],
+                "text": "{{did-insert this.click}} {{did-update (fn this.click @a) @b}}",
+              },
               "line": 1,
               "message": "Modifier {{did-insert this.click}} is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "{{did-insert this.click}}",
             },
           ]
         `);
@@ -285,24 +350,31 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 20,
-              "endColumn": 25,
+              "column": 21,
+              "endColumn": 26,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  14,
+                  25,
+                ],
+                "text": "a="1" b="2"",
+              },
               "line": 1,
-              "message": "Attribute a=\\"1\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Attribute a="1" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "a=\\"1\\"",
             },
           ]
         `);
       },
     },
     {
-      template: '<div {{did-render this.someAction}} aria-label="button"></div>',
-      fixedTemplate: '<div aria-label="button" {{did-render this.someAction}}></div>',
+      template:
+        '<div {{did-render this.someAction}} aria-label="button"></div>',
+      fixedTemplate:
+        '<div aria-label="button" {{did-render this.someAction}}></div>',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
@@ -346,16 +418,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 38,
-              "endColumn": 58,
+              "column": 39,
+              "endColumn": 59,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  24,
+                  115,
+                ],
+                "text": "@change={{this.foo}}data-test-foo  local-class="foo" ...attributes  {{on "click" this.foo}}",
+              },
               "line": 1,
               "message": "Argument @change={{this.foo}} must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@change={{this.foo}}",
             },
           ]
         `);
@@ -370,28 +447,38 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 38,
-              "endColumn": 58,
+              "column": 39,
+              "endColumn": 59,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  13,
+                  58,
+                ],
+                "text": "@change={{this.foo}} @value="5"data-test-foo ",
+              },
               "line": 1,
               "message": "Argument @change={{this.foo}} is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@change={{this.foo}}",
             },
             {
-              "column": 38,
-              "endColumn": 58,
+              "column": 39,
+              "endColumn": 59,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  24,
+                  58,
+                ],
+                "text": "@change={{this.foo}}data-test-foo ",
+              },
               "line": 1,
               "message": "Argument @change={{this.foo}} must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@change={{this.foo}}",
             },
           ]
         `);
@@ -407,16 +494,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 27,
-              "endColumn": 30,
+              "column": 28,
+              "endColumn": 31,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  23,
+                  30,
+                ],
+                "text": "a=2 b=1",
+              },
               "line": 1,
               "message": "Attribute a=2 is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "a=2",
             },
           ]
         `);
@@ -434,52 +526,72 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 71,
-              "endColumn": 79,
+              "column": 32,
+              "endColumn": 54,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 1,
-              "message": "Argument @foo=\\"1\\" must go before attributes and modifiers",
-              "rule": "attribute-order",
-              "severity": 2,
-              "source": "@foo=\\"1\\"",
-            },
-            {
-              "column": 54,
-              "endColumn": 70,
-              "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 1,
-              "message": "Attribute aria-label=\\"foo\\" must go after arguments",
-              "rule": "attribute-order",
-              "severity": 2,
-              "source": "aria-label=\\"foo\\"",
-            },
-            {
-              "column": 31,
-              "endColumn": 53,
-              "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  53,
+                ],
+                "text": "{{did-render this.ok}} {{did-update this.notok}}",
+              },
               "line": 1,
               "message": "Modifier {{did-render this.ok}} is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "{{did-render this.ok}}",
             },
             {
-              "column": 31,
-              "endColumn": 53,
+              "column": 32,
+              "endColumn": 54,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  54,
+                  79,
+                ],
+                "text": "@foo="1" aria-label="foo"",
+              },
               "line": 1,
               "message": "Modifier {{did-render this.ok}} must go after attributes",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "{{did-render this.ok}}",
+            },
+            {
+              "column": 55,
+              "endColumn": 71,
+              "endLine": 1,
+              "fix": {
+                "range": [
+                  54,
+                  79,
+                ],
+                "text": "@foo="1" aria-label="foo"",
+              },
+              "line": 1,
+              "message": "Attribute aria-label="foo" must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
+              "severity": 2,
+            },
+            {
+              "column": 72,
+              "endColumn": 80,
+              "endLine": 1,
+              "fix": {
+                "range": [
+                  54,
+                  79,
+                ],
+                "text": "@foo="1" aria-label="foo"",
+              },
+              "line": 1,
+              "message": "Argument @foo="1" must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
+              "severity": 2,
             },
           ]
         `);
@@ -495,16 +607,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 20,
-              "endColumn": 25,
+              "column": 21,
+              "endColumn": 26,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  14,
+                  25,
+                ],
+                "text": "a="1" b="2"",
+              },
               "line": 1,
-              "message": "Attribute a=\\"1\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Attribute a="1" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "a=\\"1\\"",
             },
           ]
         `);
@@ -519,16 +636,21 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 25,
-              "endColumn": 38,
+              "column": 26,
+              "endColumn": 39,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  8,
+                  118,
+                ],
+                "text": "@alert="b" @alertDescription="d" @block={{@b}} @button="b" @description="a" @dialogButton="b" @dialogTitle="a"",
+              },
               "line": 1,
               "message": "Argument @block={{@b}} is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@block={{@b}}",
             },
           ]
         `);
@@ -539,21 +661,27 @@ generateRuleTests({
         @c="2"
         @b="3"
       ></MyComponent>`,
-      fixedTemplate: `<MyComponent @b="3" @c="2"></MyComponent>`,
+      fixedTemplate: '<MyComponent @b="3" @c="2"></MyComponent>',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 8,
-              "endColumn": 14,
+              "column": 9,
+              "endColumn": 15,
               "endLine": 3,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  21,
+                  42,
+                ],
+                "text": "@b="3"
+                  @c="2"",
+              },
               "line": 3,
-              "message": "Argument @b=\\"3\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Argument @b="3" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@b=\\"3\\"",
             },
           ]
         `);
@@ -565,45 +693,63 @@ generateRuleTests({
         a=1
         @c="2"
       ></MyComponent>`,
-      fixedTemplate: `<!-- hi --> <MyComponent @c="2" a=1 {{did-update this.ok}}></MyComponent>`,
+      fixedTemplate: '<!-- hi --> <MyComponent @c="2" a=1 {{did-update this.ok}}></MyComponent>',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 8,
-              "endColumn": 14,
-              "endLine": 4,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 4,
-              "message": "Argument @c=\\"2\\" must go before attributes and modifiers",
-              "rule": "attribute-order",
-              "severity": 2,
-              "source": "@c=\\"2\\"",
-            },
-            {
-              "column": 8,
-              "endColumn": 11,
-              "endLine": 3,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 3,
-              "message": "Attribute a=1 must go after arguments",
-              "rule": "attribute-order",
-              "severity": 2,
-              "source": "a=1",
-            },
-            {
-              "column": 8,
-              "endColumn": 30,
+              "column": 9,
+              "endColumn": 31,
               "endLine": 2,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  64,
+                  82,
+                ],
+                "text": "@c="2"
+                  a=1",
+              },
               "line": 2,
               "message": "Modifier {{did-update this.ok}} must go after attributes",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "{{did-update this.ok}}",
+            },
+            {
+              "column": 9,
+              "endColumn": 12,
+              "endLine": 3,
+              "fix": {
+                "range": [
+                  64,
+                  82,
+                ],
+                "text": "@c="2"
+                  a=1",
+              },
+              "line": 3,
+              "message": "Attribute a=1 must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
+              "severity": 2,
+            },
+            {
+              "column": 9,
+              "endColumn": 15,
+              "endLine": 4,
+              "fix": {
+                "range": [
+                  64,
+                  82,
+                ],
+                "text": "@c="2"
+                  a=1",
+              },
+              "line": 4,
+              "message": "Argument @c="2" must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
+              "severity": 2,
             },
           ]
         `);
@@ -622,16 +768,22 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 8,
-              "endColumn": 13,
+              "column": 9,
+              "endColumn": 14,
               "endLine": 3,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  22,
+                  41,
+                ],
+                "text": "b="3"
+                  c="2"",
+              },
               "line": 3,
-              "message": "Attribute b=\\"3\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Attribute b="3" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "b=\\"3\\"",
             },
           ]
         `);
@@ -648,40 +800,55 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 27,
-              "endColumn": 57,
+              "column": 22,
+              "endColumn": 27,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  15,
+                  57,
+                ],
+                "text": "@close={{action "closeModal"}} a="1" b="2"",
+              },
               "line": 1,
-              "message": "Argument @close={{action \\"closeModal\\"}} must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "message": "Attribute a="1" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@close={{action \\"closeModal\\"}}",
             },
             {
-              "column": 21,
-              "endColumn": 26,
+              "column": 22,
+              "endColumn": 27,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  15,
+                  57,
+                ],
+                "text": "@close={{action "closeModal"}} b="2" a="1"",
+              },
               "line": 1,
-              "message": "Attribute a=\\"1\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Attribute a="1" must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "a=\\"1\\"",
             },
             {
-              "column": 21,
-              "endColumn": 26,
+              "column": 28,
+              "endColumn": 58,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  15,
+                  57,
+                ],
+                "text": "@close={{action "closeModal"}} b="2" a="1"",
+              },
               "line": 1,
-              "message": "Attribute a=\\"1\\" must go after arguments",
-              "rule": "attribute-order",
+              "message": "Argument @close={{action "closeModal"}} must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "a=\\"1\\"",
             },
           ]
         `);
@@ -692,21 +859,27 @@ generateRuleTests({
       @type="checkbox"
       @checked={{@title.isVisible}}
     />`,
-      fixedTemplate: `<Input @checked={{@title.isVisible}} @type="checkbox" />`,
+      fixedTemplate: '<Input @checked={{@title.isVisible}} @type="checkbox" />',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 6,
-              "endColumn": 35,
+              "column": 7,
+              "endColumn": 36,
               "endLine": 3,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  13,
+                  65,
+                ],
+                "text": "@checked={{@title.isVisible}}
+                @type="checkbox"",
+              },
               "line": 3,
               "message": "Argument @checked={{@title.isVisible}} is not alphabetized",
-              "rule": "attribute-order",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@checked={{@title.isVisible}}",
             },
           ]
         `);
@@ -741,28 +914,38 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 17,
-              "endColumn": 28,
+              "column": 6,
+              "endColumn": 17,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  28,
+                ],
+                "text": "@tagName="" class="asd"",
+              },
               "line": 1,
-              "message": "Argument @tagName=\\"\\" must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "message": "Attribute class="asd" must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@tagName=\\"\\"",
             },
             {
-              "column": 5,
-              "endColumn": 16,
+              "column": 18,
+              "endColumn": 29,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  5,
+                  28,
+                ],
+                "text": "@tagName="" class="asd"",
+              },
               "line": 1,
-              "message": "Attribute class=\\"asd\\" must go after arguments",
-              "rule": "attribute-order",
+              "message": "Argument @tagName="" must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "class=\\"asd\\"",
             },
           ]
         `);
@@ -775,33 +958,45 @@ generateRuleTests({
       {{!-- @second --}}
       @foo={{1}}
     />`,
-      fixedTemplate: `<Foo {{!-- @second --}} @foo={{1}} {{!-- @glint-expect-error --}} id="op" />`,
+      fixedTemplate: '<Foo {{!-- @second --}} @foo={{1}} {{!-- @glint-expect-error --}} id="op" />',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 6,
-              "endColumn": 16,
-              "endLine": 5,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 5,
-              "message": "Argument @foo={{1}} must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "column": 7,
+              "endColumn": 14,
+              "endLine": 3,
+              "fix": {
+                "range": [
+                  48,
+                  80,
+                ],
+                "text": "{{!-- @second --}}
+                id="op"",
+              },
+              "line": 3,
+              "message": "Attribute id="op" must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@foo={{1}}",
             },
             {
-              "column": 6,
-              "endColumn": 13,
-              "endLine": 3,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 3,
-              "message": "Attribute id=\\"op\\" must go after arguments",
-              "rule": "attribute-order",
+              "column": 7,
+              "endColumn": 17,
+              "endLine": 5,
+              "fix": {
+                "range": [
+                  48,
+                  80,
+                ],
+                "text": "{{!-- @second --}}
+                id="op"",
+              },
+              "line": 5,
+              "message": "Argument @foo={{1}} must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "id=\\"op\\"",
             },
           ]
         `);
@@ -818,33 +1013,51 @@ generateRuleTests({
         {{!-- second last --}}
         {{!-- trailing comment --}}
       />`,
-      fixedTemplate: `<Foo {{!-- double comment --}} {{!-- @second --}} @foo={{1}} {{!-- @glint-expect-error --}} id="op" {{!-- another comment --}} {{!-- second last --}} {{!-- trailing comment --}} />`,
+      fixedTemplate: '<Foo {{!-- double comment --}} {{!-- @second --}} @foo={{1}} {{!-- @glint-expect-error --}} id="op" {{!-- another comment --}} {{!-- second last --}} {{!-- trailing comment --}} />',
       verifyResults(results) {
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 8,
-              "endColumn": 18,
-              "endLine": 6,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 6,
-              "message": "Argument @foo={{1}} must go before attributes and modifiers",
-              "rule": "attribute-order",
+              "column": 9,
+              "endColumn": 16,
+              "endLine": 3,
+              "fix": {
+                "range": [
+                  13,
+                  139,
+                ],
+                "text": "@foo={{1}}
+                  {{!-- double comment --}}
+                  {{!-- @glint-expect-error --}}
+                  id="op"
+                  {{!-- @second --}}",
+              },
+              "line": 3,
+              "message": "Attribute id="op" must go after arguments",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@foo={{1}}",
             },
             {
-              "column": 8,
-              "endColumn": 15,
-              "endLine": 3,
-              "filePath": "layout.hbs",
-              "isFixable": true,
-              "line": 3,
-              "message": "Attribute id=\\"op\\" must go after arguments",
-              "rule": "attribute-order",
+              "column": 9,
+              "endColumn": 19,
+              "endLine": 6,
+              "fix": {
+                "range": [
+                  13,
+                  139,
+                ],
+                "text": "@foo={{1}}
+                  {{!-- double comment --}}
+                  {{!-- @glint-expect-error --}}
+                  id="op"
+                  {{!-- @second --}}",
+              },
+              "line": 6,
+              "message": "Argument @foo={{1}} must go before attributes and modifiers",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "id=\\"op\\"",
             },
           ]
         `);
@@ -857,30 +1070,34 @@ generateRuleTests({
         expect(results).toMatchInlineSnapshot(`
           [
             {
-              "column": 13,
-              "endColumn": 19,
+              "column": 14,
+              "endColumn": 20,
               "endLine": 1,
-              "filePath": "layout.hbs",
-              "isFixable": true,
+              "fix": {
+                "range": [
+                  6,
+                  19,
+                ],
+                "text": "@a="a" @b="b"",
+              },
               "line": 1,
-              "message": "Argument @a=\\"a\\" is not alphabetized",
-              "rule": "attribute-order",
+              "message": "Argument @a="a" is not alphabetized",
+              "nodeType": null,
+              "ruleId": "ember-template-lint/attribute-order",
               "severity": 2,
-              "source": "@a=\\"a\\"",
             },
           ]
         `);
       },
     },
   ],
-
   error: [
     {
       config: null,
       template: 'test',
       result: {
         fatal: true,
-        message: createAttributesOrderErrorMessage(null),
+        message: (0, _attributeOrder.createAttributesOrderErrorMessage)(null),
       },
     },
     {
@@ -888,7 +1105,7 @@ generateRuleTests({
       template: 'test',
       result: {
         fatal: true,
-        message: createAttributesOrderErrorMessage('true'),
+        message: (0, _attributeOrder.createAttributesOrderErrorMessage)('true'),
       },
     },
     {
@@ -898,25 +1115,33 @@ generateRuleTests({
       template: 'test',
       result: {
         fatal: true,
-        message: createAttributesOrderErrorMessage({
+        message: (0, _attributeOrder.createAttributesOrderErrorMessage)({
           order: ['arguments', 'NOT_AN_OPTION'],
         }),
       },
     },
     {
-      config: { invalidOption: true },
+      config: {
+        invalidOption: true,
+      },
       template: 'test',
       result: {
         fatal: true,
-        message: createAttributesOrderErrorMessage({ invalidOption: true }),
+        message: (0, _attributeOrder.createAttributesOrderErrorMessage)({
+          invalidOption: true,
+        }),
       },
     },
     {
-      config: { alphabetize: 'true' },
+      config: {
+        alphabetize: 'true',
+      },
       template: 'test',
       result: {
         fatal: true,
-        message: createAttributesOrderErrorMessage({ alphabetize: 'true' }),
+        message: (0, _attributeOrder.createAttributesOrderErrorMessage)({
+          alphabetize: 'true',
+        }),
       },
     },
     {
@@ -926,10 +1151,12 @@ generateRuleTests({
       template: 'test',
       result: {
         fatal: true,
-        message: createAttributesOrderErrorMessage({
+        message: (0, _attributeOrder.createAttributesOrderErrorMessage)({
           order: ['attributes'],
         }),
       },
     },
   ],
 });
+
+describe('', () => {});

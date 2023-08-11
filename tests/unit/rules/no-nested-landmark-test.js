@@ -1,24 +1,17 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-nested-landmark",
-
   config: true,
-
-  good: [
-    "<div><main></main></div>",
-    '<div role="application"><div role="document"><div role="application"></div></div></div>',
-    "<header><nav></nav></header>", // nested landmarks of different types are okay
-    '<div role="banner"><nav></nav></div>',
-    '<header><div role="navigation"></div></header>',
-    '<div role="banner"><div role="navigation"></div></div>',
-  ],
-
-  bad: [
-    {
-      template: "<main><main></main></main>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<div><main></main></div>", '<div role="application"><div role="document"><div role="application"></div></div></div>', "<header><nav></nav></header>",
+  // nested landmarks of different types are okay
+  '<div role="banner"><nav></nav></div>', '<header><div role="navigation"></div></header>', '<div role="banner"><div role="navigation"></div></div>'],
+  bad: [{
+    template: "<main><main></main></main>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -32,12 +25,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<main><div><main></main></div></main>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<main><div><main></main></div></main>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -51,13 +43,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: '<div role="main"><main></main></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="main"><main></main></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -71,12 +61,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="main"><div><main></main></div></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="main"><div><main></main></div></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -90,13 +79,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: '<main><div role="main"></div></main>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<main><div role="main"></div></main>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -110,12 +97,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<main><div><div role="main"></div></div></main>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<main><div><div role="main"></div></div></main>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -129,12 +115,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<nav><nav></nav></nav>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<nav><nav></nav></nav>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -148,12 +133,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<header><header></header></header>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<header><header></header></header>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -167,12 +151,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<header><div role="banner"></div></header>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<header><div role="banner"></div></header>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -186,12 +169,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="contentinfo"><footer></footer></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="contentinfo"><footer></footer></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 25,
@@ -205,7 +187,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

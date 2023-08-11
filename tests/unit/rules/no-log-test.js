@@ -1,26 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-log",
-
   config: true,
-
-  good: [
-    "{{foo}}",
-    "{{button}}",
-    "{{#each this.logs as |log|}}{{log}}{{/each}}",
-    "{{#let this.log as |log|}}{{log}}{{/let}}",
-    '{{#let (component "my-log-component") as |log|}}{{#log}}message{{/log}}{{/let}}',
-    "<Logs @logs={{this.logs}} as |log|>{{log}}</Logs>",
-    "<Logs @logs={{this.logs}} as |log|><Log>{{log}}</Log></Logs>",
-  ],
-
-  bad: [
-    {
-      template: "{{log}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{foo}}", "{{button}}", "{{#each this.logs as |log|}}{{log}}{{/each}}", "{{#let this.log as |log|}}{{log}}{{/let}}", '{{#let (component "my-log-component") as |log|}}{{#log}}message{{/log}}{{/let}}', "<Logs @logs={{this.logs}} as |log|>{{log}}</Logs>", "<Logs @logs={{this.logs}} as |log|><Log>{{log}}</Log></Logs>"],
+  bad: [{
+    template: "{{log}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -34,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{log "Logs are best for debugging!"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{log "Logs are best for debugging!"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -54,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#log}}Arrgh!{{/log}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#log}}Arrgh!{{/log}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -74,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#log "Foo"}}{{/log}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#log "Foo"}}{{/log}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -94,13 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#each this.messages as |message|}}{{log message}}{{/each}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#each this.messages as |message|}}{{log message}}{{/each}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 37,
@@ -114,13 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#let this.message as |message|}}{{log message}}{{/let}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#let this.message as |message|}}{{log message}}{{/let}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 35,
@@ -134,14 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<Messages @messages={{this.messages}} as |message|>{{#log}}{{message}}{{/log}}</Messages>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Messages @messages={{this.messages}} as |message|>{{#log}}{{message}}{{/log}}</Messages>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 52,
@@ -155,7 +131,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

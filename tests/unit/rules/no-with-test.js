@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-with",
-
   config: true,
-
-  good: [
-    "{{@with}}",
-    "{{this.with}}",
-    '{{with "foo" bar="baz"}}',
-    "{{#if @model.posts}}{{@model.posts}}{{/if}}",
-    "{{#let @model.posts as |blogPosts|}}{{blogPosts}}{{/let}}",
-  ],
-
-  bad: [
-    {
-      template: "{{#with this.foo as |bar|}}{{bar}}{{/with}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{@with}}", "{{this.with}}", '{{with "foo" bar="baz"}}', "{{#if @model.posts}}{{@model.posts}}{{/if}}", "{{#let @model.posts as |blogPosts|}}{{blogPosts}}{{/let}}"],
+  bad: [{
+    template: "{{#with this.foo as |bar|}}{{bar}}{{/with}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -32,14 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#with (hash firstName="John" lastName="Doe") as |user|}}{{user.firstName}} {{user.lastName}}{{/with}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#with (hash firstName="John" lastName="Doe") as |user|}}{{user.firstName}} {{user.lastName}}{{/with}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -53,7 +41,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

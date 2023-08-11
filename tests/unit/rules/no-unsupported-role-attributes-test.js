@@ -1,39 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-unsupported-role-attributes',
-
   config: true,
-
-  good: [
-    '<div role="button" aria-disabled="true"></div>',
-    '<div role="heading" aria-level="1" />',
-    '<span role="checkbox" aria-checked={{this.checked}}></span>',
-    '<CustomComponent role="banner" />',
-    '<div role="textbox" aria-required={{this.required}} aria-errormessage={{this.error}}></div>',
-    '<div role="heading" foo="true" />',
-    '<dialog />',
-    '<a href="#" aria-describedby=""></a>',
-    '<menu type="toolbar" aria-hidden="true" />',
-    '<a role="menuitem" aria-labelledby={{this.label}} />',
-    '<input type="image" aria-atomic />',
-    '<input type="submit" aria-disabled="true" />',
-    '<select aria-expanded="false" aria-controls="ctrlID" />',
-    '<div type="button" foo="true" />',
-    '{{some-component role="heading" aria-level="2"}}',
-    '{{other-component role=this.role aria-bogus="true"}}',
-    '<ItemCheckbox @model={{@model}} @checkable={{@checkable}} />',
-    '<some-custom-element />',
-    '<input type="password">',
-  ],
-
-  bad: [
-    {
-      template: '<div role="link" href="#" aria-checked />',
-      fixedTemplate: '<div role="link" href="#" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<div role="button" aria-disabled="true"></div>', '<div role="heading" aria-level="1" />', '<span role="checkbox" aria-checked={{this.checked}}></span>', '<CustomComponent role="banner" />', '<div role="textbox" aria-required={{this.required}} aria-errormessage={{this.error}}></div>', '<div role="heading" foo="true" />', '<dialog />', '<a href="#" aria-describedby=""></a>', '<menu type="toolbar" aria-hidden="true" />', '<a role="menuitem" aria-labelledby={{this.label}} />', '<input type="image" aria-atomic />', '<input type="submit" aria-disabled="true" />', '<select aria-expanded="false" aria-controls="ctrlID" />', '<div type="button" foo="true" />', '{{some-component role="heading" aria-level="2"}}', '{{other-component role=this.role aria-bogus="true"}}', '<ItemCheckbox @model={{@model}} @checkable={{@checkable}} />', '<some-custom-element />', '<input type="password">'],
+  bad: [{
+    template: '<div role="link" href="#" aria-checked />',
+    fixedTemplate: '<div role="link" href="#" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -49,14 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<CustomComponent role="listbox" aria-level="2" />',
-      fixedTemplate: '<CustomComponent role="listbox" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<CustomComponent role="listbox" aria-level="2" />',
+    fixedTemplate: '<CustomComponent role="listbox" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -72,14 +47,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="option" aria-notreal="bogus" aria-selected="false" />',
-      fixedTemplate: '<div role="option" aria-selected="false" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="option" aria-notreal="bogus" aria-selected="false" />',
+    fixedTemplate: '<div role="option" aria-selected="false" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -95,15 +68,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div role="combobox" aria-multiline="true" aria-expanded="false" aria-controls="someId" />',
-      fixedTemplate: '<div role="combobox" aria-expanded="false" aria-controls="someId" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="combobox" aria-multiline="true" aria-expanded="false" aria-controls="someId" />',
+    fixedTemplate: '<div role="combobox" aria-expanded="false" aria-controls="someId" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -119,14 +89,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button type="submit" aria-valuetext="woosh"></button>',
-      fixedTemplate: '<button type="submit"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button type="submit" aria-valuetext="woosh"></button>',
+    fixedTemplate: '<button type="submit"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -142,14 +110,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<menu type="toolbar" aria-expanded="true" />',
-      fixedTemplate: '<menu type="toolbar" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<menu type="toolbar" aria-expanded="true" />',
+    fixedTemplate: '<menu type="toolbar" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -165,14 +131,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a role="menuitem" aria-checked={{this.checked}} />',
-      fixedTemplate: '<a role="menuitem" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a role="menuitem" aria-checked={{this.checked}} />',
+    fixedTemplate: '<a role="menuitem" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -188,14 +152,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input type="button" aria-invalid="grammar" />',
-      fixedTemplate: '<input type="button" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input type="button" aria-invalid="grammar" />',
+    fixedTemplate: '<input type="button" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -211,14 +173,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input type="email" aria-level={{this.level}} />',
-      fixedTemplate: '<input type="email" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input type="email" aria-level={{this.level}} />',
+    fixedTemplate: '<input type="email" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -234,14 +194,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{foo-component role="button" aria-valuetext="blahblahblah"}}',
-      fixedTemplate: '{{foo-component role="button"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{foo-component role="button" aria-valuetext="blahblahblah"}}',
+    fixedTemplate: '{{foo-component role="button"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -257,7 +215,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

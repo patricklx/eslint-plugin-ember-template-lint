@@ -1,68 +1,42 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 describe("", function () {});
-
-generateRuleTests({
+(0, _ruleTestHarness.default)({
   name: "no-duplicate-id",
-
   config: true,
-
   good: [
-    // Unique sibling TextNode IDs
-    '<div id="id-00"></div><div id="id-01"></div>',
-    "<div id={{unique-id}}></div><div id={{unique-id}}></div>",
-
-    // Built-in helpers:
-    '<div id="{{unique-id}}"></div><div id="{{unique-id}}"></div>',
-    "<div id='{{unique-id}}'></div><div id='{{unique-id}}'></div>",
-
-    // argument-less helpers have to be invoked with parens
-    '<div id="{{(unique-id)}}"></div><div id="{{(unique-id)}}"></div>',
-    "<div id={{(unique-id)}}></div><div id={{(unique-id)}}></div>",
-
-    // Mustache Statements
-    '<div id={{"id-00"}}></div>',
-    "<div id={{this.divId00}}></div>",
-    "<div id={{this.divId00}}></div><div id={{this.divId01}}></div>",
-
-    // ConcatStatements
-    '<div id="concat-{{this.divId}}"></div>',
-    '<div id="concat-{{this.divId00}}"></div><div id="concat-{{this.divId01}}"></div>',
-
-    // Mustache and Concat do not conflict/flag with TextNode
-    '<div id={{id-00}}></div><div id="id-00"></div>',
-    '<div id="id-00"></div><div id={{id-00}}></div>',
-    '<div id="concat-{{id-00}}"></div><div id="concat-id-00"></div>',
-    '<div id="concat-id-00"></div><div id="concat-{{id-00}}"></div>',
-
-    // BlockStatement
-    '<div id="id-00"></div>{{#foo elementId="id-01"}}{{/foo}}',
-    '{{#foo elementId="id-01"}}{{/foo}}<div id="id-00"></div>',
-    '{{#if}}<div id="id-00"></div>{{else}}<span id="id-00"></span>{{/if}}',
-
-    // Number
-    "<div id={{1234}}></div>",
-    '<div id={{1234}}></div><div id={{"1234"}}></div>',
-
-    // Dynamic
-    '<div id={{"id-00"}}></div><div id={{"id-01"}}></div>',
-    "<div id={{this.foo}}></div><div id={{this.bar}}></div>",
-
-    // Source: Mustache
-    '{{foo id="id-00"}}{{foo id="id-01"}}',
-
-    // Mixed
-    '<div id="partA{{partB}}{{"partC"}}"></div><div id="{{"partA"}}{{"partB"}}partC"></div>',
-
-    // Bypass: *all* duplicate ids are contained within a control flow helper BlockStatement
-    `
+  // Unique sibling TextNode IDs
+  '<div id="id-00"></div><div id="id-01"></div>', "<div id={{unique-id}}></div><div id={{unique-id}}></div>",
+  // Built-in helpers:
+  '<div id="{{unique-id}}"></div><div id="{{unique-id}}"></div>', "<div id='{{unique-id}}'></div><div id='{{unique-id}}'></div>",
+  // argument-less helpers have to be invoked with parens
+  '<div id="{{(unique-id)}}"></div><div id="{{(unique-id)}}"></div>', "<div id={{(unique-id)}}></div><div id={{(unique-id)}}></div>",
+  // Mustache Statements
+  '<div id={{"id-00"}}></div>', "<div id={{this.divId00}}></div>", "<div id={{this.divId00}}></div><div id={{this.divId01}}></div>",
+  // ConcatStatements
+  '<div id="concat-{{this.divId}}"></div>', '<div id="concat-{{this.divId00}}"></div><div id="concat-{{this.divId01}}"></div>',
+  // Mustache and Concat do not conflict/flag with TextNode
+  '<div id={{id-00}}></div><div id="id-00"></div>', '<div id="id-00"></div><div id={{id-00}}></div>', '<div id="concat-{{id-00}}"></div><div id="concat-id-00"></div>', '<div id="concat-id-00"></div><div id="concat-{{id-00}}"></div>',
+  // BlockStatement
+  '<div id="id-00"></div>{{#foo elementId="id-01"}}{{/foo}}', '{{#foo elementId="id-01"}}{{/foo}}<div id="id-00"></div>', '{{#if}}<div id="id-00"></div>{{else}}<span id="id-00"></span>{{/if}}',
+  // Number
+  "<div id={{1234}}></div>", '<div id={{1234}}></div><div id={{"1234"}}></div>',
+  // Dynamic
+  '<div id={{"id-00"}}></div><div id={{"id-01"}}></div>', "<div id={{this.foo}}></div><div id={{this.bar}}></div>",
+  // Source: Mustache
+  '{{foo id="id-00"}}{{foo id="id-01"}}',
+  // Mixed
+  '<div id="partA{{partB}}{{"partC"}}"></div><div id="{{"partA"}}{{"partB"}}partC"></div>',
+  // Bypass: *all* duplicate ids are contained within a control flow helper BlockStatement
+  `
       {{#if this.foo}}
         <div id="id-00"></div>
       {{else}}
         <div id="id-00"></div>
       {{/if}}
-    `,
-    `
+    `, `
       {{#if this.foo}}
         <div id="id-00"></div>
       {{else if this.bar}}
@@ -70,15 +44,13 @@ generateRuleTests({
       {{else}}
         <div id="id-00"></div>
       {{/if}}
-    `,
-    `
+    `, `
       {{#unless this.foo}}
         <div id="id-00"></div>
       {{else}}
         <div id="id-00"></div>
       {{/unless}}
-    `,
-    `
+    `, `
       {{#unless this.foo}}
         <div id="id-00"></div>
       {{else unless this.bar}}
@@ -88,8 +60,7 @@ generateRuleTests({
       {{else}}
         <div id="id-00"></div>
       {{/unless}}
-    `,
-    `
+    `, `
       {{#let blah.id as |footerId|}}
         {{#if this.foo}}
           <div id={{footerId}}></div>
@@ -97,8 +68,7 @@ generateRuleTests({
           <span id={{footerId}}></span>
         {{/if}}
       {{/let}}
-    `,
-    `
+    `, `
       {{#let 'foobar' as |footerId|}}
         {{#if this.foo}}
           <div id={{footerId}}></div>
@@ -106,24 +76,21 @@ generateRuleTests({
           <span id={{footerId}}></span>
         {{/if}}
       {{/let}}
-    `,
-    `
+    `, `
       {{#if this.foo}}
         <div id={{this.divId00}}></div>
       {{else}}
         <div id={{this.divId00}}></div>
       {{/if}}
-    `,
-    {
-      template: `
+    `, {
+    template: `
       {{#if this.foo}}
         <div id="partA{{partB}}{{"partC"}}"></div>
       {{else}}
         <div id="partA{{partB}}{{"partC"}}"></div>
       {{/if}}
-    `,
-    },
     `
+  }, `
       {{#if this.foo}}
         {{#if this.other}}
           <div id="nested"></div>
@@ -134,8 +101,7 @@ generateRuleTests({
       {{else}}
         <div id="nested"></div>
       {{/if}}
-    `,
-    `
+    `, `
       <MyComponent as |inputProperties|>
         <Input id={{inputProperties.id}} />
         <div id={{inputProperties.abc}} />
@@ -144,14 +110,11 @@ generateRuleTests({
       <MyComponent as |inputProperties|>
         <Input id={{inputProperties.id}} />
       </MyComponent>
-    `,
-  ],
-
-  bad: [
-    {
-      template: '<div id="id-00"></div><div id="id-00"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    `],
+  bad: [{
+    template: '<div id="id-00"></div><div id="id-00"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 28,
@@ -165,13 +128,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div><div id="id-01"></div></div><div><div id="id-01"></div></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div><div id="id-01"></div></div><div><div id="id-01"></div></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 44,
@@ -185,12 +146,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div id="id-00"></div><div id={{"id-00"}}></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id="id-00"></div><div id={{"id-00"}}></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 28,
@@ -204,12 +164,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div id={{"id-00"}}></div><div id="id-00"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id={{"id-00"}}></div><div id="id-00"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 32,
@@ -223,12 +182,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div id="id-00"></div><div id="id-{{"00"}}"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id="id-00"></div><div id="id-{{"00"}}"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 28,
@@ -242,12 +200,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div id="id-00"></div><div id="{{"id"}}-00"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id="id-00"></div><div id="{{"id"}}-00"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 28,
@@ -261,12 +218,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div id="id-00"></div>{{#foo elementId="id-00"}}{{/foo}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id="id-00"></div>{{#foo elementId="id-00"}}{{/foo}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -280,12 +236,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo elementId="id-00"}}{{/foo}}<div id="id-00"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo elementId="id-00"}}{{/foo}}<div id="id-00"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 40,
@@ -299,12 +254,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div id={{"id-00"}}></div>{{#foo elementId="id-00"}}{{/foo}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id={{"id-00"}}></div>{{#foo elementId="id-00"}}{{/foo}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 27,
@@ -318,12 +272,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo elementId="id-00"}}{{/foo}}<div id={{"id-00"}}></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo elementId="id-00"}}{{/foo}}<div id={{"id-00"}}></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 40,
@@ -337,13 +290,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div id="id-{{"00"}}"></div>{{#foo elementId="id-00"}}{{/foo}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id="id-{{"00"}}"></div>{{#foo elementId="id-00"}}{{/foo}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 29,
@@ -357,13 +308,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#foo elementId="id-00"}}{{/foo}}<div id="id-{{"00"}}"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo elementId="id-00"}}{{/foo}}<div id="id-{{"00"}}"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 40,
@@ -377,13 +326,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#foo elementId="id-00"}}{{/foo}}{{#bar elementId="id-00"}}{{/bar}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo elementId="id-00"}}{{/foo}}{{#bar elementId="id-00"}}{{/bar}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 35,
@@ -397,12 +344,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{foo id="id-00"}}{{foo id="id-00"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{foo id="id-00"}}{{foo id="id-00"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -416,12 +362,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<div id={{1234}}></div><div id={{1234}}></div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div id={{1234}}></div><div id={{1234}}></div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 29,
@@ -435,13 +380,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<div id={{this.divId00}}></div><div id={{this.divId00}}></div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div id={{this.divId00}}></div><div id={{this.divId00}}></div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 37,
@@ -455,13 +398,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div id="partA{{partB}}{{"partC"}}"></div><div id="{{"partA"}}{{partB}}partC"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div id="partA{{partB}}{{"partC"}}"></div><div id="{{"partA"}}{{partB}}partC"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 48,
@@ -475,12 +416,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo elementId="id-00"}}{{/foo}}{{bar elementId="id-00"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo elementId="id-00"}}{{/foo}}{{bar elementId="id-00"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 35,
@@ -494,12 +434,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo id="id-00"}}{{/foo}}{{bar id="id-00"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo id="id-00"}}{{/foo}}{{bar id="id-00"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 28,
@@ -513,12 +452,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo id="id-00"}}{{/foo}}<Bar id="id-00" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo id="id-00"}}{{/foo}}<Bar id="id-00" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 33,
@@ -532,12 +470,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo id="id-00"}}{{/foo}}<Bar @id="id-00" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo id="id-00"}}{{/foo}}<Bar @id="id-00" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 33,
@@ -551,12 +488,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#foo id="id-00"}}{{/foo}}<Bar @elementId="id-00" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#foo id="id-00"}}{{/foo}}<Bar @elementId="id-00" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 33,
@@ -570,10 +506,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       {{#if this.foo}}
         <div id={{this.divId00}}></div>
         <div id={{this.divId00}}></div>
@@ -581,8 +516,8 @@ generateRuleTests({
         <div id="other-thing"></div>
       {{/if}}
     `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -596,17 +531,16 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         <div id="id-00"></div>
         {{#if this.foo}}
           <div id="id-00"></div>
         {{/if}}
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 16,
@@ -620,10 +554,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <div id={{this.divId00}}></div>
       {{#if this.foo}}
         <div id={{this.divId00}}></div>
@@ -631,8 +564,8 @@ generateRuleTests({
         <div id={{this.divId00}}></div>
       {{/if}}
     `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -656,10 +589,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         {{#if this.foo}}
           <div id="otherid"></div>
         {{else}}
@@ -667,8 +599,8 @@ generateRuleTests({
         {{/if}}
         <div id="anidhere"></div>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -682,10 +614,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         {{#if this.foo}}
           {{#if this.other}}
             <div id="nested"></div>
@@ -695,8 +626,8 @@ generateRuleTests({
         {{/if}}
         <div id="nested"></div>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -710,10 +641,9 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         {{#if this.foo}}
           {{#if this.other}}
             <div id={{(hello-world)}}></div>
@@ -723,8 +653,8 @@ generateRuleTests({
         {{/if}}
         <div id={{(hello-world)}}></div>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -738,17 +668,16 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
         <MyComponent as |inputProperties|>
           <Input id={{inputProperties.id}} />
           <Input id={{inputProperties.id}} />
         </MyComponent>
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -762,7 +691,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

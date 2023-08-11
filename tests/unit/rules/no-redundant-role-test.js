@@ -1,70 +1,57 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-redundant-role',
-
   config: true,
-
-  good: [
-    '<form role="search"></form>',
-    '<footer role={{this.foo}}></footer>',
-    '<footer role="{{this.stuff}}{{this.foo}}"></footer>',
-    '<nav role="navigation"></nav>',
-    '<ol role="list"></ol>',
-    '<ul role="list"></ul>',
-    {
-      config: { checkAllHTMLElements: false },
-      template: '<body role="document"></body>',
+  good: ['<form role="search"></form>', '<footer role={{this.foo}}></footer>', '<footer role="{{this.stuff}}{{this.foo}}"></footer>', '<nav role="navigation"></nav>', '<ol role="list"></ol>', '<ul role="list"></ul>', {
+    config: {
+      checkAllHTMLElements: false
     },
-    {
-      config: { checkAllHTMLElements: true },
-      template: '<footer role={{this.bar}}></footer>',
+    template: '<body role="document"></body>'
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: {
-        checkAllHTMLElements: true,
-      },
-      template: '<nav class="navigation" role="navigation></nav>',
+    template: '<footer role={{this.bar}}></footer>'
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: {
-        checkAllHTMLElements: true,
-      },
-      template: '<button role="link"></button>',
+    template: '<nav class="navigation" role="navigation></nav>'
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: {
-        checkAllHTMLElements: true,
-      },
-      template: '<input type="checkbox" value="yes" checked />',
+    template: '<button role="link"></button>'
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: {
-        checkAllHTMLElements: false,
-      },
-      template: '<input type="range" />',
+    template: '<input type="checkbox" value="yes" checked />'
+  }, {
+    config: {
+      checkAllHTMLElements: false
     },
-    {
-      config: {
-        checkAllHTMLElements: false,
-      },
-      template: '<dialog role="dialog" />',
+    template: '<input type="range" />'
+  }, {
+    config: {
+      checkAllHTMLElements: false
     },
-    {
-      config: {
-        checkAllHTMLElements: false,
-      },
-      template: '<ul class="list" role="combobox"></ul>',
+    template: '<dialog role="dialog" />'
+  }, {
+    config: {
+      checkAllHTMLElements: false
     },
-  ],
-
-  bad: [
-    {
-      // with no config, checkAllHTMLElements defaults to true
-      template: '<dialog role="dialog" />',
-      fixedTemplate: '<dialog />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<ul class="list" role="combobox"></ul>'
+  }],
+  bad: [{
+    // with no config, checkAllHTMLElements defaults to true
+    template: '<dialog role="dialog" />',
+    fixedTemplate: '<dialog />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -80,14 +67,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<header role="banner"></header>',
-      fixedTemplate: '<header></header>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<header role="banner"></header>',
+    fixedTemplate: '<header></header>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -103,14 +88,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<footer role="contentinfo"></footer>',
-      fixedTemplate: '<footer></footer>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<footer role="contentinfo"></footer>',
+    fixedTemplate: '<footer></footer>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -126,14 +109,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<main role="main"></main>',
-      fixedTemplate: '<main></main>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<main role="main"></main>',
+    fixedTemplate: '<main></main>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -149,14 +130,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<aside role="complementary"></aside>',
-      fixedTemplate: '<aside></aside>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<aside role="complementary"></aside>',
+    fixedTemplate: '<aside></aside>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -172,14 +151,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<form role="form"></form>',
-      fixedTemplate: '<form></form>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<form role="form"></form>',
+    fixedTemplate: '<form></form>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -195,14 +172,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<header role="banner" class="page-header"></header>',
-      fixedTemplate: '<header class="page-header"></header>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<header role="banner" class="page-header"></header>',
+    fixedTemplate: '<header class="page-header"></header>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -218,15 +193,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: { checkAllHTMLElements: true },
-      template: '<button role="button"></button>',
-      fixedTemplate: '<button></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<button role="button"></button>',
+    fixedTemplate: '<button></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -242,15 +217,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: { checkAllHTMLElements: true },
-      template: '<input type="checkbox" name="agree" value="checkbox1" role="checkbox" />',
-      fixedTemplate: '<input type="checkbox" name="agree" value="checkbox1" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<input type="checkbox" name="agree" value="checkbox1" role="checkbox" />',
+    fixedTemplate: '<input type="checkbox" name="agree" value="checkbox1" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -266,15 +241,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: { checkAllHTMLElements: true },
-      template: '<table><th role="columnheader">Some heading</th><td>cell1</td></table>',
-      fixedTemplate: '<table><th>Some heading</th><td>cell1</td></table>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<table><th role="columnheader">Some heading</th><td>cell1</td></table>',
+    fixedTemplate: '<table><th>Some heading</th><td>cell1</td></table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -290,17 +265,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      checkAllHTMLElements: true
     },
-    {
-      config: { checkAllHTMLElements: true },
-      template:
-        '<select name="color" id="color" role="listbox" multiple><option value="default-color">black</option></select>',
-      fixedTemplate:
-        '<select name="color" id="color" multiple><option value="default-color">black</option></select>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<select name="color" id="color" role="listbox" multiple><option value="default-color">black</option></select>',
+    fixedTemplate: '<select name="color" id="color" multiple><option value="default-color">black</option></select>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -316,15 +289,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      checkAllHTMLElements: false
     },
-    {
-      config: { checkAllHTMLElements: false },
-      template: '<main role="main"></main>',
-      fixedTemplate: '<main></main>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<main role="main"></main>',
+    fixedTemplate: '<main></main>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -340,15 +313,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      checkAllHTMLElements: false
     },
-    {
-      config: { checkAllHTMLElements: false },
-      template: '<aside role="complementary"></aside>',
-      fixedTemplate: '<aside></aside>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<aside role="complementary"></aside>',
+    fixedTemplate: '<aside></aside>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -364,7 +337,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

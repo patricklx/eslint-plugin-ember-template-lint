@@ -1,20 +1,15 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-valueless-arguments',
-
   config: true,
-
-  good: [
-    '<SomeComponent @emptyString="" data-test-some-component />',
-    `<button type="submit" disabled {{on "click" this.submit}}></button>`,
-  ],
-
-  bad: [
-    {
-      template: '<SomeComponent @valueless />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<SomeComponent @emptyString="" data-test-some-component />', `<button type="submit" disabled {{on "click" this.submit}}></button>`],
+  bad: [{
+    template: '<SomeComponent @valueless />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -29,12 +24,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<SomeComponent @valuelessByAccident{{this.canBeAModifier}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SomeComponent @valuelessByAccident{{this.canBeAModifier}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -49,12 +43,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<SomeComponent @valuelessByAccident{{@canBeAModifier}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SomeComponent @valuelessByAccident{{@canBeAModifier}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -69,7 +62,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

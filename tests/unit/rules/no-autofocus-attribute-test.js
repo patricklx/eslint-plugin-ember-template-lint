@@ -1,29 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-autofocus-attribute",
-
   config: true,
-
-  good: [
-    "<input />",
-    '<input type="text" disabled="true" />',
-    '<input type="password" disabled={{false}} />',
-    '<input type="password" disabled />',
-    '{{input type="text" disabled=true}}',
-    '{{component "input" type="text" disabled=true}}',
-    "<div></div>",
-    "<h1><span>Valid Heading</span></h1>",
-    "<CustomComponent />",
-    "<CustomComponent disabled />",
-    "<CustomComponent disabled=true />",
-  ],
-
-  bad: [
-    {
-      template: "<input autofocus />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<input />", '<input type="text" disabled="true" />', '<input type="password" disabled={{false}} />', '<input type="password" disabled />', '{{input type="text" disabled=true}}', '{{component "input" type="text" disabled=true}}', "<div></div>", "<h1><span>Valid Heading</span></h1>", "<CustomComponent />", "<CustomComponent disabled />", "<CustomComponent disabled=true />"],
+  bad: [{
+    template: "<input autofocus />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -37,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input type="text" autofocus="autofocus" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input type="text" autofocus="autofocus" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -56,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<input autofocus={{this.foo}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<input autofocus={{this.foo}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -75,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{input type="text" autofocus=true}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{input type="text" autofocus=true}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -94,12 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component "input" type="text" autofocus=true}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component "input" type="text" autofocus=true}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 33,
@@ -113,12 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div autofocus="true"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div autofocus="true"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -132,12 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<h1 autofocus="autofocus"><span>Valid Heading</span></h1>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<h1 autofocus="autofocus"><span>Valid Heading</span></h1>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 5,
@@ -151,12 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<CustomComponent autofocus={{this.foo}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<CustomComponent autofocus={{this.foo}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -170,7 +149,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

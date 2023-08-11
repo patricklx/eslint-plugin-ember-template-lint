@@ -1,33 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'link-rel-noopener',
-
   config: true,
-
-  good: [
-    '<a href="/some/where"></a>',
-    '<a href="/some/where" target="_self"></a>',
-    '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
-    '<a href="/some/where" target="_blank" rel="noreferrer noopener"></a>',
-    '<a href="/some/where" target="_blank" rel="nofollow noreferrer noopener"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="noopener noreferrer"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="nofollow noopener noreferrer"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="noopener nofollow noreferrer"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="noopener noreferrer nofollow"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="noreferrer noopener"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="nofollow noreferrer noopener"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="noreferrer nofollow noopener"></a>',
-    '<a href="/some/where/ingrid" target="_blank" rel="noreferrer noopener nofollow"></a>',
-  ],
-
-  bad: [
-    {
-      template: '<a href="/some/where" target="_blank"></a>',
-      fixedTemplate: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<a href="/some/where"></a>', '<a href="/some/where" target="_self"></a>', '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>', '<a href="/some/where" target="_blank" rel="noreferrer noopener"></a>', '<a href="/some/where" target="_blank" rel="nofollow noreferrer noopener"></a>', '<a href="/some/where/ingrid" target="_blank" rel="noopener noreferrer"></a>', '<a href="/some/where/ingrid" target="_blank" rel="nofollow noopener noreferrer"></a>', '<a href="/some/where/ingrid" target="_blank" rel="noopener nofollow noreferrer"></a>', '<a href="/some/where/ingrid" target="_blank" rel="noopener noreferrer nofollow"></a>', '<a href="/some/where/ingrid" target="_blank" rel="noreferrer noopener"></a>', '<a href="/some/where/ingrid" target="_blank" rel="nofollow noreferrer noopener"></a>', '<a href="/some/where/ingrid" target="_blank" rel="noreferrer nofollow noopener"></a>', '<a href="/some/where/ingrid" target="_blank" rel="noreferrer noopener nofollow"></a>'],
+  bad: [{
+    template: '<a href="/some/where" target="_blank"></a>',
+    fixedTemplate: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -43,15 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="/some/where" target="_blank" rel="nofollow"></a>',
-      fixedTemplate:
-        '<a href="/some/where" target="_blank" rel="nofollow noopener noreferrer"></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="/some/where" target="_blank" rel="nofollow"></a>',
+    fixedTemplate: '<a href="/some/where" target="_blank" rel="nofollow noopener noreferrer"></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -67,14 +47,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="/some/where" target="_blank" rel="noopener"></a>',
-      fixedTemplate: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="/some/where" target="_blank" rel="noopener"></a>',
+    fixedTemplate: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -90,14 +68,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="/some/where" target="_blank" rel="noreferrer"></a>',
-      fixedTemplate: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="/some/where" target="_blank" rel="noreferrer"></a>',
+    fixedTemplate: '<a href="/some/where" target="_blank" rel="noopener noreferrer"></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -113,7 +89,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

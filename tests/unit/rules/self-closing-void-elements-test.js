@@ -1,100 +1,64 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'self-closing-void-elements',
-
   config: true,
-
-  good: [
-    '<area>',
-    '<base>',
-    '<br>',
-    '<col>',
-    '<command>',
-    '<embed>',
-    '<hr>',
-    '<img>',
-    '<input>',
-    '<keygen>',
-    '<link>',
-    '<meta>',
-    '<param>',
-    '<source>',
-    '<track>',
-    '<wbr>',
-    {
-      config: 'require',
-      template: '<area/>',
-    },
-    {
-      config: 'require',
-      template: '<base/>',
-    },
-    {
-      config: 'require',
-      template: '<br/>',
-    },
-    {
-      config: 'require',
-      template: '<col/>',
-    },
-    {
-      config: 'require',
-      template: '<command/>',
-    },
-    {
-      config: 'require',
-      template: '<embed/>',
-    },
-    {
-      config: 'require',
-      template: '<hr/>',
-    },
-    {
-      config: 'require',
-      template: '<img/>',
-    },
-    {
-      config: 'require',
-      template: '<input/>',
-    },
-    {
-      config: 'require',
-      template: '<keygen/>',
-    },
-    {
-      config: 'require',
-      template: '<link/>',
-    },
-    {
-      config: 'require',
-      template: '<meta/>',
-    },
-    {
-      config: 'require',
-      template: '<param/>',
-    },
-    {
-      config: 'require',
-      template: '<source/>',
-    },
-    {
-      config: 'require',
-      template: '<track/>',
-    },
-    {
-      config: 'require',
-      template: '<wbr/>',
-    },
-  ],
-
-  bad: [
-    {
-      template: '<area/>',
-      fixedTemplate: '<area>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<area>', '<base>', '<br>', '<col>', '<command>', '<embed>', '<hr>', '<img>', '<input>', '<keygen>', '<link>', '<meta>', '<param>', '<source>', '<track>', '<wbr>', {
+    config: 'require',
+    template: '<area/>'
+  }, {
+    config: 'require',
+    template: '<base/>'
+  }, {
+    config: 'require',
+    template: '<br/>'
+  }, {
+    config: 'require',
+    template: '<col/>'
+  }, {
+    config: 'require',
+    template: '<command/>'
+  }, {
+    config: 'require',
+    template: '<embed/>'
+  }, {
+    config: 'require',
+    template: '<hr/>'
+  }, {
+    config: 'require',
+    template: '<img/>'
+  }, {
+    config: 'require',
+    template: '<input/>'
+  }, {
+    config: 'require',
+    template: '<keygen/>'
+  }, {
+    config: 'require',
+    template: '<link/>'
+  }, {
+    config: 'require',
+    template: '<meta/>'
+  }, {
+    config: 'require',
+    template: '<param/>'
+  }, {
+    config: 'require',
+    template: '<source/>'
+  }, {
+    config: 'require',
+    template: '<track/>'
+  }, {
+    config: 'require',
+    template: '<wbr/>'
+  }],
+  bad: [{
+    template: '<area/>',
+    fixedTemplate: '<area>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -113,14 +77,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<base/>',
-      fixedTemplate: '<base>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<base/>',
+    fixedTemplate: '<base>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -139,14 +101,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<br/>',
-      fixedTemplate: '<br>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<br/>',
+    fixedTemplate: '<br>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -165,14 +125,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<col/>',
-      fixedTemplate: '<col>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<col/>',
+    fixedTemplate: '<col>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -191,14 +149,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<command/>',
-      fixedTemplate: '<command>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<command/>',
+    fixedTemplate: '<command>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -217,14 +173,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<embed/>',
-      fixedTemplate: '<embed>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<embed/>',
+    fixedTemplate: '<embed>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -243,14 +197,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<hr/>',
-      fixedTemplate: '<hr>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<hr/>',
+    fixedTemplate: '<hr>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -269,14 +221,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img/>',
-      fixedTemplate: '<img>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img/>',
+    fixedTemplate: '<img>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -295,14 +245,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input/>',
-      fixedTemplate: '<input>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input/>',
+    fixedTemplate: '<input>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -321,14 +269,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<keygen/>',
-      fixedTemplate: '<keygen>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<keygen/>',
+    fixedTemplate: '<keygen>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -347,14 +293,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<link/>',
-      fixedTemplate: '<link>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<link/>',
+    fixedTemplate: '<link>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -373,14 +317,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<meta/>',
-      fixedTemplate: '<meta>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<meta/>',
+    fixedTemplate: '<meta>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -399,14 +341,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<param/>',
-      fixedTemplate: '<param>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<param/>',
+    fixedTemplate: '<param>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -425,14 +365,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<source/>',
-      fixedTemplate: '<source>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<source/>',
+    fixedTemplate: '<source>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -451,14 +389,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<track/>',
-      fixedTemplate: '<track>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<track/>',
+    fixedTemplate: '<track>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -477,15 +413,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<wbr/>',
-      fixedTemplate: '<wbr>',
-      config: true,
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<wbr/>',
+    fixedTemplate: '<wbr>',
+    config: true,
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -504,15 +438,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<area>',
-      fixedTemplate: '<area />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<area>',
+    fixedTemplate: '<area />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -531,15 +463,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<base>',
-      fixedTemplate: '<base />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<base>',
+    fixedTemplate: '<base />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -558,15 +488,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<br>',
-      fixedTemplate: '<br />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<br>',
+    fixedTemplate: '<br />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -585,15 +513,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<col>',
-      fixedTemplate: '<col />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<col>',
+    fixedTemplate: '<col />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -612,15 +538,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<command>',
-      fixedTemplate: '<command />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<command>',
+    fixedTemplate: '<command />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -639,15 +563,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<embed>',
-      fixedTemplate: '<embed />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<embed>',
+    fixedTemplate: '<embed />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -666,15 +588,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<hr>',
-      fixedTemplate: '<hr />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<hr>',
+    fixedTemplate: '<hr />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -693,15 +613,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img>',
-      fixedTemplate: '<img />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img>',
+    fixedTemplate: '<img />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -720,15 +638,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input>',
-      fixedTemplate: '<input />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input>',
+    fixedTemplate: '<input />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -747,15 +663,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<keygen>',
-      fixedTemplate: '<keygen />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<keygen>',
+    fixedTemplate: '<keygen />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -774,15 +688,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<link>',
-      fixedTemplate: '<link />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<link>',
+    fixedTemplate: '<link />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -801,15 +713,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<meta>',
-      fixedTemplate: '<meta />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<meta>',
+    fixedTemplate: '<meta />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -828,15 +738,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<param>',
-      fixedTemplate: '<param />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<param>',
+    fixedTemplate: '<param />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -855,15 +763,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<source>',
-      fixedTemplate: '<source />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<source>',
+    fixedTemplate: '<source />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -882,15 +788,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<track>',
-      fixedTemplate: '<track />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<track>',
+    fixedTemplate: '<track />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -909,15 +813,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<wbr>',
-      fixedTemplate: '<wbr />',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<wbr>',
+    fixedTemplate: '<wbr />',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -936,17 +838,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| >bar',
-      fixedTemplate:
-        'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| />bar',
-      config: 'require',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: 'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| >bar',
+    fixedTemplate: 'foo<wbr data-custom="50" {{my-modifier true "baz"}} {{!comment}} as |paramA paramB| />bar',
+    config: 'require',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -965,7 +863,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

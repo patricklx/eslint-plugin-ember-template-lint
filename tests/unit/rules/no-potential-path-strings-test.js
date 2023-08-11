@@ -1,23 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-potential-path-strings",
-
   config: true,
-
-  good: [
-    '<img src="foo.png">',
-    "<img src={{picture}}>",
-    "<img src={{this.picture}}>",
-    "<img src={{@img}}>",
-    "<SomeComponent @foo={{@bar}} />",
-  ],
-
-  bad: [
-    {
-      template: '<img src="this.picture">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<img src="foo.png">', "<img src={{picture}}>", "<img src={{this.picture}}>", "<img src={{@img}}>", "<SomeComponent @foo={{@bar}} />"],
+  bad: [{
+    template: '<img src="this.picture">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -31,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<img src=this.picture>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<img src=this.picture>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -50,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img src="@img">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img src="@img">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -69,12 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<img src=@img>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<img src=@img>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -88,12 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<SomeComponent @foo=@bar />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<SomeComponent @foo=@bar />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -107,12 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<SomeComponent @foo=this.bar />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<SomeComponent @foo=this.bar />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -126,7 +113,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

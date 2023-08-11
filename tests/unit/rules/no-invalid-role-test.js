@@ -1,42 +1,22 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-invalid-role",
-
   config: true,
-
-  good: [
-    "<div></div>",
-    '<div role="none"></div>',
-    '<div role="presentation"></div>',
-    '<img alt="" role="none">',
-    '<img role="none">',
-    '<img alt="" role="presentation">',
-    '<img role="presentation">',
-    '<span role="none"></span>',
-    '<span role="presentation"></span>',
-    '<svg role="none"></svg>',
-    '<svg role="presentation"></svg>',
-    '<li role="none"></li>',
-    '<li role="presentation"></li>',
-    '<custom-component role="none"></custom-component>',
-    '<AwesomeThing role="none"></AwesomeThing>',
-    '<AwesomeThing role="presentation"></AwesomeThing>',
-    '<table role="textbox"></table>', // Random role on this element.
-    '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>',
-    {
-      config: {
-        catchNonexistentRoles: false,
-      },
-      template: '<div role="command interface"></div>',
+  good: ["<div></div>", '<div role="none"></div>', '<div role="presentation"></div>', '<img alt="" role="none">', '<img role="none">', '<img alt="" role="presentation">', '<img role="presentation">', '<span role="none"></span>', '<span role="presentation"></span>', '<svg role="none"></svg>', '<svg role="presentation"></svg>', '<li role="none"></li>', '<li role="presentation"></li>', '<custom-component role="none"></custom-component>', '<AwesomeThing role="none"></AwesomeThing>', '<AwesomeThing role="presentation"></AwesomeThing>', '<table role="textbox"></table>',
+  // Random role on this element.
+  '<div role="{{if this.inModal "dialog" "contentinfo" }}"></div>', {
+    config: {
+      catchNonexistentRoles: false
     },
-  ],
-
-  bad: [
-    {
-      template: '<ul role="presentation"></ul>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<div role="command interface"></div>'
+  }],
+  bad: [{
+    template: '<ul role="presentation"></ul>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -50,12 +30,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<ol role="presentation"></ol>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<ol role="presentation"></ol>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -69,12 +48,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<table role="presentation"></table>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<table role="presentation"></table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -88,12 +66,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<table role="none"></table>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<table role="none"></table>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -107,12 +84,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button role="presentation"></button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button role="presentation"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -126,12 +102,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button role="none"></button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button role="none"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -145,12 +120,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<label role="presentation"></label>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<label role="presentation"></label>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -164,12 +138,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<label role="none"></label>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<label role="none"></label>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -183,12 +156,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="command interface"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="command interface"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -202,15 +174,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    template: '<div role="command interface"></div>',
+    config: {
+      catchNonexistentRoles: true
     },
-    {
-      template: '<div role="command interface"></div>',
-      config: {
-        catchNonexistentRoles: true,
-      },
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -224,12 +195,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="COMMAND INTERFACE"></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="COMMAND INTERFACE"></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -243,7 +213,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

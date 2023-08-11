@@ -1,31 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-positive-tabindex",
-
   config: true,
-
-  good: [
-    '<button tabindex="0"></button>',
-    '<button tabindex="-1"></button>',
-    "<button tabindex={{-1}}>baz</button>",
-    '<button tabindex={{"-1"}}>baz</button>',
-    '<button tabindex="{{-1}}">baz</button>',
-    '<button tabindex="{{"-1"}}">baz</button>',
-    '<button tabindex="{{if this.show -1}}">baz</button>',
-    '<button tabindex="{{if this.show "-1" "0"}}">baz</button>',
-    '<button tabindex="{{if (not this.show) "-1" "0"}}">baz</button>',
-    "<button tabindex={{if this.show -1}}>baz</button>",
-    '<button tabindex={{if this.show "-1" "0"}}>baz</button>',
-    '<button tabindex={{if (not this.show) "-1" "0"}}>baz</button>',
-  ],
-
-  bad: [
-    {
-      template: "<button tabindex={{someProperty}}></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<button tabindex="0"></button>', '<button tabindex="-1"></button>', "<button tabindex={{-1}}>baz</button>", '<button tabindex={{"-1"}}>baz</button>', '<button tabindex="{{-1}}">baz</button>', '<button tabindex="{{"-1"}}">baz</button>', '<button tabindex="{{if this.show -1}}">baz</button>', '<button tabindex="{{if this.show "-1" "0"}}">baz</button>', '<button tabindex="{{if (not this.show) "-1" "0"}}">baz</button>', "<button tabindex={{if this.show -1}}>baz</button>", '<button tabindex={{if this.show "-1" "0"}}>baz</button>', '<button tabindex={{if (not this.show) "-1" "0"}}>baz</button>'],
+  bad: [{
+    template: "<button tabindex={{someProperty}}></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -39,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="1"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="1"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -59,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="text"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="text"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -79,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<button tabindex={{true}}></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<button tabindex={{true}}></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -99,13 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{false}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{false}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -119,13 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{5}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{5}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -139,13 +113,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{if a 1 -1}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{if a 1 -1}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -159,13 +131,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{if a -1 1}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{if a -1 1}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -179,13 +149,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{if a 1}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{if a 1}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -199,13 +167,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{if (not a) 1}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{if (not a) 1}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -219,13 +185,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{unless a 1}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{unless a 1}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -239,13 +203,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button tabindex="{{unless a -1 1}}"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button tabindex="{{unless a -1 1}}"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -259,7 +221,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

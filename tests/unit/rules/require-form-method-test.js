@@ -1,42 +1,25 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-form-method",
-
   config: true,
-
-  good: [
-    {
-      config: {
-        allowedMethods: ["get"],
-      },
-      template: '<form method="GET"></form>',
+  good: [{
+    config: {
+      allowedMethods: ["get"]
     },
-
-    '<form method="POST"></form>',
-    '<form method="post"></form>',
-    '<form method="GET"></form>',
-    '<form method="get"></form>',
-    '<form method="DIALOG"></form>',
-    '<form method="dialog"></form>',
-
-    // dynamic values
-    '<form method="{{formMethod}}"></form>',
-    "<form method={{formMethod}}></form>",
-
-    "<div/>",
-    "<div></div>",
-    '<div method="randomType"></div>',
-  ],
-
-  bad: [
-    {
-      config: {
-        allowedMethods: ["get"],
-      },
-      template: '<form method="POST"></form>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<form method="GET"></form>'
+  }, '<form method="POST"></form>', '<form method="post"></form>', '<form method="GET"></form>', '<form method="get"></form>', '<form method="DIALOG"></form>', '<form method="dialog"></form>',
+  // dynamic values
+  '<form method="{{formMethod}}"></form>', "<form method={{formMethod}}></form>", "<div/>", "<div></div>", '<div method="randomType"></div>'],
+  bad: [{
+    config: {
+      allowedMethods: ["get"]
+    },
+    template: '<form method="POST"></form>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -50,15 +33,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      allowedMethods: ["POST"]
     },
-    {
-      config: {
-        allowedMethods: ["POST"],
-      },
-      template: '<form method="GET"></form>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<form method="GET"></form>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -72,12 +54,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<form></form>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<form></form>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -91,12 +72,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<form method=""></form>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<form method=""></form>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -110,12 +90,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<form method=42></form>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<form method=42></form>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -129,12 +108,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<form method=" ge t "></form>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<form method=" ge t "></form>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -148,12 +126,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<form method=" pos t "></form>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<form method=" pos t "></form>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -167,7 +144,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

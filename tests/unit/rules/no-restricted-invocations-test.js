@@ -1,58 +1,22 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-restricted-invocations",
-
-  config: [
-    "foo",
-    "bar",
-    "nested-scope/foo-bar",
-    {
-      names: ["deprecated-component"],
-      message: "This component is deprecated; use component ABC instead.",
-    },
-  ],
-
-  good: [
-    "{{baz}}",
-    "{{baz foo=bar}}",
-    "{{baz foo=(baz)}}",
-    "{{#baz}}{{/baz}}",
-    "{{#baz foo=bar}}{{/baz}}",
-    "{{#baz foo=(baz)}}{{/baz}}",
-
-    // Component helper:
-    "{{component}}",
-    '{{component "baz"}}',
-    '{{component "baz" foo=bar}}',
-    '{{component "baz" foo=(baz)}}',
-    '{{#component "baz"}}{{/component}}',
-    '{{#component "baz" foo=bar}}{{/component}}',
-    '{{#component "baz" foo=(baz)}}{{/component}}',
-    '{{yield (component "baz")}}',
-    '{{yield (component "baz" foo=bar)}}',
-    '{{yield (component "baz" foo=(baz))}}',
-
-    "{{yield (baz (baz (baz) bar))}}",
-    "{{yield (baz (baz (baz) (baz)))}}",
-    "{{yield (baz (baz (baz) foo=(baz)))}}",
-    "{{#baz as |foo|}}{{foo}}{{/baz}}",
-    '{{#with (component "blah") as |Foo|}} <Foo /> {{/with}}',
-    "{{other/foo-bar}}",
-    "{{nested-scope/other}}",
-
-    // Angle bracket:
-    "<Random/>",
-    "<HelloWorld/>",
-    "<NestedScope::Random/>",
-  ],
-
-  bad: [
-    {
-      template: "<div {{foo}} />",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  config: ["foo", "bar", "nested-scope/foo-bar", {
+    names: ["deprecated-component"],
+    message: "This component is deprecated; use component ABC instead."
+  }],
+  good: ["{{baz}}", "{{baz foo=bar}}", "{{baz foo=(baz)}}", "{{#baz}}{{/baz}}", "{{#baz foo=bar}}{{/baz}}", "{{#baz foo=(baz)}}{{/baz}}",
+  // Component helper:
+  "{{component}}", '{{component "baz"}}', '{{component "baz" foo=bar}}', '{{component "baz" foo=(baz)}}', '{{#component "baz"}}{{/component}}', '{{#component "baz" foo=bar}}{{/component}}', '{{#component "baz" foo=(baz)}}{{/component}}', '{{yield (component "baz")}}', '{{yield (component "baz" foo=bar)}}', '{{yield (component "baz" foo=(baz))}}', "{{yield (baz (baz (baz) bar))}}", "{{yield (baz (baz (baz) (baz)))}}", "{{yield (baz (baz (baz) foo=(baz)))}}", "{{#baz as |foo|}}{{foo}}{{/baz}}", '{{#with (component "blah") as |Foo|}} <Foo /> {{/with}}', "{{other/foo-bar}}", "{{nested-scope/other}}",
+  // Angle bracket:
+  "<Random/>", "<HelloWorld/>", "<NestedScope::Random/>"],
+  bad: [{
+    template: "<div {{foo}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -69,13 +33,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{foo}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -92,13 +54,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo />",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -115,13 +75,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{foo foo=bar}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{foo foo=bar}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -138,13 +96,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{foo foo=(baz)}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{foo foo=(baz)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -161,13 +117,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#foo}}{{/foo}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#foo}}{{/foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -184,13 +138,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#foo foo=bar}}{{/foo}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#foo foo=bar}}{{/foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -207,13 +159,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#foo foo=(baz)}}{{/foo}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#foo foo=(baz)}}{{/foo}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -230,13 +180,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component "foo"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component "foo"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -253,13 +201,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component "foo" foo=bar}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component "foo" foo=bar}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -276,13 +222,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component "foo" foo=(baz)}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component "foo" foo=(baz)}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -299,13 +243,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#component "foo"}}{{/component}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#component "foo"}}{{/component}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -322,13 +264,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#component "foo" foo=bar}}{{/component}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#component "foo" foo=bar}}{{/component}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -345,13 +285,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#component "foo" foo=(baz)}}{{/component}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#component "foo" foo=(baz)}}{{/component}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -368,13 +306,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{yield (component "foo")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{yield (component "foo")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -391,13 +327,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{yield (component "foo" foo=bar)}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{yield (component "foo" foo=bar)}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -414,13 +348,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{yield (component "foo" foo=(baz))}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{yield (component "foo" foo=(baz))}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -437,13 +369,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{yield (baz (foo (baz) bar))}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{yield (baz (foo (baz) bar))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -460,13 +390,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{yield (baz (baz (baz) (foo)))}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{yield (baz (baz (baz) (foo)))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -483,13 +411,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{yield (baz (baz (baz) foo=(foo)))}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{yield (baz (baz (baz) foo=(foo)))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -506,13 +432,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#baz as |bar|}}{{bar foo=(foo)}}{{/baz}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#baz as |bar|}}{{bar foo=(foo)}}{{/baz}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -529,13 +453,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{nested-scope/foo-bar}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{nested-scope/foo-bar}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -552,13 +474,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<NestedScope::FooBar/>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<NestedScope::FooBar/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -575,13 +495,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{deprecated-component}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{deprecated-component}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "fatal": true,
@@ -598,127 +516,104 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
-
-  error: [
-    {
-      config: "sometimes",
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `"sometimes"`',
-      },
-    },
-    {
-      config: true,
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: "You specified `true`",
-      },
-    },
-    {
-      config: {},
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: "You specified `{}`",
-      },
-    },
-    {
-      config: [],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: "You specified `[]`",
-      },
-    },
-    {
-      // Disallows non-string.
-      config: [123],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: "You specified `[123]`",
-      },
-    },
-    {
-      // Disallows empty string.
-      config: [""],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `[""]`',
-      },
-    },
-    {
-      // Disallows incorrect naming format (disallows angle bracket invocation style).
-      config: ["MyComponent"],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `["MyComponent"]`',
-      },
-    },
-    {
-      // Disallows incorrect naming format.
-      config: ["Scope/MyComponent"],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `["Scope/MyComponent"]`',
-      },
-    },
-    {
-      // Disallows incorrect naming format.
-      config: ["scope::my-component"],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `["scope::my-component"]`',
-      },
-    },
-    {
-      // Disallows empty object.
-      config: [{}],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: "You specified `[{}]`",
-      },
-    },
-    {
-      // Disallows object missing names array.
-      config: [{ message: "Custom error message." }],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message: 'You specified `[{"message":"Custom error message."}]`',
-      },
-    },
-    {
-      // Disallows object with empty names array.
-      config: [{ names: [], message: "Custom error message." }],
-      template: "test",
-
-      result: {
-        fatal: true,
-        message:
-          'You specified `[{"names":[],"message":"Custom error message."}]`',
-      },
-    },
-  ],
+    }
+  }],
+  error: [{
+    config: "sometimes",
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `"sometimes"`'
+    }
+  }, {
+    config: true,
+    template: "test",
+    result: {
+      fatal: true,
+      message: "You specified `true`"
+    }
+  }, {
+    config: {},
+    template: "test",
+    result: {
+      fatal: true,
+      message: "You specified `{}`"
+    }
+  }, {
+    config: [],
+    template: "test",
+    result: {
+      fatal: true,
+      message: "You specified `[]`"
+    }
+  }, {
+    // Disallows non-string.
+    config: [123],
+    template: "test",
+    result: {
+      fatal: true,
+      message: "You specified `[123]`"
+    }
+  }, {
+    // Disallows empty string.
+    config: [""],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `[""]`'
+    }
+  }, {
+    // Disallows incorrect naming format (disallows angle bracket invocation style).
+    config: ["MyComponent"],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `["MyComponent"]`'
+    }
+  }, {
+    // Disallows incorrect naming format.
+    config: ["Scope/MyComponent"],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `["Scope/MyComponent"]`'
+    }
+  }, {
+    // Disallows incorrect naming format.
+    config: ["scope::my-component"],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `["scope::my-component"]`'
+    }
+  }, {
+    // Disallows empty object.
+    config: [{}],
+    template: "test",
+    result: {
+      fatal: true,
+      message: "You specified `[{}]`"
+    }
+  }, {
+    // Disallows object missing names array.
+    config: [{
+      message: "Custom error message."
+    }],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `[{"message":"Custom error message."}]`'
+    }
+  }, {
+    // Disallows object with empty names array.
+    config: [{
+      names: [],
+      message: "Custom error message."
+    }],
+    template: "test",
+    result: {
+      fatal: true,
+      message: 'You specified `[{"names":[],"message":"Custom error message."}]`'
+    }
+  }]
 });

@@ -1,79 +1,69 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-positional-data-test-selectors',
   config: true,
-  good: [
-    `
+  good: [`
       {{#if data-test-foo}}
       {{/if}}
-    `,
-    `
+    `, `
       <div data-test-blah></div>
-    `,
-    `
+    `, `
       <Foo data-test-derp />
-    `,
-    `
+    `, `
       {{something data-test-lol=true}}
-    `,
-    `
+    `, `
       {{#if dataSomething}}
         <div> hello </div>
       {{/if}}
-    `,
-    `
+    `, `
       <div
         data-test-msg-connections-typeahead-result={{true}}
       >
       </div>
-    `,
-    `
+    `, `
       <div
         data-test-msg-connections-typeahead-result="foo-bar"
       >
       </div>
-    `,
-    `
+    `, `
       {{badge
         data-test-profile-card-one-to-one-connection-distance=true
         degreeText=(t "i18n_distance_v2" distance=recipientDistance)
         degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
       }}
-    `,
-    `
+    `, `
       {{badge
         data-test-profile-card-one-to-one-connection-distance="foo-bar"
         degreeText=(t "i18n_distance_v2" distance=recipientDistance)
         degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
       }}
-    `,
-    `
+    `, `
       <div
         data-test-profile=true
       >
         hello
       </div>
-    `,
-  ],
-  bad: [
-    {
-      template: `
+    `],
+  bad: [{
+    template: `
         {{badge
           data-test-profile-card-one-to-one-connection-distance
           degreeText=(t "i18n_distance_v2" distance=recipientDistance)
           degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
         }}
       `,
-      fixedTemplate: `
+    fixedTemplate: `
         {{badge
           data-test-profile-card-one-to-one-connection-distance=true
           degreeText=(t "i18n_distance_v2" distance=recipientDistance)
           degreeA11yText=(t "i18n_distance_a11y_v2" distance=recipientDistance)
         }}
       `,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -93,7 +83,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

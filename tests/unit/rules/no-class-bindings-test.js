@@ -1,18 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-class-bindings",
-
   config: true,
-
   good: ["<SomeThing />", "{{lol-wat}}", "{{true}}", '{{"hehe"}}'],
-
-  bad: [
-    {
-      template: '{{some-thing classBinding="lol:wat"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  bad: [{
+    template: '{{some-thing classBinding="lol:wat"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -26,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<SomeThing @classBinding="lol:wat" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SomeThing @classBinding="lol:wat" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -46,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{some-thing classNameBindings="lol:foo:bar"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{some-thing classNameBindings="lol:foo:bar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -66,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<SomeThing @classNameBindings="lol:foo:bar" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SomeThing @classNameBindings="lol:foo:bar" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -86,7 +77,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

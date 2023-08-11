@@ -1,34 +1,35 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 describe("template-length", function () {
-  generateRuleTests({
+  (0, _ruleTestHarness.default)({
     name: "template-length",
-
     config: true,
-
-    good: [
-      "testing this\nand\nthis\nand\this",
-      {
-        config: { max: 10 },
-        template: "testing\nthis\n",
+    good: ["testing this\nand\nthis\nand\this", {
+      config: {
+        max: 10
       },
-      {
-        config: { min: 1 },
-        template: "testing\nthis\nand\this\n",
+      template: "testing\nthis\n"
+    }, {
+      config: {
+        min: 1
       },
-      {
-        config: { min: 1, max: 5 },
-        template: "testing\nthis\nandthis\n",
+      template: "testing\nthis\nand\this\n"
+    }, {
+      config: {
+        min: 1,
+        max: 5
       },
-    ],
-
-    bad: [
-      {
-        config: { min: 10 },
-        template: "testing\ntoo-short template\n",
-
-        verifyResults(results) {
-          expect(results).toMatchInlineSnapshot(`
+      template: "testing\nthis\nandthis\n"
+    }],
+    bad: [{
+      config: {
+        min: 10
+      },
+      template: "testing\ntoo-short template\n",
+      verifyResults(results) {
+        expect(results).toMatchInlineSnapshot(`
             [
               {
                 "column": 1,
@@ -42,14 +43,14 @@ describe("template-length", function () {
               },
             ]
           `);
-        },
+      }
+    }, {
+      config: {
+        max: 3
       },
-      {
-        config: { max: 3 },
-        template: "test\nthis\nand\nthis\n",
-
-        verifyResults(results) {
-          expect(results).toMatchInlineSnapshot(`
+      template: "test\nthis\nand\nthis\n",
+      verifyResults(results) {
+        expect(results).toMatchInlineSnapshot(`
             [
               {
                 "column": 1,
@@ -63,8 +64,7 @@ describe("template-length", function () {
               },
             ]
           `);
-        },
-      },
-    ],
+      }
+    }]
   });
 });

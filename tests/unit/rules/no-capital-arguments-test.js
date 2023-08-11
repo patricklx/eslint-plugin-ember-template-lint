@@ -1,18 +1,16 @@
-import { ERROR_MESSAGE_RESERVED } from "../../../lib/rules/no-capital-arguments.js";
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _noCapitalArguments = require("../../../lib/rules/no-capital-arguments.js");
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-capital-arguments",
-
   config: true,
-
   good: ['<Foo @name="bar" />', "@foo"],
-
-  bad: [
-    {
-      template: '<Foo @Name="bar" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  bad: [{
+    template: '<Foo @Name="bar" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -26,12 +24,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Foo @_ame="bar" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Foo @_ame="bar" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -45,12 +42,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{@Name}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{@Name}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -64,12 +60,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{@_Name}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{@_Name}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -83,35 +78,30 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    ...["@arguments", "@args", "@block", "@else"].map((el) => {
-      return {
-        template: `{{${el}}}`,
-        result: {
-          message: ERROR_MESSAGE_RESERVED(el),
-          line: 1,
-          column: 3,
-          endColumn: el.length + 2,
-          endLine: 1,
-          source: el.slice(1),
-        },
-      };
-    }),
-
-    ...["@arguments", "@args", "@block", "@else"].map((el) => {
-      return {
-        template: `<MyComponent ${el}={{42}} />`,
-        result: {
-          message: ERROR_MESSAGE_RESERVED(el),
-          line: 1,
-          column: 13,
-          endColumn: el.length + 20,
-          endLine: 1,
-          source: el.slice(1),
-        },
-      };
-    }),
-  ],
+    }
+  }, ...["@arguments", "@args", "@block", "@else"].map(el => {
+    return {
+      template: `{{${el}}}`,
+      result: {
+        message: (0, _noCapitalArguments.ERROR_MESSAGE_RESERVED)(el),
+        line: 1,
+        column: 3,
+        endColumn: el.length + 2,
+        endLine: 1,
+        source: el.slice(1)
+      }
+    };
+  }), ...["@arguments", "@args", "@block", "@else"].map(el => {
+    return {
+      template: `<MyComponent ${el}={{42}} />`,
+      result: {
+        message: (0, _noCapitalArguments.ERROR_MESSAGE_RESERVED)(el),
+        line: 1,
+        column: 13,
+        endColumn: el.length + 20,
+        endLine: 1,
+        source: el.slice(1)
+      }
+    };
+  })]
 });

@@ -1,28 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'require-has-block-helper',
-
   config: true,
-
-  good: [
-    '{{has-block}}',
-    '{{has-block-params}}',
-    '{{something-else}}',
-    '{{component test=(if (has-block) "true")}}',
-    '{{component test=(if (has-block-params) "true")}}',
-    '<SomeComponent someProp={{has-block}}',
-    '<SomeComponent someProp={{has-block-params}}',
-    '{{#if (has-block)}}{{/if}}',
-    '{{#if (has-block-params)}}{{/if}}',
-  ],
-
-  bad: [
-    {
-      template: '{{hasBlock}}',
-      fixedTemplate: '{{has-block}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['{{has-block}}', '{{has-block-params}}', '{{something-else}}', '{{component test=(if (has-block) "true")}}', '{{component test=(if (has-block-params) "true")}}', '<SomeComponent someProp={{has-block}}', '<SomeComponent someProp={{has-block-params}}', '{{#if (has-block)}}{{/if}}', '{{#if (has-block-params)}}{{/if}}'],
+  bad: [{
+    template: '{{hasBlock}}',
+    fixedTemplate: '{{has-block}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -38,13 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{hasBlockParams}}',
-      fixedTemplate: '{{has-block-params}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{hasBlockParams}}',
+    fixedTemplate: '{{has-block-params}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -60,13 +47,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if hasBlock "true" "false"}}',
-      fixedTemplate: '{{if (has-block) "true" "false"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if hasBlock "true" "false"}}',
+    fixedTemplate: '{{if (has-block) "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 5,
@@ -82,13 +68,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if hasBlockParams "true" "false"}}',
-      fixedTemplate: '{{if (has-block-params) "true" "false"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if hasBlockParams "true" "false"}}',
+    fixedTemplate: '{{if (has-block-params) "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 5,
@@ -104,13 +89,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (hasBlock) "true" "false"}}',
-      fixedTemplate: '{{if (has-block) "true" "false"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (hasBlock) "true" "false"}}',
+    fixedTemplate: '{{if (has-block) "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -126,13 +110,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (hasBlockParams) "true" "false"}}',
-      fixedTemplate: '{{if (has-block-params) "true" "false"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (hasBlockParams) "true" "false"}}',
+    fixedTemplate: '{{if (has-block-params) "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -148,13 +131,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (hasBlock "inverse") "true" "false"}}',
-      fixedTemplate: '{{if (has-block "inverse") "true" "false"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (hasBlock "inverse") "true" "false"}}',
+    fixedTemplate: '{{if (has-block "inverse") "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -170,13 +152,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (hasBlockParams "inverse") "true" "false"}}',
-      fixedTemplate: '{{if (has-block-params "inverse") "true" "false"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (hasBlockParams "inverse") "true" "false"}}',
+    fixedTemplate: '{{if (has-block-params "inverse") "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -192,13 +173,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component test=(if hasBlock "true")}}',
-      fixedTemplate: '{{component test=(if (has-block) "true")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component test=(if hasBlock "true")}}',
+    fixedTemplate: '{{component test=(if (has-block) "true")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -214,13 +194,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{component test=(if hasBlockParams "true")}}',
-      fixedTemplate: '{{component test=(if (has-block-params) "true")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{component test=(if hasBlockParams "true")}}',
+    fixedTemplate: '{{component test=(if (has-block-params) "true")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -236,13 +215,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if hasBlock}}{{/if}}',
-      fixedTemplate: '{{#if (has-block)}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if hasBlock}}{{/if}}',
+    fixedTemplate: '{{#if (has-block)}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -258,13 +236,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if hasBlockParams}}{{/if}}',
-      fixedTemplate: '{{#if (has-block-params)}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if hasBlockParams}}{{/if}}',
+    fixedTemplate: '{{#if (has-block-params)}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -280,13 +257,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (hasBlock)}}{{/if}}',
-      fixedTemplate: '{{#if (has-block)}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (hasBlock)}}{{/if}}',
+    fixedTemplate: '{{#if (has-block)}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -302,13 +278,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (hasBlockParams)}}{{/if}}',
-      fixedTemplate: '{{#if (has-block-params)}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (hasBlockParams)}}{{/if}}',
+    fixedTemplate: '{{#if (has-block-params)}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -324,13 +299,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (hasBlock "inverse")}}{{/if}}',
-      fixedTemplate: '{{#if (has-block "inverse")}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (hasBlock "inverse")}}{{/if}}',
+    fixedTemplate: '{{#if (has-block "inverse")}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -346,13 +320,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (hasBlockParams "inverse")}}{{/if}}',
-      fixedTemplate: '{{#if (has-block-params "inverse")}}{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (hasBlockParams "inverse")}}{{/if}}',
+    fixedTemplate: '{{#if (has-block-params "inverse")}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 7,
@@ -368,13 +341,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button name={{hasBlock}}></button>',
-      fixedTemplate: '<button name={{has-block}}></button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button name={{hasBlock}}></button>',
+    fixedTemplate: '<button name={{has-block}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -390,13 +362,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button name={{hasBlockParams}}></button>',
-      fixedTemplate: '<button name={{has-block-params}}></button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button name={{hasBlockParams}}></button>',
+    fixedTemplate: '<button name={{has-block-params}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -412,13 +383,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button name={{hasBlock "inverse"}}></button>',
-      fixedTemplate: '<button name={{has-block "inverse"}}></button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button name={{hasBlock "inverse"}}></button>',
+    fixedTemplate: '<button name={{has-block "inverse"}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -434,13 +404,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button name={{hasBlockParams "inverse"}}></button>',
-      fixedTemplate: '<button name={{has-block-params "inverse"}}></button>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button name={{hasBlockParams "inverse"}}></button>',
+    fixedTemplate: '<button name={{has-block-params "inverse"}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -456,13 +425,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (or isLoading hasLoadFailed hasBlock)}}...{{/if}}',
-      fixedTemplate: '{{#if (or isLoading hasLoadFailed (has-block))}}...{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (or isLoading hasLoadFailed hasBlock)}}...{{/if}}',
+    fixedTemplate: '{{#if (or isLoading hasLoadFailed (has-block))}}...{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 34,
@@ -478,13 +446,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#if (or isLoading hasLoadFailed hasBlockParams)}}...{{/if}}',
-      fixedTemplate: '{{#if (or isLoading hasLoadFailed (has-block-params))}}...{{/if}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#if (or isLoading hasLoadFailed hasBlockParams)}}...{{/if}}',
+    fixedTemplate: '{{#if (or isLoading hasLoadFailed (has-block-params))}}...{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 34,
@@ -500,7 +467,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

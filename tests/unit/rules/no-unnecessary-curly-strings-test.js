@@ -1,35 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-unnecessary-curly-strings',
-
   config: true,
-
-  good: [
-    '<FooBar class="btn" />',
-    '{{foo}}',
-    '{{(foo)}}',
-    '{{this.calculate 1 2 op="add"}}',
-    '{{get address part}}',
-    'foo',
-    '"foo"',
-    '<FooBar value=12345 />',
-    '<FooBar value=null />',
-    '<FooBar value=true />',
-    '<FooBar value=undefined />',
-    '<FooBar value={{12345}} />',
-    '<FooBar value={{null}} />',
-    '<FooBar value={{true}} />',
-    '<FooBar value={{undefined}} />',
-  ],
-
-  bad: [
-    {
-      template: '<FooBar class={{"btn"}} @fooArg={{\'barbaz\'}} />',
-      fixedTemplate: '<FooBar class="btn" @fooArg=\'barbaz\' />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<FooBar class="btn" />', '{{foo}}', '{{(foo)}}', '{{this.calculate 1 2 op="add"}}', '{{get address part}}', 'foo', '"foo"', '<FooBar value=12345 />', '<FooBar value=null />', '<FooBar value=true />', '<FooBar value=undefined />', '<FooBar value={{12345}} />', '<FooBar value={{null}} />', '<FooBar value={{true}} />', '<FooBar value={{undefined}} />'],
+  bad: [{
+    template: '<FooBar class={{"btn"}} @fooArg={{\'barbaz\'}} />',
+    fixedTemplate: '<FooBar class="btn" @fooArg=\'barbaz\' />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -57,14 +38,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<FooBar class="btn">{{"Foo"}}</FooBar>',
-      fixedTemplate: '<FooBar class="btn">Foo</FooBar>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<FooBar class="btn">{{"Foo"}}</FooBar>',
+    fixedTemplate: '<FooBar class="btn">Foo</FooBar>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -80,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

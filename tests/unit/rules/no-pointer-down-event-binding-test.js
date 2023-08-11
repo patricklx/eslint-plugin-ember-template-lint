@@ -1,26 +1,21 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-pointer-down-event-binding",
-
   config: true,
-
   good: [
-    // Typical event binding
-    "<div {{on 'mouseup' this.doSomething}}></div>",
-    "<div {{action this.doSomething on='mouseup'}}></div>",
-    // DOM event handling through attributes
-    '<input type="text" onmouseup="myFunction()">',
-    // For now, we're not catching component arguments
-    "{{my-component mouseDown=this.doSomething}}",
-    "<MyComponent @mouseDown={{this.doSomething}} />",
-  ],
-
-  bad: [
-    {
-      template: '<div {{on "mousedown" this.doSomething}}></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  // Typical event binding
+  "<div {{on 'mouseup' this.doSomething}}></div>", "<div {{action this.doSomething on='mouseup'}}></div>",
+  // DOM event handling through attributes
+  '<input type="text" onmouseup="myFunction()">',
+  // For now, we're not catching component arguments
+  "{{my-component mouseDown=this.doSomething}}", "<MyComponent @mouseDown={{this.doSomething}} />"],
+  bad: [{
+    template: '<div {{on "mousedown" this.doSomething}}></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -34,12 +29,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div {{action this.doSomething on="mousedown"}}></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div {{action this.doSomething on="mousedown"}}></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 35,
@@ -53,14 +47,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // Detecting the `on` param works, even if it's not the first hash param to `{{action}}`
-      template:
-        '<div {{action this.doSomething preventDefault=true on="mousedown"}}></div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // Detecting the `on` param works, even if it's not the first hash param to `{{action}}`
+    template: '<div {{action this.doSomething preventDefault=true on="mousedown"}}></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 55,
@@ -74,13 +66,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // DOM event handling through attributes
-      template: '<input type="text" onmousedown="myFunction()">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // DOM event handling through attributes
+    template: '<input type="text" onmousedown="myFunction()">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -94,7 +85,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

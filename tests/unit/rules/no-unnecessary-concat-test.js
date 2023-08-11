@@ -1,19 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-unnecessary-concat',
-
   config: true,
-
   good: ['<div class={{clazz}}></div>', '<div class="first {{second}}"></div>', '"{{foo}}"'],
-
-  bad: [
-    {
-      template: '<div class="{{clazz}}"></div>',
-      fixedTemplate: '<div class={{clazz}}></div>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  bad: [{
+    template: '<div class="{{clazz}}"></div>',
+    fixedTemplate: '<div class={{clazz}}></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -29,14 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img src="{{url}}" alt="{{t "alternate-text"}}">',
-      fixedTemplate: '<img src={{url}} alt={{t "alternate-text"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img src="{{url}}" alt="{{t "alternate-text"}}">',
+    fixedTemplate: '<img src={{url}} alt={{t "alternate-text"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -64,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,56 +1,27 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 const RULE_NAME = "no-array-prototype-extensions";
-generateRuleTests({
+(0, _ruleTestHarness.default)({
   name: RULE_NAME,
-
   config: true,
-
-  good: [
-    "{{foo bar=(get this 'list.0' )}}",
-    "<Foo @bar={{get this 'list.0'}}",
-    "{{get this 'list.0.foo'}}",
-    "{{get this 'firstObject'}}",
-    "{{get this 'lastObject.name'}}",
-    "{{foo bar @list}}",
-    "{{this.firstObject}}",
-    "{{this.lastObject.name}}",
-    "{{firstObject}}",
-    "{{lastObject}}",
-    "{{notfirstObject}}",
-    "{{@firstObject}}",
-    "{{@lastObject}}",
-    "{{@lastObject.name}}",
-    "{{foo bar this.firstObject}}",
-    "{{foo bar this.lastObject.name}}",
-    "{{foo bar @lastObject}}",
-    "{{foo bar @firstObject}}",
-    "{{foo bar @lastObject.name}}",
-    "{{foo bar @list.notfirstObject}}",
-    "{{foo bar @list.lastObjectV2}}",
-    "Just a regular text in the template bar.firstObject bar.lastObject.foo",
-    '<Foo foo="bar.firstObject.baz" />',
-    '<Foo foo="lastObject" />',
-    `<FooBar
+  good: ["{{foo bar=(get this 'list.0' )}}", "<Foo @bar={{get this 'list.0'}}", "{{get this 'list.0.foo'}}", "{{get this 'firstObject'}}", "{{get this 'lastObject.name'}}", "{{foo bar @list}}", "{{this.firstObject}}", "{{this.lastObject.name}}", "{{firstObject}}", "{{lastObject}}", "{{notfirstObject}}", "{{@firstObject}}", "{{@lastObject}}", "{{@lastObject.name}}", "{{foo bar this.firstObject}}", "{{foo bar this.lastObject.name}}", "{{foo bar @lastObject}}", "{{foo bar @firstObject}}", "{{foo bar @lastObject.name}}", "{{foo bar @list.notfirstObject}}", "{{foo bar @list.lastObjectV2}}", "Just a regular text in the template bar.firstObject bar.lastObject.foo", '<Foo foo="bar.firstObject.baz" />', '<Foo foo="lastObject" />', `<FooBar
      @subHeaderText={{if
       this.isFooBarV2Enabled
       "firstObject"
     }}
-  />`,
-    `<FooBar
+  />`, `<FooBar
      @subHeaderText={{if
       this.isFooBarV2Enabled
       "hi.lastObject.name"
     }}
-  />`,
-  ],
-
-  bad: [
-    /** Non-fixable `lastObject` */
-    {
-      template: "{{foo bar=@list.lastObject.test}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  />`],
+  bad: [/** Non-fixable `lastObject` */
+  {
+    template: "{{foo bar=@list.lastObject.test}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -64,12 +35,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{this.list.lastObject}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{this.list.lastObject}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -83,12 +53,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo @bar={{get this 'list.lastObject'}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo @bar={{get this 'list.lastObject'}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 13,
@@ -102,15 +71,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    /** Fixable `firstObject` */
-    {
-      template: `<div data-test={{eq this.list.firstObject.abc "def"}}>Hello</div>`,
-      fixedTemplate:
-        '<div data-test={{eq (get this.list "0.abc") "def"}}>Hello</div>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, /** Fixable `firstObject` */
+  {
+    template: `<div data-test={{eq this.list.firstObject.abc "def"}}>Hello</div>`,
+    fixedTemplate: '<div data-test={{eq (get this.list "0.abc") "def"}}>Hello</div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -126,13 +93,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{foo bar=this.list.firstObject}}",
-      fixedTemplate: '{{foo bar=(get this.list "0")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{foo bar=this.list.firstObject}}",
+    fixedTemplate: '{{foo bar=(get this.list "0")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -148,13 +114,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{this.list.firstObject}}",
-      fixedTemplate: '{{get this.list "0"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{this.list.firstObject}}",
+    fixedTemplate: '{{get this.list "0"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -170,13 +135,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{this.list.firstObject.name}}",
-      fixedTemplate: '{{get this.list "0.name"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{this.list.firstObject.name}}",
+    fixedTemplate: '{{get this.list "0.name"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -192,13 +156,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo @bar={{@list.firstObject}} />",
-      fixedTemplate: '<Foo @bar={{get @list "0"}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo @bar={{@list.firstObject}} />",
+    fixedTemplate: '<Foo @bar={{get @list "0"}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -214,13 +177,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo @bar={{this.list.firstObject.name.foo}} />",
-      fixedTemplate: '<Foo @bar={{get this.list "0.name.foo"}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo @bar={{this.list.firstObject.name.foo}} />",
+    fixedTemplate: '<Foo @bar={{get this.list "0.name.foo"}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -236,13 +198,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo @bar={{get this 'list.firstObject'}} />",
-      fixedTemplate: "<Foo @bar={{get this 'list.0'}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo @bar={{get this 'list.firstObject'}} />",
+    fixedTemplate: "<Foo @bar={{get this 'list.0'}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -258,13 +219,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo @bar={{get @list 'firstObject.name'}} />",
-      fixedTemplate: "<Foo @bar={{get @list '0.name'}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo @bar={{get @list 'firstObject.name'}} />",
+    fixedTemplate: "<Foo @bar={{get @list '0.name'}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -280,7 +240,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-iframe-title",
-
   config: true,
-
-  good: [
-    '<iframe title="Welcome to the Matrix!" />',
-    "<iframe title={{someValue}} />",
-    '<iframe title="" aria-hidden />',
-    '<iframe title="" hidden />',
-    '<iframe title="foo" /><iframe title="bar" />',
-  ],
-
-  bad: [
-    {
-      template: '<iframe title="foo" /><iframe title="foo" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<iframe title="Welcome to the Matrix!" />', "<iframe title={{someValue}} />", '<iframe title="" aria-hidden />', '<iframe title="" hidden />', '<iframe title="foo" /><iframe title="bar" />'],
+  bad: [{
+    template: '<iframe title="foo" /><iframe title="foo" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -42,13 +33,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<iframe title="foo" /><iframe title="boo" /><iframe title="foo" /><iframe title="boo" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<iframe title="foo" /><iframe title="boo" /><iframe title="foo" /><iframe title="boo" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -92,13 +81,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<iframe src="12" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<iframe src="12" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -112,13 +99,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<iframe src="12" title={{false}} />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<iframe src="12" title={{false}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -132,13 +117,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<iframe src="12" title="{{false}}" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<iframe src="12" title="{{false}}" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -152,13 +135,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<iframe src="12" title="" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<iframe src="12" title="" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -172,7 +153,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,27 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-nested-splattributes",
-
   config: true,
-
-  good: [
-    "<div>...</div>",
-    "<div><div ...attributes>...</div></div>",
-    "<div ...attributes>...</div>",
-    "<div ...attributes>...</div><div ...attributes>...</div>",
-  ],
-
-  bad: [
-    {
-      template:
-        "<div ...attributes>\n" +
-        "  <div ...attributes>\n" +
-        "    ...\n" +
-        "  </div>\n" +
-        "</div>\n",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<div>...</div>", "<div><div ...attributes>...</div></div>", "<div ...attributes>...</div>", "<div ...attributes>...</div><div ...attributes>...</div>"],
+  bad: [{
+    template: "<div ...attributes>\n" + "  <div ...attributes>\n" + "    ...\n" + "  </div>\n" + "</div>\n",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -35,19 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<div ...attributes>\n" +
-        "  <div>\n" +
-        "    <div ...attributes>\n" +
-        "    ...\n" +
-        "    </div>\n" +
-        "  </div>\n" +
-        "</div>\n",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<div ...attributes>\n" + "  <div>\n" + "    <div ...attributes>\n" + "    ...\n" + "    </div>\n" + "  </div>\n" + "</div>\n",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -61,7 +41,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

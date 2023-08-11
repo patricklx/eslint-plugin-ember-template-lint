@@ -1,34 +1,23 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-link-to-positional-params",
-
   config: true,
-
-  good: [
-    '{{#link-to route="about"}}About Us{{/link-to}}',
-    '{{#link-to route="post" model=@post}}Read {{@post.title}}...{{/link-to}}',
-    `{{#link-to route="post.comment" models=(array post comment)}}
+  good: ['{{#link-to route="about"}}About Us{{/link-to}}', '{{#link-to route="post" model=@post}}Read {{@post.title}}...{{/link-to}}', `{{#link-to route="post.comment" models=(array post comment)}}
         Comment by {{comment.author.name}} on {{comment.date}}
-      {{/link-to}}`,
-    `{{#link-to route="posts" query=(hash direction="desc" showArchived=false)}}
+      {{/link-to}}`, `{{#link-to route="posts" query=(hash direction="desc" showArchived=false)}}
         Recent Posts
-      {{/link-to}}`,
-    '<LinkTo @route="about">About Us</LinkTo>',
-    '<LinkTo @route="post" @model={{@post}}>Read {{@post.title}}...</LinkTo>',
-    `<LinkTo @route="post.comment" @models={{array post comment}}>
+      {{/link-to}}`, '<LinkTo @route="about">About Us</LinkTo>', '<LinkTo @route="post" @model={{@post}}>Read {{@post.title}}...</LinkTo>', `<LinkTo @route="post.comment" @models={{array post comment}}>
         Comment by {{comment.author.name}} on {{comment.date}}
-      </LinkTo>`,
-    `<LinkTo @route="posts" @query={{hash direction="desc" showArchived=false}}>
+      </LinkTo>`, `<LinkTo @route="posts" @query={{hash direction="desc" showArchived=false}}>
         Recent Posts
-      </LinkTo>`,
-  ],
-
-  bad: [
-    {
-      template: '{{link-to "About Us" "about"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+      </LinkTo>`],
+  bad: [{
+    template: '{{link-to "About Us" "about"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -42,13 +31,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{link-to "About Us" (if this.showNewAboutPage "about-us" "about")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to "About Us" (if this.showNewAboutPage "about-us" "about")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -62,12 +49,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{link-to (t "about") "about"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to (t "about") "about"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -81,12 +67,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{link-to (t "about") this.aboutRoute}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to (t "about") this.aboutRoute}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -100,12 +85,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{link-to (t "about") this.aboutRoute "foo"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to (t "about") this.aboutRoute "foo"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -119,12 +103,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{link-to (t "about") this.aboutRoute "foo" "bar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to (t "about") this.aboutRoute "foo" "bar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -138,13 +121,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{link-to (t "about") this.aboutRoute "foo" "bar" (query-params foo="bar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{link-to (t "about") this.aboutRoute "foo" "bar" (query-params foo="bar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -158,14 +139,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template:
-        '{{#link-to (if this.showNewAboutPage "about-us" "about")}}About Us{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to (if this.showNewAboutPage "about-us" "about")}}About Us{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -179,12 +157,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#link-to "about"}}About Us{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to "about"}}About Us{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -198,12 +175,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#link-to this.aboutRoute}}About Us{{/link-to}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#link-to this.aboutRoute}}About Us{{/link-to}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -217,12 +193,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#link-to this.aboutRoute "foo"}}About Us{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to this.aboutRoute "foo"}}About Us{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -236,12 +211,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#link-to this.aboutRoute "foo" "bar"}}About Us{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to this.aboutRoute "foo" "bar"}}About Us{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -255,13 +229,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#link-to this.aboutRoute "foo" "bar" (query-params foo="bar")}}About Us{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to this.aboutRoute "foo" "bar" (query-params foo="bar")}}About Us{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -275,12 +247,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#link-to "post" @post}}Read {{@post.title}}...{{/link-to}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#link-to "post" @post}}Read {{@post.title}}...{{/link-to}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -294,14 +265,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `{{#link-to "post.comment" @comment.post @comment}}
+    }
+  }, {
+    template: `{{#link-to "post.comment" @comment.post @comment}}
         Comment by {{@comment.author.name}} on {{@comment.date}}
       {{/link-to}}`,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -315,14 +285,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `{{#link-to "posts" (query-params direction="desc" showArchived=false)}}
+    }
+  }, {
+    template: `{{#link-to "posts" (query-params direction="desc" showArchived=false)}}
         Recent Posts
       {{/link-to}}`,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -336,7 +305,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

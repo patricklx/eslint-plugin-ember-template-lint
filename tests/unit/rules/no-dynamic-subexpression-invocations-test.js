@@ -1,36 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-dynamic-subexpression-invocations",
-
   config: true,
-
-  good: [
-    '{{something "here"}}',
-    "{{something}}",
-    '{{something here="goes"}}',
-    '<button onclick={{fn something "here"}}></button>',
-    '{{@thing "somearg"}}',
-    '<Foo @bar="asdf" />',
-    '<Foo @bar={{"asdf"}} />',
-    "<Foo @bar={{true}} />",
-    "<Foo @bar={{false}} />",
-    "<Foo @bar={{undefined}} />",
-    "<Foo @bar={{null}} />",
-    "<Foo @bar={{1}} />",
-    "{{1}}",
-    "{{true}}",
-    "{{null}}",
-    "{{undefined}}",
-    '{{"foo"}}',
-  ],
-
-  bad: [
-    {
-      template: '<Foo bar="{{@thing "some-arg"}}" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['{{something "here"}}', "{{something}}", '{{something here="goes"}}', '<button onclick={{fn something "here"}}></button>', '{{@thing "somearg"}}', '<Foo @bar="asdf" />', '<Foo @bar={{"asdf"}} />', "<Foo @bar={{true}} />", "<Foo @bar={{false}} />", "<Foo @bar={{undefined}} />", "<Foo @bar={{null}} />", "<Foo @bar={{1}} />", "{{1}}", "{{true}}", "{{null}}", "{{undefined}}", '{{"foo"}}'],
+  bad: [{
+    template: '<Foo bar="{{@thing "some-arg"}}" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -44,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo {{this.foo}} />",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo {{this.foo}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -64,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo {{@foo}} />",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo {{@foo}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -84,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Foo {{foo.bar}} />",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Foo {{foo.bar}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -104,13 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button onclick={{@thing "some-arg"}}></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button onclick={{@thing "some-arg"}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -124,14 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '{{#let "whatever" as |thing|}}<button onclick={{thing "some-arg"}}></button>{{/let}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#let "whatever" as |thing|}}<button onclick={{thing "some-arg"}}></button>{{/let}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 46,
@@ -146,13 +114,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button onclick={{this.thing "some-arg"}}></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button onclick={{this.thing "some-arg"}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -166,13 +132,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button onclick={{lol.other.path "some-arg"}}></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button onclick={{lol.other.path "some-arg"}}></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -186,13 +150,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (this.foo) "true" "false"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (this.foo) "true" "false"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -206,13 +168,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Foo @bar={{@thing "some-arg"}} />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Foo @bar={{@thing "some-arg"}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -226,13 +186,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<Foo onclick={{@thing "some-arg"}} />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Foo onclick={{@thing "some-arg"}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -246,7 +204,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

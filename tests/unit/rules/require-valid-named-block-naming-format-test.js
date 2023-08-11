@@ -1,80 +1,55 @@
-import { FORMAT } from '../../../lib/rules/require-valid-named-block-naming-format.js';
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _requireValidNamedBlockNamingFormat = require("../../../lib/rules/require-valid-named-block-naming-format.js");
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'require-valid-named-block-naming-format',
-
   config: true,
-
   good: [
-    // Default config.
-    '{{yield}}',
-    '{{yield to="fooBar"}}',
-
-    '{{has-block}}',
-    '{{has-block "fooBar"}}',
-
-    '{{if (has-block)}}',
-    '{{if (has-block "fooBar")}}',
-
-    '{{has-block-params}}',
-    '{{has-block-params "fooBar"}}',
-
-    '{{if (has-block-params)}}',
-    '{{if (has-block-params "fooBar")}}',
-
-    // Explicit config: `camelCase`.
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{yield to="fooBar"}}',
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{has-block "fooBar"}}',
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{if (has-block "fooBar")}}',
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{has-block-params "fooBar"}}',
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{if (has-block-params "fooBar")}}',
-    },
-
-    // Explicit config: `kebab-case`.
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{yield to="foo-bar"}}',
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{has-block "foo-bar"}}',
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{if (has-block "foo-bar")}}',
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{has-block-params "foo-bar"}}',
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{if (has-block-params "foo-bar")}}',
-    },
-  ],
-
+  // Default config.
+  '{{yield}}', '{{yield to="fooBar"}}', '{{has-block}}', '{{has-block "fooBar"}}', '{{if (has-block)}}', '{{if (has-block "fooBar")}}', '{{has-block-params}}', '{{has-block-params "fooBar"}}', '{{if (has-block-params)}}', '{{if (has-block-params "fooBar")}}',
+  // Explicit config: `camelCase`.
+  {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{yield to="fooBar"}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{has-block "fooBar"}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{if (has-block "fooBar")}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{has-block-params "fooBar"}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{if (has-block-params "fooBar")}}'
+  },
+  // Explicit config: `kebab-case`.
+  {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{yield to="foo-bar"}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{has-block "foo-bar"}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{if (has-block "foo-bar")}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{has-block-params "foo-bar"}}'
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{if (has-block-params "foo-bar")}}'
+  }],
   bad: [
-    // Default config.
-    {
-      template: '{{yield to="foo-bar"}}',
-      fixedTemplate: '{{yield to="fooBar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  // Default config.
+  {
+    template: '{{yield to="foo-bar"}}',
+    fixedTemplate: '{{yield to="fooBar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -90,13 +65,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{has-block "foo-bar"}}',
-      fixedTemplate: '{{has-block "fooBar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{has-block "foo-bar"}}',
+    fixedTemplate: '{{has-block "fooBar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -112,13 +86,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (has-block "foo-bar")}}',
-      fixedTemplate: '{{if (has-block "fooBar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (has-block "foo-bar")}}',
+    fixedTemplate: '{{if (has-block "fooBar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 16,
@@ -134,13 +107,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{has-block-params "foo-bar"}}',
-      fixedTemplate: '{{has-block-params "fooBar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{has-block-params "foo-bar"}}',
+    fixedTemplate: '{{has-block-params "fooBar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -156,13 +128,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{if (has-block-params "foo-bar")}}',
-      fixedTemplate: '{{if (has-block-params "fooBar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{if (has-block-params "foo-bar")}}',
+    fixedTemplate: '{{if (has-block-params "fooBar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -178,16 +149,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // Explicit config: `camelCase`.
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{yield to="foo-bar"}}',
-      fixedTemplate: '{{yield to="fooBar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // Explicit config: `camelCase`.
+  {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{yield to="foo-bar"}}',
+    fixedTemplate: '{{yield to="fooBar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -203,14 +173,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{has-block "foo-bar"}}',
-      fixedTemplate: '{{has-block "fooBar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{has-block "foo-bar"}}',
+    fixedTemplate: '{{has-block "fooBar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -226,14 +195,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{if (has-block "foo-bar")}}',
-      fixedTemplate: '{{if (has-block "fooBar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{if (has-block "foo-bar")}}',
+    fixedTemplate: '{{if (has-block "fooBar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 16,
@@ -249,14 +217,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{has-block-params "foo-bar"}}',
-      fixedTemplate: '{{has-block-params "fooBar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{has-block-params "foo-bar"}}',
+    fixedTemplate: '{{has-block-params "fooBar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -272,14 +239,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.CAMEL_CASE,
-      template: '{{if (has-block-params "foo-bar")}}',
-      fixedTemplate: '{{if (has-block-params "fooBar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.CAMEL_CASE,
+    template: '{{if (has-block-params "foo-bar")}}',
+    fixedTemplate: '{{if (has-block-params "fooBar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -295,16 +261,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // Explicit config: `kebab-case`.
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{yield to="fooBar"}}',
-      fixedTemplate: '{{yield to="foo-bar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // Explicit config: `kebab-case`.
+  {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{yield to="fooBar"}}',
+    fixedTemplate: '{{yield to="foo-bar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -320,14 +285,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{has-block "fooBar"}}',
-      fixedTemplate: '{{has-block "foo-bar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{has-block "fooBar"}}',
+    fixedTemplate: '{{has-block "foo-bar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -343,14 +307,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{if (has-block "fooBar")}}',
-      fixedTemplate: '{{if (has-block "foo-bar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{if (has-block "fooBar")}}',
+    fixedTemplate: '{{if (has-block "foo-bar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 16,
@@ -366,14 +329,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{has-block-params "fooBar"}}',
-      fixedTemplate: '{{has-block-params "foo-bar"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{has-block-params "fooBar"}}',
+    fixedTemplate: '{{has-block-params "foo-bar"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -389,14 +351,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      config: FORMAT.KEBAB_CASE,
-      template: '{{if (has-block-params "fooBar")}}',
-      fixedTemplate: '{{if (has-block-params "foo-bar")}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    config: _requireValidNamedBlockNamingFormat.FORMAT.KEBAB_CASE,
+    template: '{{if (has-block-params "fooBar")}}',
+    fixedTemplate: '{{if (has-block-params "foo-bar")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -412,7 +373,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

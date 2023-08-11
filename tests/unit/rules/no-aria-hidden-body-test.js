@@ -1,22 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-aria-hidden-body',
-
   config: true,
-
-  good: [
-    '<body></body>',
-    '<body><h1>Hello world</h1></body>',
-    '<body><p aria-hidden="true">Some things are better left unsaid</p></body>',
-  ],
-
-  bad: [
-    {
-      template: '<body aria-hidden="true"></body>',
-      fixedTemplate: '<body></body>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<body></body>', '<body><h1>Hello world</h1></body>', '<body><p aria-hidden="true">Some things are better left unsaid</p></body>'],
+  bad: [{
+    template: '<body aria-hidden="true"></body>',
+    fixedTemplate: '<body></body>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -32,13 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<body aria-hidden></body>',
-      fixedTemplate: '<body></body>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<body aria-hidden></body>',
+    fixedTemplate: '<body></body>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -54,7 +47,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

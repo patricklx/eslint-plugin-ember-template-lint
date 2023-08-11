@@ -7,7 +7,7 @@ const glimmerVisitorKeys = require(path.join(
 
 const nodeNames = Object.keys(glimmerVisitorKeys);
 
-let root = '../lib/ember-template-lint/rules/';
+let root = './tr/rules/';
 let entries = fs.readdirSync(root);
 
 for (const entry of entries) {
@@ -19,7 +19,7 @@ for (const entry of entries) {
   fs.writeFileSync(root + entry, content);
 }
 
-root = '../lib/ember-template-lint/helpers/';
+root = './tr/helpers/';
 entries = fs.readdirSync(root);
 
 for (const entry of entries) {
@@ -30,3 +30,16 @@ for (const entry of entries) {
   }
   fs.writeFileSync(root + entry, content);
 }
+
+root = './tr/config/';
+entries = fs.readdirSync(root);
+
+for (const entry of entries) {
+  let content = fs.readFileSync(root + entry).toString();
+  for (const nodeName of nodeNames) {
+    const regex = new RegExp(`\\b${nodeName}\\b`, 'g');
+    content = content.replace(regex, `Glimmer${nodeName}`);
+  }
+  fs.writeFileSync(root + entry, content);
+}
+

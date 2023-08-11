@@ -1,119 +1,90 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-negated-condition',
-
   config: true,
-
   good: [
-    // ******************************************
-    // BlockStatement
-    // ******************************************
+  // ******************************************
+  // BlockStatement
+  // ******************************************
 
-    // if ...
-    '{{#if condition}}<img>{{/if}}',
-    '{{#if (or c1 c2)}}{{/if}}',
-    '{{#if (not (or c1 c2))}}{{/if}}', // Valid since we don't want to suggest `unless` with helpers in the condition.
-    '{{#if (not c1 c2)}}{{/if}}', // Valid since there is not way to simplify.
-    '{{#if (not (not c1) c2)}}<img>{{/if}}',
-    '{{#if (not c1 (not c2))}}<img>{{/if}}',
-    {
-      config: { simplifyHelpers: false },
-      template: '{{#if (not (not c2))}}<img>{{/if}}',
+  // if ...
+  '{{#if condition}}<img>{{/if}}', '{{#if (or c1 c2)}}{{/if}}', '{{#if (not (or c1 c2))}}{{/if}}',
+  // Valid since we don't want to suggest `unless` with helpers in the condition.
+  '{{#if (not c1 c2)}}{{/if}}',
+  // Valid since there is not way to simplify.
+  '{{#if (not (not c1) c2)}}<img>{{/if}}', '{{#if (not c1 (not c2))}}<img>{{/if}}', {
+    config: {
+      simplifyHelpers: false
     },
-    {
-      config: { simplifyHelpers: false },
-      template: '{{#if (not (eq c2))}}<img>{{/if}}',
+    template: '{{#if (not (not c2))}}<img>{{/if}}'
+  }, {
+    config: {
+      simplifyHelpers: false
     },
+    template: '{{#if (not (eq c2))}}<img>{{/if}}'
+  },
+  // if ... else ...
+  '{{#if condition}}<img>{{else}}<img>{{/if}}', '{{#if (or c1 c2)}}<img>{{else}}<img>{{/if}}',
+  // if ... else if ...
+  '{{#if condition}}<img>{{else if condition}}<img>{{/if}}', '{{#if condition}}<img>{{else if (not condition2)}}<img>{{/if}}',
+  // we ignore `if ... else if ...`
+  '{{#if (not condition)}}<img>{{else if (not condition2)}}<img>{{/if}}',
+  // we ignore `if ... else if ...`
 
-    // if ... else ...
-    '{{#if condition}}<img>{{else}}<img>{{/if}}',
-    '{{#if (or c1 c2)}}<img>{{else}}<img>{{/if}}',
+  // if ... else if ... else ...
+  '{{#if condition}}<img>{{else if condition}}<img>{{else}}<img>{{/if}}', '{{#if (not condition)}}<img>{{else if (not condition2)}}<img>{{else}}<img>{{/if}}',
+  // we ignore `if ... else if ...`
 
-    // if ... else if ...
-    '{{#if condition}}<img>{{else if condition}}<img>{{/if}}',
-    '{{#if condition}}<img>{{else if (not condition2)}}<img>{{/if}}', // we ignore `if ... else if ...`
-    '{{#if (not condition)}}<img>{{else if (not condition2)}}<img>{{/if}}', // we ignore `if ... else if ...`
+  // unless ...
+  '{{#unless condition}}<img>{{/unless}}', '{{#unless (or c1 c2)}}<img>{{/unless}}', '{{#unless (not c1 c2)}}<img>{{/unless}}',
+  // unless ... else ...
+  '{{#unless condition}}<img>{{else}}<img>{{/unless}}', '{{#unless (or c1 c2)}}<img>{{else}}<img>{{/unless}}',
+  // unless ... else if ...
+  '{{#unless condition}}<img>{{else if condition}}<img>{{/unless}}', '{{#unless (or c1 c2)}}<img>{{else if (or c1 c2)}}<img>{{/unless}}',
+  // unless ... else if ... else ...
+  '{{#unless condition}}<img>{{else if condition}}<img>{{else}}<img>{{/unless}}', '{{#unless (or c1 c2)}}<img>{{else if (or c1 c2)}}<img>{{else}}<img>{{/unless}}',
+  // ******************************************
+  // MustacheStatement
+  // ******************************************
 
-    // if ... else if ... else ...
-    '{{#if condition}}<img>{{else if condition}}<img>{{else}}<img>{{/if}}',
-    '{{#if (not condition)}}<img>{{else if (not condition2)}}<img>{{else}}<img>{{/if}}', // we ignore `if ... else if ...`
+  // if ...
+  '<img class={{if condition "some-class"}}>', '<img class={{if (or c1 c2) "some-class"}}>', '<img class={{if (not (or c1 c2)) "some-class"}}>',
+  // Valid since we don't want to suggest `unless` with helpers in the condition.
+  '<img class={{if (not c1 c2) "some-class"}}>',
+  // if ... else ...
+  '<img class={{if condition "some-class" "other-class"}}>', '<img class={{if (or c1 c2) "some-class" "other-class"}}>',
+  // unless ...
+  '<img class={{unless condition "some-class"}}>', '<img class={{unless (or c1 c2) "some-class"}}>', '<img class={{unless (not c1 c2) "some-class"}}>',
+  // unless ... else ...
+  '<img class={{unless condition "some-class" "other-class"}}>', '<img class={{unless (or c1 c2) "some-class" "other-class"}}>',
+  // ******************************************
+  // SubExpression
+  // ******************************************
 
-    // unless ...
-    '{{#unless condition}}<img>{{/unless}}',
-    '{{#unless (or c1 c2)}}<img>{{/unless}}',
-    '{{#unless (not c1 c2)}}<img>{{/unless}}',
-
-    // unless ... else ...
-    '{{#unless condition}}<img>{{else}}<img>{{/unless}}',
-    '{{#unless (or c1 c2)}}<img>{{else}}<img>{{/unless}}',
-
-    // unless ... else if ...
-    '{{#unless condition}}<img>{{else if condition}}<img>{{/unless}}',
-    '{{#unless (or c1 c2)}}<img>{{else if (or c1 c2)}}<img>{{/unless}}',
-
-    // unless ... else if ... else ...
-    '{{#unless condition}}<img>{{else if condition}}<img>{{else}}<img>{{/unless}}',
-    '{{#unless (or c1 c2)}}<img>{{else if (or c1 c2)}}<img>{{else}}<img>{{/unless}}',
-
-    // ******************************************
-    // MustacheStatement
-    // ******************************************
-
-    // if ...
-    '<img class={{if condition "some-class"}}>',
-    '<img class={{if (or c1 c2) "some-class"}}>',
-    '<img class={{if (not (or c1 c2)) "some-class"}}>', // Valid since we don't want to suggest `unless` with helpers in the condition.
-    '<img class={{if (not c1 c2) "some-class"}}>',
-
-    // if ... else ...
-    '<img class={{if condition "some-class" "other-class"}}>',
-    '<img class={{if (or c1 c2) "some-class" "other-class"}}>',
-
-    // unless ...
-    '<img class={{unless condition "some-class"}}>',
-    '<img class={{unless (or c1 c2) "some-class"}}>',
-    '<img class={{unless (not c1 c2) "some-class"}}>',
-
-    // unless ... else ...
-    '<img class={{unless condition "some-class" "other-class"}}>',
-    '<img class={{unless (or c1 c2) "some-class" "other-class"}}>',
-
-    // ******************************************
-    // SubExpression
-    // ******************************************
-
-    // if ...
-    '{{input class=(if condition "some-class")}}',
-    '{{input class=(if (or c1 c2) "some-class")}}',
-    '{{input class=(if (not (or c1 c2)) "some-class")}}', // Valid since we don't want to suggest `unless` with helpers in the condition.
-    '{{input class=(if (not c1 c2) "some-class")}}',
-
-    // if ... else ...
-    '{{input class=(if condition "some-class" "other-class")}}',
-    '{{input class=(if (or c1 c2) "some-class" "other-class")}}',
-
-    // unless ...
-    '{{input class=(unless condition "some-class")}}',
-    '{{input class=(unless (or c1 c2) "some-class")}}',
-
-    // unless ... else ...
-    '{{input class=(unless condition "some-class" "other-class")}}',
-    '{{input class=(unless (or c1 c2) "some-class" "other-class")}}',
-  ],
-
+  // if ...
+  '{{input class=(if condition "some-class")}}', '{{input class=(if (or c1 c2) "some-class")}}', '{{input class=(if (not (or c1 c2)) "some-class")}}',
+  // Valid since we don't want to suggest `unless` with helpers in the condition.
+  '{{input class=(if (not c1 c2) "some-class")}}',
+  // if ... else ...
+  '{{input class=(if condition "some-class" "other-class")}}', '{{input class=(if (or c1 c2) "some-class" "other-class")}}',
+  // unless ...
+  '{{input class=(unless condition "some-class")}}', '{{input class=(unless (or c1 c2) "some-class")}}',
+  // unless ... else ...
+  '{{input class=(unless condition "some-class" "other-class")}}', '{{input class=(unless (or c1 c2) "some-class" "other-class")}}'],
   bad: [
-    // ******************************************
-    // BlockStatement
-    // ******************************************
+  // ******************************************
+  // BlockStatement
+  // ******************************************
 
-    // if ...
-    {
-      template: '{{#if (not condition)}}<img>{{/if}}',
-      fixedTemplate: '{{#unless condition}}<img>{{/unless}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  // if ...
+  {
+    template: '{{#if (not condition)}}<img>{{/if}}',
+    fixedTemplate: '{{#unless condition}}<img>{{/unless}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -129,15 +100,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '{{#if (not (not condition))}}<img>{{/if}}',
-      fixedTemplate: '{{#if condition}}<img>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#if (not (not condition))}}<img>{{/if}}',
+    fixedTemplate: '{{#if condition}}<img>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -153,15 +124,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // no config, allowing simplifyHelpers to default to true.
-      template: '{{#if (not (not c1 c2))}}<img>{{/if}}',
-      fixedTemplate: '{{#if (or c1 c2)}}<img>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // no config, allowing simplifyHelpers to default to true.
+    template: '{{#if (not (not c1 c2))}}<img>{{/if}}',
+    fixedTemplate: '{{#if (or c1 c2)}}<img>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -177,15 +146,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '{{#if (not (not c1 c2))}}<img>{{/if}}',
-      fixedTemplate: '{{#if (or c1 c2)}}<img>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#if (not (not c1 c2))}}<img>{{/if}}',
+    fixedTemplate: '{{#if (or c1 c2)}}<img>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -201,15 +170,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '{{#if (not (eq c1 c2))}}<img>{{/if}}',
-      fixedTemplate: '{{#if (not-eq c1 c2)}}<img>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#if (not (eq c1 c2))}}<img>{{/if}}',
+    fixedTemplate: '{{#if (not-eq c1 c2)}}<img>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -225,15 +194,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    // if ... else ...
-    {
-      template: '{{#if (not condition)}}<img>{{else}}<input>{{/if}}',
-      fixedTemplate: '{{#if condition}}<input>{{else}}<img>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // if ... else ...
+  {
+    template: '{{#if (not condition)}}<img>{{else}}<input>{{/if}}',
+    fixedTemplate: '{{#if condition}}<input>{{else}}<img>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -249,16 +217,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ...
-    {
-      template: '{{#unless (not condition)}}<img>{{/unless}}',
-      fixedTemplate: '{{#if condition}}<img>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ...
+  {
+    template: '{{#unless (not condition)}}<img>{{/unless}}',
+    fixedTemplate: '{{#if condition}}<img>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -274,14 +240,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{#unless (not (not condition))}}<img>{{/unless}}',
-      fixedTemplate: '{{#unless condition}}<img>{{/unless}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{#unless (not (not condition))}}<img>{{/unless}}',
+    fixedTemplate: '{{#unless condition}}<img>{{/unless}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -297,16 +261,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ... else ...
-    {
-      template: '{{#unless (not condition)}}<img>{{else}}<input>{{/unless}}',
-      fixedTemplate: '{{#if condition}}<img>{{else}}<input>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ... else ...
+  {
+    template: '{{#unless (not condition)}}<img>{{else}}<input>{{/unless}}',
+    fixedTemplate: '{{#if condition}}<img>{{else}}<input>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -322,15 +284,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '{{#unless (not (not-eq c1 c2))}}<img>{{else}}<input>{{/unless}}',
-      fixedTemplate: '{{#unless (eq c1 c2)}}<img>{{else}}<input>{{/unless}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#unless (not (not-eq c1 c2))}}<img>{{else}}<input>{{/unless}}',
+    fixedTemplate: '{{#unless (eq c1 c2)}}<img>{{else}}<input>{{/unless}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -346,15 +308,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    // unless ... else if ...
-    {
-      template: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{/unless}}',
-      fixedTemplate: '{{#if condition}}<img>{{else if (not condition)}}<input>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ... else if ...
+  {
+    template: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{/unless}}',
+    fixedTemplate: '{{#if condition}}<img>{{else if (not condition)}}<input>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -370,16 +331,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template:
-        '{{#unless (not (not condition))}}<img>{{else if (not (not condition))}}<input>{{/unless}}',
-      fixedTemplate: '{{#unless condition}}<img>{{else if condition}}<input>{{/unless}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#unless (not (not condition))}}<img>{{else if (not (not condition))}}<input>{{/unless}}',
+    fixedTemplate: '{{#unless condition}}<img>{{else if condition}}<input>{{/unless}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -407,15 +367,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '{{#unless (not (gt c 10))}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
-      fixedTemplate: '{{#unless (lte c 10)}}<img>{{else if (gte c 5)}}<input>{{/unless}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#unless (not (gt c 10))}}<img>{{else if (not (lt c 5))}}<input>{{/unless}}',
+    fixedTemplate: '{{#unless (lte c 10)}}<img>{{else if (gte c 5)}}<input>{{/unless}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -443,17 +403,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ... else if ... else ...
-    {
-      template:
-        '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/unless}}',
-      fixedTemplate: '{{#if condition}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ... else if ... else ...
+  {
+    template: '{{#unless (not condition)}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/unless}}',
+    fixedTemplate: '{{#if condition}}<img>{{else if (not condition)}}<input>{{else}}<hr>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -469,16 +426,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template:
-        '{{#unless (not condition)}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/unless}}',
-      fixedTemplate: '{{#if condition}}<img>{{else if (or c1 c2)}}<input>{{else}}<hr>{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{#unless (not condition)}}<img>{{else if (not (not c1 c2))}}<input>{{else}}<hr>{{/unless}}',
+    fixedTemplate: '{{#if condition}}<img>{{else if (or c1 c2)}}<input>{{else}}<hr>{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -506,18 +462,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // Nested inside the body of an `else` block (with preceding comment):
-    {
-      template:
-        '{{#if condition}}{{else}}{{! some comment }}{{#if (not condition)}}<img>{{/if}}{{/if}}',
-      fixedTemplate:
-        '{{#if condition}}{{else}}{{! some comment }}{{#unless condition}}<img>{{/unless}}{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // Nested inside the body of an `else` block (with preceding comment):
+  {
+    template: '{{#if condition}}{{else}}{{! some comment }}{{#if (not condition)}}<img>{{/if}}{{/if}}',
+    fixedTemplate: '{{#if condition}}{{else}}{{! some comment }}{{#unless condition}}<img>{{/unless}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 44,
@@ -533,16 +485,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // Nested inside the body of an `else` block (without preceding comment):
-    {
-      template: '{{#if condition}}{{else}}{{#if (not condition)}}<img>{{/if}}{{/if}}',
-      fixedTemplate: '{{#if condition}}{{else}}{{#unless condition}}<img>{{/unless}}{{/if}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // Nested inside the body of an `else` block (without preceding comment):
+  {
+    template: '{{#if condition}}{{else}}{{#if (not condition)}}<img>{{/if}}{{/if}}',
+    fixedTemplate: '{{#if condition}}{{else}}{{#unless condition}}<img>{{/unless}}{{/if}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 25,
@@ -558,20 +508,18 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
+    }
+  },
+  // ******************************************
+  // MustacheStatement
+  // ******************************************
 
-    // ******************************************
-    // MustacheStatement
-    // ******************************************
-
-    // if ...
-    {
-      template: '<img class={{if (not condition) "some-class"}}>',
-      fixedTemplate: '<img class={{unless condition "some-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  // if ...
+  {
+    template: '<img class={{if (not condition) "some-class"}}>',
+    fixedTemplate: '<img class={{unless condition "some-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -587,15 +535,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '<img class={{if (not (gte c 10)) "some-class"}}>',
-      fixedTemplate: '<img class={{if (lt c 10) "some-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<img class={{if (not (gte c 10)) "some-class"}}>',
+    fixedTemplate: '<img class={{if (lt c 10) "some-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -611,16 +559,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // if ... else ...
-    {
-      template: '<img class={{if (not condition) "some-class" "other-class"}}>',
-      fixedTemplate: '<img class={{if condition "other-class" "some-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // if ... else ...
+  {
+    template: '<img class={{if (not condition) "some-class" "other-class"}}>',
+    fixedTemplate: '<img class={{if condition "other-class" "some-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -636,15 +582,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '<img class={{if (not (not condition)) "some-class" "other-class"}}>',
-      fixedTemplate: '<img class={{if condition "some-class" "other-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<img class={{if (not (not condition)) "some-class" "other-class"}}>',
+    fixedTemplate: '<img class={{if condition "some-class" "other-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -660,16 +606,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ...
-    {
-      template: '<img class={{unless (not condition) "some-class"}}>',
-      fixedTemplate: '<img class={{if condition "some-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ...
+  {
+    template: '<img class={{unless (not condition) "some-class"}}>',
+    fixedTemplate: '<img class={{if condition "some-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -685,16 +629,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ... else ...
-    {
-      template: '<img class={{unless (not condition) "some-class" "other-class"}}>',
-      fixedTemplate: '<img class={{if condition "some-class" "other-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ... else ...
+  {
+    template: '<img class={{unless (not condition) "some-class" "other-class"}}>',
+    fixedTemplate: '<img class={{if condition "some-class" "other-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -710,14 +652,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img class={{unless (not (not condition)) "some-class" "other-class"}}>',
-      fixedTemplate: '<img class={{unless condition "some-class" "other-class"}}>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img class={{unless (not (not condition)) "some-class" "other-class"}}>',
+    fixedTemplate: '<img class={{unless condition "some-class" "other-class"}}>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -733,19 +673,18 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    // ******************************************
-    // SubExpression
-    // ******************************************
+    }
+  },
+  // ******************************************
+  // SubExpression
+  // ******************************************
 
-    // if ...
-    {
-      template: '{{input class=(if (not condition) "some-class")}}',
-      fixedTemplate: '{{input class=(unless condition "some-class")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  // if ...
+  {
+    template: '{{input class=(if (not condition) "some-class")}}',
+    fixedTemplate: '{{input class=(unless condition "some-class")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -761,16 +700,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // if ... else ...
-    {
-      template: '{{input class=(if (not condition) "some-class" "other-class")}}',
-      fixedTemplate: '{{input class=(if condition "other-class" "some-class")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // if ... else ...
+  {
+    template: '{{input class=(if (not condition) "some-class" "other-class")}}',
+    fixedTemplate: '{{input class=(if condition "other-class" "some-class")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -786,15 +723,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      simplifyHelpers: true
     },
-    {
-      config: { simplifyHelpers: true },
-      template: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
-      fixedTemplate: '{{input class=(if (gt c 10) "some-class" "other-class")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{input class=(if (not (lte c 10)) "some-class" "other-class")}}',
+    fixedTemplate: '{{input class=(if (gt c 10) "some-class" "other-class")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -810,16 +747,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ...
-    {
-      template: '{{input class=(unless (not condition) "some-class")}}',
-      fixedTemplate: '{{input class=(if condition "some-class")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ...
+  {
+    template: '{{input class=(unless (not condition) "some-class")}}',
+    fixedTemplate: '{{input class=(if condition "some-class")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -835,16 +770,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // unless ... else ...
-    {
-      template: '{{input class=(unless (not condition) "some-class" "other-class")}}',
-      fixedTemplate: '{{input class=(if condition "some-class" "other-class")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // unless ... else ...
+  {
+    template: '{{input class=(unless (not condition) "some-class" "other-class")}}',
+    fixedTemplate: '{{input class=(if condition "some-class" "other-class")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -860,14 +793,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{input class=(unless (not (not condition)) "some-class" "other-class")}}',
-      fixedTemplate: '{{input class=(unless condition "some-class" "other-class")}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{input class=(unless (not (not condition)) "some-class" "other-class")}}',
+    fixedTemplate: '{{input class=(unless condition "some-class" "other-class")}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -883,7 +814,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

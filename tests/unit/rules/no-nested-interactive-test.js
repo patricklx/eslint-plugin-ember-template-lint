@@ -1,21 +1,11 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-nested-interactive",
-
   config: true,
-
-  good: [
-    "<button>button</button>",
-    "<button>button <strong>!!!</strong></button>",
-    "<a><button>button</button></a>",
-    '<a href="/">link</a>',
-    '<a href="/">link <strong>!!!</strong></a>',
-    '<button><input type="hidden"></button>',
-    "<div tabindex=-1><button>Click me!</button></div>",
-    '<div tabindex="1"><button></button></div>',
-    "<label><input></label>",
-    `
+  good: ["<button>button</button>", "<button>button <strong>!!!</strong></button>", "<a><button>button</button></a>", '<a href="/">link</a>', '<a href="/">link <strong>!!!</strong></a>', '<button><input type="hidden"></button>', "<div tabindex=-1><button>Click me!</button></div>", '<div tabindex="1"><button></button></div>', "<label><input></label>", `
     <ul role="menubar" aria-label="functions" id="appmenu">
       <li role="menuitem" aria-haspopup="true">
         File
@@ -26,35 +16,26 @@ generateRuleTests({
         </ul>
       </li>
     </ul>
-    `,
-    {
-      config: {
-        ignoredTags: ["button"],
-      },
-      template: "<button><input></button>",
+    `, {
+    config: {
+      ignoredTags: ["button"]
     },
-    {
-      config: {
-        ignoreTabindex: true,
-      },
-
-      template: "<button><div tabindex=-1></div></button>",
+    template: "<button><input></button>"
+  }, {
+    config: {
+      ignoreTabindex: true
     },
-    {
-      config: {
-        ignoreUsemapAttribute: true,
-      },
-
-      template: '<button><img usemap=""></button>',
+    template: "<button><div tabindex=-1></div></button>"
+  }, {
+    config: {
+      ignoreUsemapAttribute: true
     },
-  ],
-
-  bad: [
-    {
-      template: '<a href="/">button<a href="/">!</a></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<button><img usemap=""></button>'
+  }],
+  bad: [{
+    template: '<a href="/">button<a href="/">!</a></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -68,13 +49,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<a href="/">button<button>!</button></a>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<a href="/">button<button>!</button></a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -88,13 +67,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button>button<a href="/">!</a></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button>button<a href="/">!</a></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -108,13 +85,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<button>button<button>!</button></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<button>button<button>!</button></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -128,13 +103,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button><input type="text"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button><input type="text"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -148,14 +121,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "<button><details><summary>Some details</summary><p>!</p></details></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<button><details><summary>Some details</summary><p>!</p></details></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -169,14 +139,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<button><embed type="video/quicktime" src="movie.mov" width="640" height="480"></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button><embed type="video/quicktime" src="movie.mov" width="640" height="480"></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -190,14 +157,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<button><iframe src="/frame.html" width="640" height="480"></iframe></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button><iframe src="/frame.html" width="640" height="480"></iframe></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -211,13 +175,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<button><select></select></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<button><select></select></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -231,13 +193,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<button><textarea></textarea></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<button><textarea></textarea></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -251,13 +211,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button><div tabindex="1"></div></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button><div tabindex="1"></div></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -271,13 +229,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<button><img usemap=""></button>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<button><img usemap=""></button>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -291,13 +247,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<object usemap=""><button></button></object>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<object usemap=""><button></button></object>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -311,16 +265,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      additionalInteractiveTags: ["my-special-input"]
     },
-    {
-      config: {
-        additionalInteractiveTags: ["my-special-input"],
-      },
-      template: "<button><my-special-input></my-special-input></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<button><my-special-input></my-special-input></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -334,14 +286,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: "<label><input><input></label>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<label><input><input></label>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 15,
@@ -355,19 +304,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: [
-        '<label for="foo">',
-        '  <div id="foo" tabindex=-1></div>',
-        "  <input>",
-        "</label>",
-      ].join("\n"),
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: ['<label for="foo">', '  <div id="foo" tabindex=-1></div>', "  <input>", "</label>"].join("\n"),
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -381,7 +322,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

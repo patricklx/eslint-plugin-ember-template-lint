@@ -1,23 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-triple-curlies",
-
   config: true,
-
-  good: [
-    "{{foo}}",
-    "{{! template-lint-disable no-bare-strings }}",
-    "{{! template-lint-disable }}",
-    "{{! template-lint-disable no-triple-curlies}}{{{lol}}}",
-  ],
-
-  bad: [
-    {
-      template: "\n {{{foo}}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{foo}}", "{{! template-lint-disable no-bare-strings }}", "{{! template-lint-disable }}", "{{! template-lint-disable no-triple-curlies}}{{{lol}}}"],
+  bad: [{
+    template: "\n {{{foo}}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -31,7 +23,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

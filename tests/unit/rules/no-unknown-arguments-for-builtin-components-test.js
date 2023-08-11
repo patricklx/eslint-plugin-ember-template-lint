@@ -1,25 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-unknown-arguments-for-builtin-components",
-
   config: true,
-
-  good: [
-    '<Input @value="foo" />',
-    '<Textarea @value="hello" />',
-    '<LinkTo @route="info" @model={{this.model}} />',
-    '<LinkTo @route="info" />',
-    "<LinkTo @query={{hash foo=bar}} />",
-    "<LinkTo @model={{this.model}} />",
-    "<LinkTo @models={{array comment.photo comment}} />",
-  ],
-
-  bad: [
-    {
-      template: "<Input @valuee={{this.content}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<Input @value="foo" />', '<Textarea @value="hello" />', '<LinkTo @route="info" @model={{this.model}} />', '<LinkTo @route="info" />', "<LinkTo @query={{hash foo=bar}} />", "<LinkTo @model={{this.model}} />", "<LinkTo @models={{array comment.photo comment}} />"],
+  bad: [{
+    template: "<Input @valuee={{this.content}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -33,12 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<Textarea @valuee={{this.content}} />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<Textarea @valuee={{this.content}} />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 11,
@@ -52,12 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<LinkTo @route="foo" @valuee={{this.content}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<LinkTo @route="foo" @valuee={{this.content}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 22,
@@ -71,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: '<LinkTo @route="foo" @madel={{this.content}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<LinkTo @route="foo" @madel={{this.content}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 22,
@@ -91,14 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template:
-        '<LinkTo @route="info" @model={{this.model}} @models={{this.models}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<LinkTo @route="info" @model={{this.model}} @models={{this.models}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 23,
@@ -122,16 +105,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
+    }
+  },
+  // LINK TO Deprecated Argument
 
-    // LINK TO Deprecated Argument
-
-    {
-      template:
-        '<LinkTo @route="info" @model={{this.model}} @tagName="button" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  {
+    template: '<LinkTo @route="info" @model={{this.model}} @tagName="button" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 45,
@@ -145,16 +126,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template:
-        '<LinkTo @route="info" @model={{this.model}} @elementId="superstar" />',
-      fixedTemplate:
-        '<LinkTo @route="info" @model={{this.model}} id="superstar" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<LinkTo @route="info" @model={{this.model}} @elementId="superstar" />',
+    fixedTemplate: '<LinkTo @route="info" @model={{this.model}} id="superstar" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 44,
@@ -171,18 +148,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
+    }
+  },
+  // LINK TO Deprecated Event
 
-    // LINK TO Deprecated Event
-
-    {
-      template:
-        '<LinkTo @route="info" @model={{this.model}} @doubleClick={{action this.click}} />',
-      fixedTemplate:
-        '<LinkTo @route="info" @model={{this.model}} {{on "dblclick" (action this.click)}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  {
+    template: '<LinkTo @route="info" @model={{this.model}} @doubleClick={{action this.click}} />',
+    fixedTemplate: '<LinkTo @route="info" @model={{this.model}} {{on "dblclick" (action this.click)}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 44,
@@ -199,15 +173,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
+    }
+  },
+  // Input Deprecated Argument
 
-    // Input Deprecated Argument
-
-    {
-      template: '<Input @value="1" @bubbles={{false}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  {
+    template: '<Input @value="1" @bubbles={{false}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -221,14 +194,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: '<Input @value="1" @elementId="42" @disabled="disabled" />',
-      fixedTemplate: '<Input @value="1" id="42" disabled="disabled" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Input @value="1" @elementId="42" @disabled="disabled" />',
+    fixedTemplate: '<Input @value="1" id="42" disabled="disabled" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -258,16 +229,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
+    }
+  },
+  // Input Deprecated Event
 
-    // Input Deprecated Event
-
-    {
-      template: '<Input @value="1" @key-up={{ths.onKeyUp}} />',
-      fixedTemplate: '<Input @value="1" {{on "keyup" ths.onKeyUp}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  {
+    template: '<Input @value="1" @key-up={{ths.onKeyUp}} />',
+    fixedTemplate: '<Input @value="1" {{on "keyup" ths.onKeyUp}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -284,14 +254,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    // Textarea Deprecated Argument
-    {
-      template: '<Textarea @value="1" @bubbles={{false}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  },
+  // Textarea Deprecated Argument
+  {
+    template: '<Textarea @value="1" @bubbles={{false}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 22,
@@ -305,14 +274,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: '<Textarea @value="1" @elementId="42" />',
-      fixedTemplate: '<Textarea @value="1" id="42" />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<Textarea @value="1" @elementId="42" />',
+    fixedTemplate: '<Textarea @value="1" id="42" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -329,15 +296,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    // Textarea Deprecated Event
+    }
+  },
+  // Textarea Deprecated Event
 
-    {
-      template: '<Textarea @value="1" @key-up={{ths.onKeyUp}} />',
-      fixedTemplate: '<Textarea @value="1" {{on "keyup" ths.onKeyUp}} />',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  {
+    template: '<Textarea @value="1" @key-up={{ths.onKeyUp}} />',
+    fixedTemplate: '<Textarea @value="1" {{on "keyup" ths.onKeyUp}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 21,
@@ -354,16 +321,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
+    }
+  },
+  // LinkTo unknown argument
 
-    // LinkTo unknown argument
-
-    {
-      template:
-        ' <LinkTo class="auk-search-results-list__item" @route={{@route}} @models={{this.models}} @random="test" @query={{@query}} ...attributes >Hello</LinkTo>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  {
+    template: ' <LinkTo class="auk-search-results-list__item" @route={{@route}} @models={{this.models}} @random="test" @query={{@query}} ...attributes >Hello</LinkTo>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 90,
@@ -377,7 +342,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

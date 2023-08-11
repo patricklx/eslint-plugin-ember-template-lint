@@ -1,64 +1,17 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-valid-alt-text",
-
   config: true,
-
-  good: [
-    '<img alt="hullo">',
-    "<img alt={{foo}}>",
-    '<img alt="blah {{derp}}">',
-    '<img aria-hidden="true">',
-    "<img hidden>",
-    '<img alt="" role="none" src="zoey.jpg">',
-    '<img alt="" role="presentation" src="zoey.jpg">',
-    '<img alt="a stylized graphic of a female hamster" src="zoey.jpg">',
-
-    '<img alt="some-alt-name">',
-    '<img alt="name {{picture}}">',
-    '<img alt="{{picture}}">',
-    '<img alt="" role="none">',
-    '<img alt="" role="presentation">',
-
-    // Valid words containing redundant words.
-    '<img alt="logout">',
-    '<img alt="photography">',
-    '<img alt="picturesque">',
-    '<img alt="pilgrimage">',
-    '<img alt="spacers">',
-
-    "<img ...attributes>",
-
-    '<input type="image" alt="some-alt">',
-    '<input type="image" aria-labelledby="some-alt">',
-    '<input type="image" aria-label="some-alt">',
-    '<input type="image" hidden>',
-    '<input type="image" aria-hidden="true">',
-
-    '<object title="some-alt"></object>',
-    '<object role="presentation"></object>',
-    '<object role="none"></object>',
-    "<object hidden></object>",
-    '<object aria-hidden="true"></object>',
-    '<object aria-labelledby="some-alt"></object>',
-    '<object aria-label="some-alt"></object>',
-    "<object>some text</object>",
-
-    '<area alt="some-alt">',
-    "<area hidden>",
-    '<area aria-hidden="true">',
-    '<area aria-labelledby="some-alt">',
-    '<area aria-label="some-alt">',
-    '<img role={{unless this.altText "presentation"}} alt={{this.altText}}>',
-  ],
-
-  bad: [
-    {
-      template: "<img>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['<img alt="hullo">', "<img alt={{foo}}>", '<img alt="blah {{derp}}">', '<img aria-hidden="true">', "<img hidden>", '<img alt="" role="none" src="zoey.jpg">', '<img alt="" role="presentation" src="zoey.jpg">', '<img alt="a stylized graphic of a female hamster" src="zoey.jpg">', '<img alt="some-alt-name">', '<img alt="name {{picture}}">', '<img alt="{{picture}}">', '<img alt="" role="none">', '<img alt="" role="presentation">',
+  // Valid words containing redundant words.
+  '<img alt="logout">', '<img alt="photography">', '<img alt="picturesque">', '<img alt="pilgrimage">', '<img alt="spacers">', "<img ...attributes>", '<input type="image" alt="some-alt">', '<input type="image" aria-labelledby="some-alt">', '<input type="image" aria-label="some-alt">', '<input type="image" hidden>', '<input type="image" aria-hidden="true">', '<object title="some-alt"></object>', '<object role="presentation"></object>', '<object role="none"></object>', "<object hidden></object>", '<object aria-hidden="true"></object>', '<object aria-labelledby="some-alt"></object>', '<object aria-label="some-alt"></object>', "<object>some text</object>", '<area alt="some-alt">', "<area hidden>", '<area aria-hidden="true">', '<area aria-labelledby="some-alt">', '<area aria-label="some-alt">', '<img role={{unless this.altText "presentation"}} alt={{this.altText}}>'],
+  bad: [{
+    template: "<img>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -72,13 +25,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img src="zoey.jpg">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img src="zoey.jpg">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -92,13 +43,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="" src="zoey.jpg">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="" src="zoey.jpg">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -112,13 +61,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt src="zoey.jpg">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt src="zoey.jpg">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -132,12 +79,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="path/to/zoey.jpg" src="path/to/zoey.jpg">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="path/to/zoey.jpg" src="path/to/zoey.jpg">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -151,13 +97,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<input type="image">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<input type="image">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -171,12 +115,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<object></object>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<object></object>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -190,12 +133,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<object />",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<object />",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -209,12 +151,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<area>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<area>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -228,13 +169,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="picture">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="picture">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -248,13 +187,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="photo">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="photo">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -268,13 +205,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="image">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="image">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -288,13 +223,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="  IMAGE ">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="  IMAGE ">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -308,13 +241,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="  IMAGE {{picture}} {{word}} ">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="  IMAGE {{picture}} {{word}} ">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -328,13 +259,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="52" src="b52.jpg">',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="52" src="b52.jpg">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -348,12 +277,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="not-null-alt" src="zoey.jpg" role="none">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="not-null-alt" src="zoey.jpg" role="none">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -367,12 +295,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<img alt="not-null-alt" src="zoey.jpg" role="presentation">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<img alt="not-null-alt" src="zoey.jpg" role="presentation">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -386,7 +313,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

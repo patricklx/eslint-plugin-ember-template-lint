@@ -1,33 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "deprecated-inline-view-helper",
-
   config: true,
-
-  good: [
-    "{{great-fishsticks}}",
-    '{{input placeholder=(t "email") value=email}}',
-    '{{title "CrossCheck Web" prepend=true separator=" | "}}',
-    "{{false}}",
-    '{{"foo"}}',
-    "{{42}}",
-    "{{null}}",
-    "{{undefined}}",
-    '{{has-block "view"}}',
-    '{{yield to="view"}}',
-    '{{#if (has-block "view")}}{{yield to="view"}}{{/if}}',
-    "{{this.view}}",
-    "{{@view}}",
-    "{{#let this.prop as |view|}} {{view}} {{/let}}",
-  ],
-
-  bad: [
-    {
-      template: "{{view 'awful-fishsticks'}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{great-fishsticks}}", '{{input placeholder=(t "email") value=email}}', '{{title "CrossCheck Web" prepend=true separator=" | "}}', "{{false}}", '{{"foo"}}', "{{42}}", "{{null}}", "{{undefined}}", '{{has-block "view"}}', '{{yield to="view"}}', '{{#if (has-block "view")}}{{yield to="view"}}{{/if}}', "{{this.view}}", "{{@view}}", "{{#let this.prop as |view|}} {{view}} {{/let}}"],
+  bad: [{
+    template: "{{view 'awful-fishsticks'}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -41,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{view.bad-fishsticks}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{view.bad-fishsticks}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -61,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{view.terrible.fishsticks}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{view.terrible.fishsticks}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -81,13 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{foo-bar bab=good baz=view.qux.qaz boo=okay}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{foo-bar bab=good baz=view.qux.qaz boo=okay}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -101,14 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<div class="whatever-class" data-foo={{view.hallo}} sure=thing></div>',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div class="whatever-class" data-foo={{view.hallo}} sure=thing></div>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -122,13 +95,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{#foo-bar derp=view.whoops thing=whatever}}{{/foo-bar}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#foo-bar derp=view.whoops thing=whatever}}{{/foo-bar}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 12,
@@ -142,7 +113,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

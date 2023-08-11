@@ -1,967 +1,361 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "attribute-indentation",
-
   config: true,
-
-  good: [
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-        "as-indentation": "attribute",
-      },
-      template: `
+  good: [{
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line",
+      "as-indentation": "attribute"
+    },
+    template: `
       {{#foo
         attribute=this.mine
         as |let|
       }}
-      {{/foo}}`,
+      {{/foo}}`
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line",
+      "as-indentation": "closing-brace"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-        "as-indentation": "closing-brace",
-      },
-      template: `
+    template: `
       {{#foo
         attribute=this.mine
       as |let|
       }}
-      {{/foo}}`,
+      {{/foo}}`
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    (if" +
-        "\n" +
-        "      abc" +
-        "\n" +
-        "      def" +
-        "\n" +
-        "      ghi)" +
-        "\n" +
-        "    stuff" +
-        "\n" +
-        "  }}" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        "/>",
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    (if" + "\n" + "      abc" + "\n" + "      def" + "\n" + "      ghi)" + "\n" + "    stuff" + "\n" + "  }}" + "\n" + "  baz=qux" + "\n" + "/>"
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff" +
-        "\n" +
-        "  }}" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        "/>",
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff" + "\n" + "  }}" + "\n" + "  baz=qux" + "\n" + "/>"
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff" +
-        "\n" +
-        "  }}" +
-        "\n" +
-        "  baz=qux/>",
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff" + "\n" + "  }}" + "\n" + "  baz=qux/>"
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff}}" +
-        "\n" +
-        "  baz=qux/>",
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff}}" + "\n" + "  baz=qux/>"
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff}}" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        "/>",
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff}}" + "\n" + "  baz=qux" + "\n" + "/>"
+  }, {
+    config: {
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff" +
-        "\n" +
-        "  }}" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        "/>",
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff" + "\n" + "  }}" + "\n" + "  baz=qux" + "\n" + "/>"
+  }, {
+    config: {
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action some stuff}}" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        "/>",
+    template: "<div" + "\n" + "  foo={{action some stuff}}" + "\n" + "  baz=qux" + "\n" + "/>"
+  }, {
+    config: {
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "element-open-end": "new-line",
-      },
-      template: "<div" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + "/>",
+    template: "<div" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + "/>"
+  }, {
+    config: {
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "element-open-end": "last-attribute",
-      },
-      template: "<div" + "\n" + "  foo=bar" + "\n" + "  baz=qux/>",
+    template: "<div" + "\n" + "  foo=bar" + "\n" + "  baz=qux/>"
+  }, {
+    config: {
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "element-open-end": "new-line",
-      },
-      template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + ">",
+    template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + ">"
+  }, {
+    config: {
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "element-open-end": "last-attribute",
-      },
-      template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=qux>",
+    template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=qux>"
+  }, {
+    config: {
+      "mustache-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-      },
-      template:
-        "{{my-component" +
-        "\n" +
-        "  foo=bar" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        '  my-attr=(component "my-other-component" data=(hash' +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    baz=qux))" +
-        "\n" +
-        "}}",
+    template: "{{my-component" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + '  my-attr=(component "my-other-component" data=(hash' + "\n" + "    foo=bar" + "\n" + "    foo=bar" + "\n" + "    baz=qux))" + "\n" + "}}"
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-      },
-      template:
-        "{{my-component" +
-        "\n" +
-        "  foo=bar" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        '  my-attr=(component "my-other-component" data=(hash' +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    baz=qux))}}",
+    template: "{{my-component" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + '  my-attr=(component "my-other-component" data=(hash' + "\n" + "    foo=bar" + "\n" + "    foo=bar" + "\n" + "    baz=qux))}}"
+  },
+  // Angle Bracket Invocation
+  {
+    config: {
+      "process-elements": true
     },
-    // Angle Bracket Invocation
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<SiteHeader" +
-        "\n" +
-        "  @selected={{this.user.country}} as |Option|" +
-        "\n" +
-        ">{{#each this.availableCountries as |country|}}" +
-        "\n" +
-        "<Option @value={{country}}>{{country.name}}</Option>" +
-        "\n" +
-        "{{/each}}" +
-        "\n" +
-        "</SiteHeader>",
+    template: "<SiteHeader" + "\n" + "  @selected={{this.user.country}} as |Option|" + "\n" + ">{{#each this.availableCountries as |country|}}" + "\n" + "<Option @value={{country}}>{{country.name}}</Option>" + "\n" + "{{/each}}" + "\n" + "</SiteHeader>"
+  },
+  // Non Block form one line
+  "<input disabled>",
+  // Non Block with wrong indentation, configuration explicitly off
+  {
+    config: {
+      "process-elements": false
     },
-    // Non Block form one line
-    "<input disabled>",
-
-    // Non Block with wrong indentation, configuration explicitly off
-    {
-      config: {
-        "process-elements": false,
-      },
-      template: "<input" + "\n" + "disabled" + "\n" + ">",
+    template: "<input" + "\n" + "disabled" + "\n" + ">"
+  },
+  // Block form multi line
+  {
+    config: {
+      "process-elements": true
     },
-    // Block form multi line
-    {
-      config: {
-        "process-elements": true,
-      },
-      template: "<a" + "\n" + "  disabled" + "\n" + ">abc" + "\n" + "</a>",
+    template: "<a" + "\n" + "  disabled" + "\n" + ">abc" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true,
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "process-elements": true,
-        "element-open-end": "last-attribute",
-      },
-      template: "<a" + "\n" + "  disabled>" + "\n" + "abc" + "\n" + "</a>",
+    template: "<a" + "\n" + "  disabled>" + "\n" + "abc" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled" +
-        "\n" +
-        ">" +
-        "\n" +
-        "<span" +
-        "\n" +
-        '  class="abc"' +
-        "\n" +
-        ">spam me" +
-        "\n" +
-        "</span>" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled" + "\n" + ">" + "\n" + "<span" + "\n" + '  class="abc"' + "\n" + ">spam me" + "\n" + "</span>" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled" +
-        "\n" +
-        ">" +
-        "\n" +
-        "{{#each" +
-        "\n" +
-        '  class="abc"' +
-        "\n" +
-        "}}spam me" +
-        "\n" +
-        "{{/each}}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled" + "\n" + ">" + "\n" + "{{#each" + "\n" + '  class="abc"' + "\n" + "}}spam me" + "\n" + "{{/each}}" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled" +
-        "\n" +
-        ">{{contact-details firstName lastName}}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled" + "\n" + ">{{contact-details firstName lastName}}" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)' +
-        "\n" +
-        "  }}" +
-        "\n" +
-        ">{{contact-details" +
-        "\n" +
-        "   firstName" +
-        "\n" +
-        "   lastName" +
-        "\n" +
-        " }}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)' + "\n" + "  }}" + "\n" + ">{{contact-details" + "\n" + "   firstName" + "\n" + "   lastName" + "\n" + " }}" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)' +
-        "\n" +
-        "  }}" +
-        "\n" +
-        ">{{#contact-details" +
-        "\n" +
-        "   firstName" +
-        "\n" +
-        "   lastName" +
-        "\n" +
-        " }}{{foo}}{{/contact-details}}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)' + "\n" + "  }}" + "\n" + ">{{#contact-details" + "\n" + "   firstName" + "\n" + "   lastName" + "\n" + " }}{{foo}}{{/contact-details}}" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true,
+      "element-open-end": "last-attribute",
+      "mustache-open-end": "last-attribute"
     },
-    {
-      config: {
-        "process-elements": true,
-        "element-open-end": "last-attribute",
-        "mustache-open-end": "last-attribute",
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)}}>' +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  firstName" +
-        "\n" +
-        "  lastName}}" +
-        "\n" +
-        " {{foo}}{{/contact-details}}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)}}>' + "\n" + "{{#contact-details" + "\n" + "  firstName" + "\n" + "  lastName}}" + "\n" + " {{foo}}{{/contact-details}}" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true,
+      "element-open-end": "new-line",
+      "mustache-open-end": "last-attribute"
     },
-    {
-      config: {
-        "process-elements": true,
-        "element-open-end": "new-line",
-        "mustache-open-end": "last-attribute",
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)}}' +
-        "\n" +
-        ">\n" +
-        "  {{#contact-details" +
-        "\n" +
-        "    firstName" +
-        "\n" +
-        "    lastName}}" +
-        "\n" +
-        "  {{foo}}\n" +
-        "  {{/contact-details}}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)}}' + "\n" + ">\n" + "  {{#contact-details" + "\n" + "    firstName" + "\n" + "    lastName}}" + "\n" + "  {{foo}}\n" + "  {{/contact-details}}" + "\n" + "</a>"
+  }, {
+    config: {
+      "process-elements": true,
+      "element-open-end": "last-attribute",
+      "mustache-open-end": "new-line"
     },
-    {
-      config: {
-        "process-elements": true,
-        "element-open-end": "last-attribute",
-        "mustache-open-end": "new-line",
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)' +
-        "\n" +
-        "  }}>\n" +
-        "  {{#contact-details" +
-        "\n" +
-        "    firstName" +
-        "\n" +
-        "    lastName" +
-        "\n" +
-        "  }}" +
-        "\n" +
-        "   {{foo}}{{/contact-details}}" +
-        "\n" +
-        "</a>",
+    template: "<a" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)' + "\n" + "  }}>\n" + "  {{#contact-details" + "\n" + "    firstName" + "\n" + "    lastName" + "\n" + "  }}" + "\n" + "   {{foo}}{{/contact-details}}" + "\n" + "</a>"
+  },
+  // Self closing single line
+  {
+    config: {
+      "process-elements": true
     },
-    // Self closing single line
-    {
-      config: {
-        "process-elements": true,
-      },
-      template: "<div disabled />",
+    template: "<div disabled />"
+  },
+  // Self closing multi line
+  {
+    config: {
+      "process-elements": true
     },
-    // Self closing multi line
-    {
-      config: {
-        "process-elements": true,
-      },
-      template: "<div" + "\n" + "  disabled" + "\n" + "/>",
+    template: "<div" + "\n" + "  disabled" + "\n" + "/>"
+  },
+  // Non Block form multi line
+  {
+    config: {
+      "process-elements": true
     },
-    // Non Block form multi line
-    {
-      config: {
-        "process-elements": true,
-      },
-      template: "<input" + "\n" + "  disabled" + "\n" + ">",
+    template: "<input" + "\n" + "  disabled" + "\n" + ">"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template: "<input disabled>",
+    template: "<input disabled>"
+  },
+  // Non Block form multi line
+  {
+    config: {
+      "process-elements": true
     },
-    // Non Block form multi line
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<input" +
-        "\n" +
-        '  disabled={{action "mostPowerfulAction" value=target.value}}' +
-        "\n" +
-        ">",
+    template: "<input" + "\n" + '  disabled={{action "mostPowerfulAction" value=target.value}}' + "\n" + ">"
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<input" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)' +
-        "\n" +
-        "  }}" +
-        "\n" +
-        ">",
+    template: "<input" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)' + "\n" + "  }}" + "\n" + ">"
+  },
+  // Non Block form with no params
+  "{{contact-details}}",
+  // Default config with open-invocation(< 80 chars)
+  // positional params
+  "{{contact-details firstName lastName}}",
+  // named params
+  "{{contact-details firstName=firstName lastName=lastName}}",
+  // Non Block form more than the default config characters (> 80 chars)
+  {
+    config: {
+      "open-invocation-max-len": 120
     },
-    // Non Block form with no params
-    "{{contact-details}}",
-    // Default config with open-invocation(< 80 chars)
-    // positional params
-    "{{contact-details firstName lastName}}",
-    // named params
-    "{{contact-details firstName=firstName lastName=lastName}}",
-    // Non Block form more than the default config characters (> 80 chars)
-    {
-      config: {
-        "open-invocation-max-len": 120,
-      },
-      template:
-        "{{contact-details firstName=firstName lastName=lastName avatarUrl=avatarUrl age=age address=address phoneNo=phoneNo}}",
+    template: "{{contact-details firstName=firstName lastName=lastName avatarUrl=avatarUrl age=age address=address phoneNo=phoneNo}}"
+  },
+  // Open-invocation with multiple lines.
+  "{{contact-details" + "\n" + "  firstName=firstName" + "\n" + "  lastName=lastName" + "\n" + "}}",
+  // positional params
+  "{{contact-details" + "\n" + "  firstName" + "\n" + "  lastName" + "\n" + "}}",
+  // helper
+  "{{if" + "\n" + "  (or logout.isRunning (not session.isAuthenticated))" + "\n" + '  "Logging Out..."' + "\n" + '  "Log Out"' + "\n" + "}}",
+  // helper unfolded
+  "{{if" + "\n" + "  (or " + "\n" + "    logout.isRunning" + "\n" + "    (not session.isAuthenticated)" + "\n" + "  )" + "\n" + '  "Logging Out..."' + "\n" + '  "Log Out"' + "\n" + "}}",
+  // positional null
+  "{{contact-null" + "\n" + "  null" + "\n" + "}}",
+  // component
+  "{{component" + "\n" + "  field" + "\n" + "  action=(action reaction)" + "\n" + "}}",
+  // Multiple open-invocations with multiple lines.
+  "{{contact-details" + "\n" + "  firstName=firstName" + "\n" + "  lastName=lastName" + "\n" + "}}" + "\n" + "{{contact-details" + "\n" + "  firstName=firstName" + "\n" + "  lastName=lastName" + "\n" + "}}",
+  // with component from hash
+  "{{t.body" + "\n" + "  canExpand=true" + "\n" + "}}",
+  // with helper
+  "{{print-debug" + "\n" + "  foo=(or" + "\n" + "    foo" + "\n" + "    bar" + "\n" + "  )" + "\n" + "  baz=baz" + "\n" + "}}",
+  // with positional helper
+  "{{print-debug" + "\n" + "  (hash" + "\n" + '    foo="bar"' + "\n" + "  )" + "\n" + '  title="baz"' + "\n" + "}}", "{{yield" + "\n" + "  (hash" + "\n" + '    header=(component "x-very-long-name-header")' + "\n" + '    body=(component "x-very-long-name-body")' + "\n" + "  )" + "\n" + "}}",
+  // Block form within 80 characters
+  // with positional params
+  "{{#contact-details firstName lastName}}" + "\n" + " {{contactImage}}" + "\n" + "{{/contact-details}}",
+  // with named params
+  "{{#contact-details firstName=firstName lastName=lastName}}" + "\n" + " {{contactImage}}" + "\n" + "{{/contact-details}}",
+  // component from hash
+  "{{#t.body" + "\n" + "  canExpand=true" + "\n" + "  multiRowExpansion=false" + "\n" + "}}" + "\n" + "  {{foo}}" + "\n" + "{{/t.body}}",
+  // with block params
+  "{{#contact-details firstName=firstName lastName=lastName as |contact|}}" + "\n" + " {{contact.fullName}}" + "\n" + "{{/contact-details}}",
+  // component from positional
+  "{{#t.body" + "\n" + "  canExpand=(helper help)" + "\n" + "  multiRowExpansion=false" + "\n" + "as |body|" + "\n" + "}}" + "\n" + "  {{foo}}" + "\n" + "{{/t.body}}",
+  // with indented block params
+  "  {{#t.body" + "\n" + "    canExpand=(helper help)" + "\n" + "    multiRowExpansion=false" + "\n" + "  as |body|" + "\n" + "  }}" + "\n" + "    {{foo}}" + "\n" + "  {{/t.body}}",
+  // Block form with open-invocation more than 80 characters
+  {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "open-invocation-max-len": 120
     },
-    // Open-invocation with multiple lines.
-    "{{contact-details" +
-      "\n" +
-      "  firstName=firstName" +
-      "\n" +
-      "  lastName=lastName" +
-      "\n" +
-      "}}",
-    // positional params
-    "{{contact-details" +
-      "\n" +
-      "  firstName" +
-      "\n" +
-      "  lastName" +
-      "\n" +
-      "}}",
-    // helper
-    "{{if" +
-      "\n" +
-      "  (or logout.isRunning (not session.isAuthenticated))" +
-      "\n" +
-      '  "Logging Out..."' +
-      "\n" +
-      '  "Log Out"' +
-      "\n" +
-      "}}",
-    // helper unfolded
-    "{{if" +
-      "\n" +
-      "  (or " +
-      "\n" +
-      "    logout.isRunning" +
-      "\n" +
-      "    (not session.isAuthenticated)" +
-      "\n" +
-      "  )" +
-      "\n" +
-      '  "Logging Out..."' +
-      "\n" +
-      '  "Log Out"' +
-      "\n" +
-      "}}",
-    // positional null
-    "{{contact-null" + "\n" + "  null" + "\n" + "}}",
-    // component
-    "{{component" +
-      "\n" +
-      "  field" +
-      "\n" +
-      "  action=(action reaction)" +
-      "\n" +
-      "}}",
-
-    // Multiple open-invocations with multiple lines.
-    "{{contact-details" +
-      "\n" +
-      "  firstName=firstName" +
-      "\n" +
-      "  lastName=lastName" +
-      "\n" +
-      "}}" +
-      "\n" +
-      "{{contact-details" +
-      "\n" +
-      "  firstName=firstName" +
-      "\n" +
-      "  lastName=lastName" +
-      "\n" +
-      "}}",
-    // with component from hash
-    "{{t.body" + "\n" + "  canExpand=true" + "\n" + "}}",
-    // with helper
-    "{{print-debug" +
-      "\n" +
-      "  foo=(or" +
-      "\n" +
-      "    foo" +
-      "\n" +
-      "    bar" +
-      "\n" +
-      "  )" +
-      "\n" +
-      "  baz=baz" +
-      "\n" +
-      "}}",
-    // with positional helper
-    "{{print-debug" +
-      "\n" +
-      "  (hash" +
-      "\n" +
-      '    foo="bar"' +
-      "\n" +
-      "  )" +
-      "\n" +
-      '  title="baz"' +
-      "\n" +
-      "}}",
-    "{{yield" +
-      "\n" +
-      "  (hash" +
-      "\n" +
-      '    header=(component "x-very-long-name-header")' +
-      "\n" +
-      '    body=(component "x-very-long-name-body")' +
-      "\n" +
-      "  )" +
-      "\n" +
-      "}}",
-
-    // Block form within 80 characters
-    // with positional params
-    "{{#contact-details firstName lastName}}" +
-      "\n" +
-      " {{contactImage}}" +
-      "\n" +
-      "{{/contact-details}}",
-    // with named params
-    "{{#contact-details firstName=firstName lastName=lastName}}" +
-      "\n" +
-      " {{contactImage}}" +
-      "\n" +
-      "{{/contact-details}}",
-    // component from hash
-    "{{#t.body" +
-      "\n" +
-      "  canExpand=true" +
-      "\n" +
-      "  multiRowExpansion=false" +
-      "\n" +
-      "}}" +
-      "\n" +
-      "  {{foo}}" +
-      "\n" +
-      "{{/t.body}}",
-    // with block params
-    "{{#contact-details firstName=firstName lastName=lastName as |contact|}}" +
-      "\n" +
-      " {{contact.fullName}}" +
-      "\n" +
-      "{{/contact-details}}",
-    // component from positional
-    "{{#t.body" +
-      "\n" +
-      "  canExpand=(helper help)" +
-      "\n" +
-      "  multiRowExpansion=false" +
-      "\n" +
-      "as |body|" +
-      "\n" +
-      "}}" +
-      "\n" +
-      "  {{foo}}" +
-      "\n" +
-      "{{/t.body}}",
-    // with indented block params
-    "  {{#t.body" +
-      "\n" +
-      "    canExpand=(helper help)" +
-      "\n" +
-      "    multiRowExpansion=false" +
-      "\n" +
-      "  as |body|" +
-      "\n" +
-      "  }}" +
-      "\n" +
-      "    {{foo}}" +
-      "\n" +
-      "  {{/t.body}}",
-
-    // Block form with open-invocation more than 80 characters
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "open-invocation-max-len": 120,
-      },
-      template:
-        "{{#contact-details firstName=firstName lastName=lastName age=age avatarUrl=avatarUrl as |contact|}}" +
-        "\n" +
-        " {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
+    template: "{{#contact-details firstName=firstName lastName=lastName age=age avatarUrl=avatarUrl as |contact|}}" + "\n" + " {{contact.fullName}}" + "\n" + "{{/contact-details}}"
+  },
+  // Block form with multiple line invocation
+  "{{#contact-details" + "\n" + "  firstName=firstName" + "\n" + "  lastName=lastName" + "\n" + "as |fullName|" + "\n" + "}}" + "\n" + "  {{fullName}}" + "\n" + "{{/contact-details}}",
+  // Block form with no params
+  "{{#contact-details" + "\n" + "as |contact|" + "\n" + "}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}", "<div>\n  <p></p>\n</div>", {
+    config: {
+      "mustache-open-end": "last-attribute"
     },
-    // Block form with multiple line invocation
-    "{{#contact-details" +
-      "\n" +
-      "  firstName=firstName" +
-      "\n" +
-      "  lastName=lastName" +
-      "\n" +
-      "as |fullName|" +
-      "\n" +
-      "}}" +
-      "\n" +
-      "  {{fullName}}" +
-      "\n" +
-      "{{/contact-details}}",
-    // Block form with no params
-    "{{#contact-details" +
-      "\n" +
-      "as |contact|" +
-      "\n" +
-      "}}" +
-      "\n" +
-      "  {{contact.fullName}}" +
-      "\n" +
-      "{{/contact-details}}",
-    "<div>\n  <p></p>\n</div>",
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-      },
-      template:
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
+    template: "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}"
+  }, {
+    config: {
+      "mustache-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-      },
-      template:
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |" +
-        "\n" +
-        "}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
+    template: "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |" + "\n" + "}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}"
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy"' +
-        "\n" +
-        ">" +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |" +
-        "\n" +
-        "}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
+    template: "<div" + "\n" + '  class="classy"' + "\n" + ">" + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |" + "\n" + "}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>"
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy">' +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
+    template: "<div" + "\n" + '  class="classy">' + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>"
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy"' +
-        "\n" +
-        ">" +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
+    template: "<div" + "\n" + '  class="classy"' + "\n" + ">" + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>"
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy">' +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |" +
-        "\n" +
-        "}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
+    template: "<div" + "\n" + '  class="classy">' + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |" + "\n" + "}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>"
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-      },
-      template: `
+    template: `
         <SomeThing
           @long-arg={{hash
             foo="bar"}}
-        />`,
+        />`
+  }, {
+    config: {
+      "mustache-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-      },
-      template: `
+    template: `
         <SomeThing
           @long-arg={{hash
             foo="bar"
           }}
-        />`,
-    },
-    {
-      template: `
+        />`
+  }, {
+    template: `
         <SomeThing
           @long-arg={{hash
             foo="bar"
           }}
           data-after-long-arg={{true}}
-        />`,
-    },
-    {
-      template: `
+        />`
+  }, {
+    template: `
         <form
           class='form-signin'
           {{action 'authenticate' email password}}
         >
-        </form>`,
-    },
-    {
-      template: `
+        </form>`
+  }, {
+    template: `
         <div>
           {{{i18n
             param=true
             otherParam=false
           }}}
-        </div>`,
+        </div>`
+  }],
+  bad: [{
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line"
     },
-  ],
-
-  bad: [
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff}}" +
-        "\n" +
-        "  baz=qux/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff}}" + "\n" + "  baz=qux/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -985,29 +379,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        "  foo={{action" +
-        "\n" +
-        "    some" +
-        "\n" +
-        "    stuff" +
-        "\n" +
-        "  }}" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        "/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div" + "\n" + "  foo={{action" + "\n" + "    some" + "\n" + "    stuff" + "\n" + "  }}" + "\n" + "  baz=qux" + "\n" + "/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 3,
@@ -1031,30 +411,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-      },
-      template:
-        "{{my-component" +
-        "\n" +
-        "  foo=bar" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        '  my-attr=(component "my-other-component" data=(hash' +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    baz=qux))" +
-        "\n" +
-        "}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "{{my-component" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + '  my-attr=(component "my-other-component" data=(hash' + "\n" + "    foo=bar" + "\n" + "    foo=bar" + "\n" + "    baz=qux))" + "\n" + "}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1068,28 +432,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-      },
-      template:
-        "{{my-component" +
-        "\n" +
-        "  foo=bar" +
-        "\n" +
-        "  baz=qux" +
-        "\n" +
-        '  my-attr=(component "my-other-component" data=(hash' +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    foo=bar" +
-        "\n" +
-        "    baz=qux))}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "{{my-component" + "\n" + "  foo=bar" + "\n" + "  baz=qux" + "\n" + '  my-attr=(component "my-other-component" data=(hash' + "\n" + "    foo=bar" + "\n" + "    foo=bar" + "\n" + "    baz=qux))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -1103,15 +453,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "element-open-end": "last-attribute",
-      },
-      template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=bar" + "\n" + ">",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=bar" + "\n" + ">",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1125,15 +474,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "element-open-end": "new-line",
-      },
-      template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=qux>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<input" + "\n" + "  foo=bar" + "\n" + "  baz=qux>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -1147,16 +495,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    // Non Block HTML element
+    config: {
+      "process-elements": true
     },
-    {
-      // Non Block HTML element
-      config: {
-        "process-elements": true,
-      },
-      template: "<input disabled" + "\n" + ">",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<input disabled" + "\n" + ">",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -1180,16 +527,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    // Self closing element
+    config: {
+      "process-elements": true
     },
-    {
-      // Self closing element
-      config: {
-        "process-elements": true,
-      },
-      template: "<div disabled" + "\n" + "/>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div disabled" + "\n" + "/>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -1213,17 +559,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    // Too long for 80 characters line
+    config: {
+      "process-elements": true
     },
-    {
-      // Too long for 80 characters line
-      config: {
-        "process-elements": true,
-      },
-      template:
-        '<input disabled type="text" value="abc" class="classy classic classist" id="input-now">',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<input disabled type="text" value="abc" class="classy classic classist" id="input-now">',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 8,
@@ -1287,34 +631,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled={{if" +
-        "\n" +
-        "    true" +
-        "\n" +
-        '    (action "mostPowerfulAction" value=target.value)' +
-        "\n" +
-        '    (action "lessPowerfulAction" value=target.value)' +
-        "\n" +
-        "  }}" +
-        "\n" +
-        ">{{contact-details" +
-        "\n" +
-        "   firstName" +
-        "\n" +
-        "   lastName" +
-        "\n" +
-        " }}</a>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<a" + "\n" + "  disabled={{if" + "\n" + "    true" + "\n" + '    (action "mostPowerfulAction" value=target.value)' + "\n" + '    (action "lessPowerfulAction" value=target.value)' + "\n" + "  }}" + "\n" + ">{{contact-details" + "\n" + "   firstName" + "\n" + "   lastName" + "\n" + " }}</a>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -1328,16 +652,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        '<a href="https://www.emberjs.com" class="emberjs-home link" rel="noopener" target="_blank">Ember JS</a>',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '<a href="https://www.emberjs.com" class="emberjs-home link" rel="noopener" target="_blank">Ember JS</a>',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 4,
@@ -1401,16 +723,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    // Non-Block form more than 30 characters
+    config: {
+      "open-invocation-max-len": 30
     },
-    {
-      // Non-Block form more than 30 characters
-      config: {
-        "open-invocation-max-len": 30,
-      },
-      template: "{{contact-details firstName=firstName lastName=lastName}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "{{contact-details firstName=firstName lastName=lastName}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 19,
@@ -1444,28 +765,14 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "process-elements": true
     },
-    {
-      config: {
-        "process-elements": true,
-      },
-      template:
-        "<a" +
-        "\n" +
-        "  disabled" +
-        "\n" +
-        ">" +
-        "\n" +
-        "{{#each" +
-        "\n" +
-        '  class="abc"' +
-        "\n" +
-        "}}spam me" +
-        "\n" +
-        "{{/each}}</a>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<a" + "\n" + "  disabled" + "\n" + ">" + "\n" + "{{#each" + "\n" + '  class="abc"' + "\n" + "}}spam me" + "\n" + "{{/each}}</a>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -1479,20 +786,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // Block form with multiple lines
-      template:
-        "{{#contact-details" +
-        "\n" +
-        " firstName=firstName lastName=lastName as |contact|}}" +
-        "\n" +
-        " {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // Block form with multiple lines
+    template: "{{#contact-details" + "\n" + " firstName=firstName lastName=lastName as |contact|}}" + "\n" + " {{contact.fullName}}" + "\n" + "{{/contact-details}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 2,
@@ -1536,23 +835,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        "{{#contact-details" +
-        "\n" +
-        "  firstName=firstName" +
-        "\n" +
-        "  lastName=lastName" +
-        "\n" +
-        "as |fullName|}}" +
-        "\n" +
-        "  {{fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{#contact-details" + "\n" + "  firstName=firstName" + "\n" + "  lastName=lastName" + "\n" + "as |fullName|}}" + "\n" + "  {{fullName}}" + "\n" + "{{/contact-details}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 14,
@@ -1566,18 +853,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // Block form (> 80 chars)
-      template:
-        "{{#contact-details firstName=firstName lastName=lastName age=age avatar=avatar as |contact|}}" +
-        "\n" +
-        "  {{fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // Block form (> 80 chars)
+    template: "{{#contact-details firstName=firstName lastName=lastName age=age avatar=avatar as |contact|}}" + "\n" + "  {{fullName}}" + "\n" + "{{/contact-details}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 20,
@@ -1641,22 +922,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      // Block form with no params with multiple lines.
-      template:
-        "{{#contact-details" +
-        "\n" +
-        "\n" +
-        "\n" +
-        "as |contact|}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    // Block form with no params with multiple lines.
+    template: "{{#contact-details" + "\n" + "\n" + "\n" + "as |contact|}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1680,17 +951,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    // with helper, non-block, > 80 chars
+    config: {
+      "open-invocation-max-len": 80
     },
-    {
-      // with helper, non-block, > 80 chars
-      config: {
-        "open-invocation-max-len": 80,
-      },
-      template:
-        '{{if (or logout.isRunning (not session.isAuthenticated)) "Logging Out..." "Log Out"}}',
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: '{{if (or logout.isRunning (not session.isAuthenticated)) "Logging Out..." "Log Out"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 6,
@@ -1734,13 +1003,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: ["{{foo-bar", "baz=true", "}}"].join("\n"),
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: ["{{foo-bar", "baz=true", "}}"].join("\n"),
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1754,13 +1021,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: ["{{#foo-bar", "baz=true", "}}", "{{/foo-bar}}"].join("\n"),
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: ["{{#foo-bar", "baz=true", "}}", "{{/foo-bar}}"].join("\n"),
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1774,35 +1039,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy">' +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div" + "\n" + '  class="classy">' + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -1826,39 +1071,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy"' +
-        "\n" +
-        ">" +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |" +
-        "\n" +
-        "}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div" + "\n" + '  class="classy"' + "\n" + ">" + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |" + "\n" + "}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1882,37 +1103,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "last-attribute",
+      "element-open-end": "new-line"
     },
-    {
-      config: {
-        "mustache-open-end": "last-attribute",
-        "element-open-end": "new-line",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy">' +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |" +
-        "\n" +
-        "}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div" + "\n" + '  class="classy">' + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |" + "\n" + "}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 17,
@@ -1936,37 +1135,15 @@ generateRuleTests({
             },
           ]
         `);
-      },
+    }
+  }, {
+    config: {
+      "mustache-open-end": "new-line",
+      "element-open-end": "last-attribute"
     },
-    {
-      config: {
-        "mustache-open-end": "new-line",
-        "element-open-end": "last-attribute",
-      },
-      template:
-        "<div" +
-        "\n" +
-        '  class="classy"' +
-        "\n" +
-        ">" +
-        "\n" +
-        "{{#contact-details" +
-        "\n" +
-        "  param0" +
-        "\n" +
-        "  param1=abc" +
-        "\n" +
-        "  param2=abc" +
-        "\n" +
-        "as |ab cd ef  cd ef |}}" +
-        "\n" +
-        "  {{contact.fullName}}" +
-        "\n" +
-        "{{/contact-details}}" +
-        "\n" +
-        "</div>",
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    template: "<div" + "\n" + '  class="classy"' + "\n" + ">" + "\n" + "{{#contact-details" + "\n" + "  param0" + "\n" + "  param1=abc" + "\n" + "  param2=abc" + "\n" + "as |ab cd ef  cd ef |}}" + "\n" + "  {{contact.fullName}}" + "\n" + "{{/contact-details}}" + "\n" + "</div>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -1990,17 +1167,16 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `
+    }
+  }, {
+    template: `
       <form
         {{action 'authenticate' email password}}
         class='form-signin'
       >
       </form>`,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 9,
@@ -2024,14 +1200,13 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: `{{#foo bar as |foo|}}
+    }
+  }, {
+    template: `{{#foo bar as |foo|}}
     {{foo.bar
       baz}}{{/foo}}`,
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 10,
@@ -2045,7 +1220,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

@@ -1,24 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "no-extra-mut-helper-argument",
-
   config: true,
-
-  good: [
-    "{{my-component click=(action (mut isClicked))}}",
-    "{{my-component click=(action (mut isClicked) true)}}",
-    "{{my-component isClickedMutable=(mut isClicked)}}",
-    "<button {{action (mut isClicked)}}></button>",
-    "<button {{action (mut isClicked) true}}></button>",
-  ],
-
-  bad: [
-    {
-      template: "{{my-component click=(action (mut isClicked true))}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["{{my-component click=(action (mut isClicked))}}", "{{my-component click=(action (mut isClicked) true)}}", "{{my-component isClickedMutable=(mut isClicked)}}", "<button {{action (mut isClicked)}}></button>", "<button {{action (mut isClicked) true}}></button>"],
+  bad: [{
+    template: "{{my-component click=(action (mut isClicked true))}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 30,
@@ -32,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "{{my-component isClickedMutable=(mut isClicked true)}}",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "{{my-component isClickedMutable=(mut isClicked true)}}",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 33,
@@ -52,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: "<button {{action (mut isClicked true)}}></button>",
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: "<button {{action (mut isClicked true)}}></button>",
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 18,
@@ -72,7 +59,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

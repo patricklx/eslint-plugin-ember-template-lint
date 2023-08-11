@@ -1,26 +1,16 @@
-import generateRuleTests from '../../helpers/rule-test-harness.js';
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: 'no-unnecessary-curly-parens',
-
   config: true,
-
-  good: [
-    '{{foo}}',
-    '{{this.foo}}',
-    '{{(helper)}}',
-    '{{(this.helper)}}',
-    '{{concat "a" "b"}}',
-    '{{concat (capitalize "foo") "-bar"}}',
-  ],
-
-  bad: [
-    {
-      template: '{{(concat "a" "b")}}',
-      fixedTemplate: '{{concat "a" "b"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ['{{foo}}', '{{this.foo}}', '{{(helper)}}', '{{(this.helper)}}', '{{concat "a" "b"}}', '{{concat (capitalize "foo") "-bar"}}'],
+  bad: [{
+    template: '{{(concat "a" "b")}}',
+    fixedTemplate: '{{concat "a" "b"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -36,15 +26,12 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-
-    {
-      template: '{{(helper a="b")}}',
-      fixedTemplate: '{{helper a="b"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{(helper a="b")}}',
+    fixedTemplate: '{{helper a="b"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 0,
@@ -60,7 +47,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });

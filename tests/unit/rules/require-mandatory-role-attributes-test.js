@@ -1,36 +1,15 @@
-import generateRuleTests from "../../helpers/rule-test-harness.js";
+"use strict";
 
-generateRuleTests({
+var _ruleTestHarness = _interopRequireDefault(require("../../helpers/rule-test-harness.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _ruleTestHarness.default)({
   name: "require-mandatory-role-attributes",
-
   config: true,
-
-  good: [
-    "<div />",
-    '<div aria-disabled="true" />',
-    '<div role="complementary" />',
-    '<div role="combobox" aria-expanded="false" aria-controls="ctrlId" />',
-    '<div role="option" aria-selected={{false}} />',
-    "<FakeComponent />",
-    '<FakeComponent role="fakerole" />',
-    '<CustomComponent role="checkbox" aria-checked="false" />',
-    '<SomeComponent role={{this.role}} aria-notreal="bar" />',
-    "<OtherComponent @role={{@role}} aria-required={{this.required}} />",
-    '<FakeElement aria-disabled="true" />',
-    "{{some-component}}",
-    '{{some-component foo="true"}}',
-    '{{some-component role="heading" aria-level="2"}}',
-    '{{foo-component role="button"}}',
-    '{{foo-component role="unknown"}}',
-    "{{foo-component role=role}}",
-  ],
-
-  bad: [
-    {
-      template: '<div role="combobox" aria-controls="someId" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+  good: ["<div />", '<div aria-disabled="true" />', '<div role="complementary" />', '<div role="combobox" aria-expanded="false" aria-controls="ctrlId" />', '<div role="option" aria-selected={{false}} />', "<FakeComponent />", '<FakeComponent role="fakerole" />', '<CustomComponent role="checkbox" aria-checked="false" />', '<SomeComponent role={{this.role}} aria-notreal="bar" />', "<OtherComponent @role={{@role}} aria-required={{this.required}} />", '<FakeElement aria-disabled="true" />', "{{some-component}}", '{{some-component foo="true"}}', '{{some-component role="heading" aria-level="2"}}', '{{foo-component role="button"}}', '{{foo-component role="unknown"}}', "{{foo-component role=role}}"],
+  bad: [{
+    template: '<div role="combobox" aria-controls="someId" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -44,13 +23,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<div role="option"  />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<div role="option"  />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -64,13 +41,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '<CustomComponent role="checkbox" aria-required="true" />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<CustomComponent role="checkbox" aria-required="true" />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -84,14 +59,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template:
-        '<SomeComponent role="scrollbar" @aria-now={{this.valuenow}} aria-controls={{some-id}} />',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '<SomeComponent role="scrollbar" @aria-now={{this.valuenow}} aria-controls={{some-id}} />',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -105,13 +77,11 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-    {
-      template: '{{some-component role="heading"}}',
-
-      verifyResults(results) {
-        expect(results).toMatchInlineSnapshot(`
+    }
+  }, {
+    template: '{{some-component role="heading"}}',
+    verifyResults(results) {
+      expect(results).toMatchInlineSnapshot(`
           [
             {
               "column": 1,
@@ -125,7 +95,6 @@ generateRuleTests({
             },
           ]
         `);
-      },
-    },
-  ],
+    }
+  }]
 });
