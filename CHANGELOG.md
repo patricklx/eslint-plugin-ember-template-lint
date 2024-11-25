@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.16.0 (2024-11-25)
+
+#### :rocket: Enhancement
+* [#135](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/135) use ember-eslint-plugin ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 
 
 
