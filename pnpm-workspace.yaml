@@ -1,0 +1,5 @@
+packages:
+  - '.'
+  - './test-projects/*'
+  - './test-projects/rules/*'
+  - './test-projects/configs/*'
