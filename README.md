@@ -57,14 +57,24 @@ require('eslint-plugin-ember-template-lint/lib/ember-teplate-lint/config').regis
 
 
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/base',
-    'plugin:ember-template-lint/config',
-    'plugin:ember-template-lint/recommended',
-    //optional:
-    'plugin:ember-template-lint/ember-template-lint-plugin-prettier:recommended'
-  ]
+  overrides: [
+    {
+      files: ['**/*.hbs'],
+      parser: 'ember-template-lint/lib/parser/hbs-parser',
+      extends: [
+        'plugin:ember-template-lint/config',
+        'plugin:ember-template-lint/recommended',
+      ],
+    },
+    {
+      files: ['**/*.gjs'],
+      parser: 'ember-eslint-parser',
+      extends: [
+        'plugin:ember-template-lint/config',
+        'plugin:ember-template-lint/recommended',
+      ],
+    },
+  ],
 };
 ```
 
