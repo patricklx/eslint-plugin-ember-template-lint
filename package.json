@@ -46,6 +46,6 @@
   },
   "license": "ISC",
   "files": [
-    "lib/**/*.js"
+    "lib/rules/*.js"
   ]
 }

@@ -8,7 +8,7 @@
  */
 
 const { ESLint } = require('eslint');
-require('../../lib/ember-teplate-lint/config').registerPlugin('ember-template-lint-plugin-prettier');
+require('../../lib/ember-template-lint/config').registerPlugin('ember-template-lint-plugin-prettier');
 const plugin = require('../../lib');
 
 /**
