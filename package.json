@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ember-template-lint",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "Provide linting for ember template",
   "keywords": [
     "eslint",
@@ -46,6 +46,6 @@
   },
   "license": "ISC",
   "files": [
-    "lib/rules/*.js"
+    "lib/**/*.js"
   ]
 }
