@@ -42,7 +42,7 @@ to just use the `.template-lintrc.js` config file just use
 
 to load ember-template-lint plugins in eslinrc you need to manually register them:
 ```js
-require('eslint-plugin-ember-template-lint/lib/ember-teplate-lint/config').registerPlugin('ember-template-lint-plugin-prettier');
+require('eslint-plugin-ember-template-lint/lib/ember-template-lint/config').registerPlugin('ember-template-lint-plugin-prettier');
 ```
 
 ## IMPORTANT
@@ -53,7 +53,7 @@ for typescript parser you can extend its base config, then it will work correctl
 ```js
 // .eslintrc.js
 // optional:
-require('eslint-plugin-ember-template-lint/lib/ember-teplate-lint/config').registerPlugin('ember-template-lint-plugin-prettier');
+require('eslint-plugin-ember-template-lint/lib/ember-template-lint/config').registerPlugin('ember-template-lint-plugin-prettier');
 
 
 module.exports = {
