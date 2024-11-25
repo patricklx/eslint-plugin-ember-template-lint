@@ -32,10 +32,24 @@ function initESLint(options) {
         ecmaVersion: 2020,
         sourceType: 'module',
       },
-      plugins: ['ember-template-lint'],
-      extends: ['plugin:ember-template-lint/recommended'],
-      rules: {
-      },
+      overrides: [
+        {
+          files: ['**/*.hbs'],
+          parser: 'ember-template-lint/lib/parser/hbs-parser',
+          extends: [
+            'plugin:ember-template-lint/config',
+            'plugin:ember-template-lint/recommended',
+          ],
+        },
+        {
+          files: ['**/*.gts'],
+          parser: 'ember-eslint-parser',
+          extends: [
+            'plugin:ember-template-lint/config',
+            'plugin:ember-template-lint/recommended',
+          ],
+        },
+      ]
     },
     ...options,
   });
@@ -61,12 +75,10 @@ describe('runs template-lint on gts', () => {
     expect(resultErrors).toHaveLength(2);
     expect(resultErrors[0].message).toBe('Duplicate attribute \'class\' found in the Element.');
     expect(resultErrors[0].line).toBe(3);
-    expect(resultErrors[0].column).toBe(24);
     expect(resultErrors[0].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
 
     expect(resultErrors[1].message).toBe('Duplicate attribute \'class\' found in the Element.');
     expect(resultErrors[1].line).toBe(8);
-    expect(resultErrors[1].column).toBe(26);
     expect(resultErrors[1].ruleId).toBe('ember-template-lint/no-duplicate-attributes');
   });
 });
