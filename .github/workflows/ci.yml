@@ -77,12 +77,8 @@ jobs:
         run: |
           version=$(cat package.json | jq -r '.version')
           TAG=v$version
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "tag exists";
-          else
-            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-            pnpm publish || echo "already published"
-          fi
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+          pnpm publish || echo "already published"
         env:
           NPM_TOKEN: "${{ secrets.NPM_TOKEN }}"
       - name: create tag
