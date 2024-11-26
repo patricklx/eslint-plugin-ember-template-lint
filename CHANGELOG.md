@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.20.0 (2024-11-26)
+
+#### :bug: Bug Fix
+* [#142](https://github.com/patricklx/eslint-plugin-ember-template-lint/pull/142) add tests ([@patricklx](https://github.com/patricklx))
+
+#### Committers: 1
+- Patrick Pircher ([@patricklx](https://github.com/patricklx))
+
+
 
 
 
