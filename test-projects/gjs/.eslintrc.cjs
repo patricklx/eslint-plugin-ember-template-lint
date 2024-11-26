@@ -19,7 +19,13 @@ module.exports = {
       files: ['**/*.gjs'],
       parser: 'ember-eslint-parser',
       plugins: ['ember'],
-      extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:ember/recommended-gjs'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gjs',
+        'plugin:ember-template-lint/config',
+        'plugin:ember-template-lint/recommended',
+      ],
     },
   ],
 };
