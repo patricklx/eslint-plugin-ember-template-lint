@@ -3,7 +3,7 @@ module.exports = {
     'ecmaVersion': 'latest',
     sourceType: 'module',
   },
-  plugins: ['node', 'jest'],
+  plugins: ['n', 'jest'],
   'env': {
     'browser': true,
     'commonjs': true,
@@ -12,11 +12,11 @@ module.exports = {
   'extends': [
     'eslint:recommended',
     'plugin:jest/recommended',
-    'plugin:node/recommended',
+    'plugin:n/recommended',
   ],
   'rules': {
-    'node/no-unpublished-require': 'off',
-    'node/no-unsupported-features/es-syntax': 'off',
+    'n/no-unpublished-require': 'off',
+    'n/no-unsupported-features/es-syntax': 'off',
     'indent': [
       'error',
       2

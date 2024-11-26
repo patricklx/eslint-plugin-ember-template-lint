@@ -1,0 +1,11 @@
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gjs/src-2/placeholer-2.gjs
+  4:47  error  Duplicate attribute 'class' found in the Element  ember-template-lint/no-duplicate-attributes
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gjs/src/placeholer.gjs
+  4:47  error  Duplicate attribute 'class' found in the Element  ember-template-lint/no-duplicate-attributes
+  4:59  error  Non-translated string used                        ember-template-lint/no-bare-strings
+
+✖ 3 problems (3 errors, 0 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+

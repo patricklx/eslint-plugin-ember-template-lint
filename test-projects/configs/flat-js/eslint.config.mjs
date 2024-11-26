@@ -1,9 +1,7 @@
 import globals from 'globals';
 import js from '@eslint/js';
-import e from 'eslint-plugin-ember';
 
-import ember from 'eslint-plugin-ember/configs/recommended';
-import emberGJS from 'eslint-plugin-ember/configs/recommended-gjs';
+import config from 'eslint-plugin-ember-template-lint/lib/config/index.js';
 
 import emberParser from 'ember-eslint-parser';
 import babelParser from '@babel/eslint-parser';
@@ -31,12 +29,7 @@ export default [
         ...globals.browser,
       },
     },
-    plugins: {
-      ember: e,
-    },
     rules: {
-      ...ember.rules,
-      ...emberGJS.rules,
     },
   },
   {
@@ -56,11 +49,10 @@ export default [
       },
     },
     plugins: {
-      ember: e,
+      ...config.config.plugins,
     },
     rules: {
-      ...ember.rules,
-      ...emberGJS.rules,
+      ...config.config.rules,
     },
   },
 ];

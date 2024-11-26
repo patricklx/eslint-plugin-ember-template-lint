@@ -2,7 +2,8 @@
   "name": "@test-project/gts",
   "private": true,
   "scripts": {
-    "test": "eslint . --max-warnings=0",
+    "test": "printf \"$(eslint . --max-warnings=0)\" | diff -B -w ./result.txt -",
+    "generate-output": "eslint . --max-warnings=0 > ./result.txt",
     "types": "tsc --noEmit"
   },
   "devDependencies": {

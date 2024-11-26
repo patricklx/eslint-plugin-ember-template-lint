@@ -17,7 +17,14 @@ module.exports = {
       files: ['**/*.gts'],
       parser: 'ember-eslint-parser',
       plugins: ['ember'],
-      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended-type-checked', 'plugin:ember/recommended', 'plugin:ember/recommended-gts'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended-type-checked',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gts',
+        'plugin:ember-template-lint/config',
+        'plugin:ember-template-lint/recommended',
+      ],
     },
     {
       files: ['**/*.gjs'],

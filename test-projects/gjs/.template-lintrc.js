@@ -3,7 +3,7 @@
 module.exports = {
   extends: 'recommended',
   rules: {
-   'no-bare-strings': 'error',
+   'no-bare-strings': ['abc'],
    'no-inline-styles': 'error',
   },
   overrides: [

@@ -1,0 +1,36 @@
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gts/src/await.gts
+  29:13  error  Unsafe call of an `any` typed value  @typescript-eslint/no-unsafe-call
+  29:35  error  Unsafe call of an `any` typed value  @typescript-eslint/no-unsafe-call
+  34:13  error  Unsafe call of an `any` typed value  @typescript-eslint/no-unsafe-call
+  34:35  error  Unsafe call of an `any` typed value  @typescript-eslint/no-unsafe-call
+  48:23  error  Non-translated string used           ember-template-lint/no-bare-strings
+  51:31  error  Non-translated string used           ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gts/src/copy-menu.gts
+  30:76  error  Non-translated string used  ember-template-lint/no-bare-strings
+  36:46  error  Non-translated string used  ember-template-lint/no-bare-strings
+  39:47  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gts/src/destructure-to-array.gts
+  5:11  error  Unsafe assignment of an `any` value          @typescript-eslint/no-unsafe-assignment
+  5:36  error  Unsafe call of an `any` typed value          @typescript-eslint/no-unsafe-call
+  5:44  error  Unsafe member access .all on an `any` value  @typescript-eslint/no-unsafe-member-access
+  6:5   error  Unsafe return of an `any` typed value        @typescript-eslint/no-unsafe-return
+  9:13  error  Non-translated string used                   ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gts/src/footer.gts
+  11:29  error  Non-translated string used  ember-template-lint/no-bare-strings
+  20:56  error  Non-translated string used  ember-template-lint/no-bare-strings
+  23:52  error  Non-translated string used  ember-template-lint/no-bare-strings
+  26:51  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gts/src/menu.gts
+  32:7  error  Unsafe assignment of an `any` value  @typescript-eslint/no-unsafe-assignment
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/gts/src/placeholder.gts
+   9:14  error  Unsafe assignment of an `any` value  @typescript-eslint/no-unsafe-assignment
+  11:49  error  Non-translated string used           ember-template-lint/no-bare-strings
+
+✖ 21 problems (21 errors, 0 warnings)
+

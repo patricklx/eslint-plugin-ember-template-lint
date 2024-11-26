@@ -1,0 +1,32 @@
+
+> @test-project/configs-flat-js@ eslint:with-config /home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js
+> ESLINT_USE_FLAT_CONFIG=true eslint --config ./eslint.config.mjs --max-warnings=0 "."
+
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js/.template-lintrc.js
+  3:1  error  'module' is not defined  no-undef
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js/src/await.gjs
+  34:23  error  Non-translated string used  ember-template-lint/no-bare-strings
+  37:31  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js/src/copy-menu.gjs
+  26:76  error  Non-translated string used  ember-template-lint/no-bare-strings
+  32:46  error  Non-translated string used  ember-template-lint/no-bare-strings
+  35:47  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js/src/destructure-to-array.gjs
+  9:13  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js/src/footer.gjs
+  11:29  error  Non-translated string used  ember-template-lint/no-bare-strings
+  20:56  error  Non-translated string used  ember-template-lint/no-bare-strings
+  23:52  error  Non-translated string used  ember-template-lint/no-bare-strings
+  26:51  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+/home/patrick/projects/eslint-plugin-ember-template-lint/test-projects/configs/flat-js/src/placeholder.gjs
+  9:49  error  Non-translated string used  ember-template-lint/no-bare-strings
+
+✖ 12 problems (12 errors, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.
