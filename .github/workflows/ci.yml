@@ -34,7 +34,7 @@ jobs:
 
     - run: pnpm run lint:js
 
-    - run: pnpm run test -- --runInBand
+    - run: pnpm run test --runInBand
 
   deploy:
     permissions:
