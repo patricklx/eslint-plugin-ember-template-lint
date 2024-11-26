@@ -36,6 +36,8 @@ jobs:
 
     - run: pnpm run test --runInBand
 
+    - run: pnpm --filter '*' test
+
   deploy:
     permissions:
       contents: write
