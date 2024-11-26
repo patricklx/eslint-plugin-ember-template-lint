@@ -62,8 +62,6 @@ jobs:
           node-version: 18.x
       - name: pnpm install, build,
         run: |
-          mkdir ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
           pnpm install
         env:
           CI: true
@@ -87,6 +85,8 @@ jobs:
           set -e
           version=$(cat package.json | jq -r '.version')
           TAG=v$version
+          mkdir ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
           git fetch --unshallow
           git fetch --all --tags
           if git rev-parse "$TAG" >/dev/null 2>&1; then

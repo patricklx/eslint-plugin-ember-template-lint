@@ -88,46 +88,6 @@ error: Non-translated string used (ember-template-lint/no-bare-strings) at src/c
   42 |       </:options>
 
 
-error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/destructure-to-array.gts:5:11:
-  3 | export class DeconstructArray extends Component<unknown> {
-  4 |   testFunction = async () => {
-> 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
-    |           ^
-  6 |     return remaining;
-  7 |   }
-  8 | 
-
-
-error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/destructure-to-array.gts:5:36:
-  3 | export class DeconstructArray extends Component<unknown> {
-  4 |   testFunction = async () => {
-> 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
-    |                                    ^
-  6 |     return remaining;
-  7 |   }
-  8 | 
-
-
-error: Unsafe member access .all on an `any` value (@typescript-eslint/no-unsafe-member-access) at src/destructure-to-array.gts:5:44:
-  3 | export class DeconstructArray extends Component<unknown> {
-  4 |   testFunction = async () => {
-> 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
-    |                                            ^
-  6 |     return remaining;
-  7 |   }
-  8 | 
-
-
-error: Unsafe return of an `any` typed value (@typescript-eslint/no-unsafe-return) at src/destructure-to-array.gts:6:5:
-  4 |   testFunction = async () => {
-  5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
-> 6 |     return remaining;
-    |     ^
-  7 |   }
-  8 | 
-  9 |   <template>
-
-
 error: Non-translated string used (ember-template-lint/no-bare-strings) at src/destructure-to-array.gts:9:13:
    7 |   }
    8 | 
@@ -208,4 +168,4 @@ error: Non-translated string used (ember-template-lint/no-bare-strings) at src/p
   14 | 
 
 
-21 errors found.
+17 errors found.
