@@ -143,30 +143,6 @@ importers:
         specifier: ^5.3.3
         version: 5.7.2
 
-  test-projects/rules/padding-line-between-statements:
-    devDependencies:
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.21.0
-        version: 6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
-      '@typescript-eslint/parser':
-        specifier: ^6.21.0
-        version: 6.21.0(eslint@8.57.1)(typescript@5.7.2)
-      ember-eslint-parser:
-        specifier: ^0.5.6
-        version: 0.5.6(@babel/core@7.26.0)(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
-      eslint:
-        specifier: ^8.0.1
-        version: 8.57.1
-      eslint-plugin-ember:
-        specifier: ^12.0.0
-        version: 12.3.3(@babel/core@7.26.0)(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
-      eslint-plugin-ember-template-lint:
-        specifier: workspace:*
-        version: link:../../..
-      typescript:
-        specifier: ^5.3.3
-        version: 5.7.2
-
 packages:
 
   '@ampproject/remapping@2.3.0':
