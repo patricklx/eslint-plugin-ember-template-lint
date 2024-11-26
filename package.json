@@ -23,7 +23,7 @@
     "ember-template-recast": "^6.1.5",
     "ember-template-lint": "^6.0.0",
     "prettier-linter-helpers": "^1.0.0",
-    "synckit": "^0.8.5",
+    "synckit": "^0.9.2",
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
