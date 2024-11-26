@@ -21,24 +21,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 'latest'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        cache: 'pnpm'
 
-    - run: npm install
+    - run: pnpm install
 
-    - run: npm run lint:js
+    - run: pnpm run lint:js
 
-    - run: npm run test -- --runInBand
+    - run: pnpm run test --runInBand
+
+    - run: pnpm --filter '*' test
 
   deploy:
     permissions:
       contents: write
       deployments: write
-      
+
     needs: [ test ]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -49,15 +53,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 'latest'
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 16.x
-      - name: npm install, build,
+      - name: pnpm install, build,
         run: |
           mkdir ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          npm install --no-audit --legacy-peer-deps
+          pnpm install --no-audit --legacy-peer-deps
           version=$(cat package.json | jq -r '.version')
           git fetch --unshallow
           git fetch --all --tags
@@ -65,7 +72,7 @@ jobs:
         env:
           CI: true
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-      - name: deploy npm
+      - name: deploy pnpm
         if: github.ref == 'refs/heads/main'
         run: |
           version=$(cat package.json | jq -r '.version')
@@ -74,7 +81,7 @@ jobs:
             echo "tag exists";
           else
             echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-            npm publish || echo "already published"
+            pnpm publish || echo "already published"
           fi
         env:
           NPM_TOKEN: "${{ secrets.NPM_TOKEN }}"
@@ -91,7 +98,7 @@ jobs:
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "tag exists";
           else
-            npm i -g lerna-changelog
+            pnpm i -g lerna-changelog
             export GITHUB_AUTH=$GITHUB_TOKEN
             export changelog=$(lerna-changelog --next-version=$version)
             echo -e "# Changelog\n\n$changelog\n$(tail --lines=+2 CHANGELOG.md)" > CHANGELOG.md

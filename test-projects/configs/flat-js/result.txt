@@ -1,0 +1,121 @@
+error: 'module' is not defined (no-undef) at .template-lintrc.js:3:1:
+  1 | 'use strict';
+  2 | 
+> 3 | module.exports = {
+    | ^
+  4 |   extends: 'recommended',
+  5 |   rules: {
+  6 |    'no-bare-strings': 'error',
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/await.gjs:34:23:
+  32 | 
+  33 |   <template>
+> 34 |     {{#if this.error}}
+     |                       ^
+  35 |       Error:
+  36 |       {{this.error.toString}}
+  37 |     {{else if this.isPending}}
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/await.gjs:37:31:
+  35 |       Error:
+  36 |       {{this.error.toString}}
+> 37 |     {{else if this.isPending}}
+     |                               ^
+  38 |       Building...
+  39 |     {{else}}
+  40 |       <this.resolved />
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/copy-menu.gjs:26:76:
+  24 |     <Menu data-test-copy-menu>
+  25 |       <:trigger as |t|>
+> 26 |         <t.Default class="absolute top-3 right-4 z-10" data-test-copy-menu>
+     |                                                                            ^
+  27 |           📋
+  28 |         </t.Default>
+  29 |       </:trigger>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/copy-menu.gjs:32:46:
+  30 | 
+  31 |       <:options as |Item|>
+> 32 |         <Item {{on "click" this.copyAsText}}>
+     |                                              ^
+  33 |           Copy as text
+  34 |         </Item>
+  35 |         <Item {{on "click" this.copyAsImage}}>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/copy-menu.gjs:35:47:
+  33 |           Copy as text
+  34 |         </Item>
+> 35 |         <Item {{on "click" this.copyAsImage}}>
+     |                                               ^
+  36 |           Copy as image
+  37 |         </Item>
+  38 |       </:options>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/destructure-to-array.gjs:9:13:
+   7 |   }
+   8 | 
+>  9 |   <template>
+     |             ^
+  10 |     This is a template
+  11 |   </template>
+  12 | }
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gjs:11:29:
+   9 |         <:custom as |DefaultContent|>
+  10 |           <span class="hidden sm:block">
+> 11 |             <DefaultContent>
+     |                             ^
+  12 |               GitHub
+  13 |             </DefaultContent>
+  14 |           </span>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gjs:20:56:
+  18 |         </:custom>
+  19 |       </ExternalLink>
+> 20 |       <ExternalLink href="https://guides.emberjs.com/">
+     |                                                        ^
+  21 |         Guides
+  22 |       </ExternalLink>
+  23 |       <ExternalLink href="https://api.emberjs.com">
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gjs:23:52:
+  21 |         Guides
+  22 |       </ExternalLink>
+> 23 |       <ExternalLink href="https://api.emberjs.com">
+     |                                                    ^
+  24 |         API Reference
+  25 |       </ExternalLink>
+  26 |       <ExternalLink href="http://new.emberjs.com">
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gjs:26:51:
+  24 |         API Reference
+  25 |       </ExternalLink>
+> 26 |       <ExternalLink href="http://new.emberjs.com">
+     |                                                   ^
+  27 |         Blitz
+  28 |       </ExternalLink>
+  29 |     </nav>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/placeholder.gjs:9:49:
+   7 | export const Placeholder = <template>
+   8 |   {{#let (service "editor") as |context|}}
+>  9 |     <label class="sr-only" for="initial-editor">
+     |                                                 ^
+  10 |       Glimmer + Markdown Code Editor
+  11 |     </label>
+  12 | 
+
+
+12 errors found.

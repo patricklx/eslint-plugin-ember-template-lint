@@ -1,0 +1,211 @@
+error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:29:13:
+  27 |     let promise = args.promise
+  28 |       .then((resolved) => {
+> 29 |         if (isDestroying(this) || isDestroyed(this)) return;
+     |             ^
+  30 | 
+  31 |         this.resolved = resolved;
+  32 |       })
+
+
+error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:29:35:
+  27 |     let promise = args.promise
+  28 |       .then((resolved) => {
+> 29 |         if (isDestroying(this) || isDestroyed(this)) return;
+     |                                   ^
+  30 | 
+  31 |         this.resolved = resolved;
+  32 |       })
+
+
+error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:34:13:
+  32 |       })
+  33 |       .catch((error) => {
+> 34 |         if (isDestroying(this) || isDestroyed(this)) return;
+     |             ^
+  35 | 
+  36 |         this.error = error as unknown;
+  37 |         this.resolved = undefined;
+
+
+error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:34:35:
+  32 |       })
+  33 |       .catch((error) => {
+> 34 |         if (isDestroying(this) || isDestroyed(this)) return;
+     |                                   ^
+  35 | 
+  36 |         this.error = error as unknown;
+  37 |         this.resolved = undefined;
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/await.gts:48:23:
+  46 | 
+  47 |   <template>
+> 48 |     {{#if this.error}}
+     |                       ^
+  49 |       Error:
+  50 |       {{this.error.toString}}
+  51 |     {{else if this.isPending}}
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/await.gts:51:31:
+  49 |       Error:
+  50 |       {{this.error.toString}}
+> 51 |     {{else if this.isPending}}
+     |                               ^
+  52 |       Building...
+  53 |     {{else}}
+  54 |       <this.resolved />
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/copy-menu.gts:30:76:
+  28 |     <Menu data-test-copy-menu>
+  29 |       <:trigger as |t|>
+> 30 |         <t.Default class="absolute top-3 right-4 z-10" data-test-copy-menu>
+     |                                                                            ^
+  31 |           📋
+  32 |         </t.Default>
+  33 |       </:trigger>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/copy-menu.gts:36:46:
+  34 | 
+  35 |       <:options as |Item|>
+> 36 |         <Item {{on "click" this.copyAsText}}>
+     |                                              ^
+  37 |           Copy as text
+  38 |         </Item>
+  39 |         <Item {{on "click" this.copyAsImage}}>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/copy-menu.gts:39:47:
+  37 |           Copy as text
+  38 |         </Item>
+> 39 |         <Item {{on "click" this.copyAsImage}}>
+     |                                               ^
+  40 |           Copy as image
+  41 |         </Item>
+  42 |       </:options>
+
+
+error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/destructure-to-array.gts:5:11:
+  3 | export class DeconstructArray extends Component<unknown> {
+  4 |   testFunction = async () => {
+> 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
+    |           ^
+  6 |     return remaining;
+  7 |   }
+  8 | 
+
+
+error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/destructure-to-array.gts:5:36:
+  3 | export class DeconstructArray extends Component<unknown> {
+  4 |   testFunction = async () => {
+> 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
+    |                                    ^
+  6 |     return remaining;
+  7 |   }
+  8 | 
+
+
+error: Unsafe member access .all on an `any` value (@typescript-eslint/no-unsafe-member-access) at src/destructure-to-array.gts:5:44:
+  3 | export class DeconstructArray extends Component<unknown> {
+  4 |   testFunction = async () => {
+> 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
+    |                                            ^
+  6 |     return remaining;
+  7 |   }
+  8 | 
+
+
+error: Unsafe return of an `any` typed value (@typescript-eslint/no-unsafe-return) at src/destructure-to-array.gts:6:5:
+  4 |   testFunction = async () => {
+  5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
+> 6 |     return remaining;
+    |     ^
+  7 |   }
+  8 | 
+  9 |   <template>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/destructure-to-array.gts:9:13:
+   7 |   }
+   8 | 
+>  9 |   <template>
+     |             ^
+  10 |     This is a template
+  11 |   </template>
+  12 | }
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gts:11:29:
+   9 |         <:custom as |DefaultContent|>
+  10 |           <span class="hidden sm:block">
+> 11 |             <DefaultContent>
+     |                             ^
+  12 |               GitHub
+  13 |             </DefaultContent>
+  14 |           </span>
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gts:20:56:
+  18 |         </:custom>
+  19 |       </ExternalLink>
+> 20 |       <ExternalLink href="https://guides.emberjs.com/">
+     |                                                        ^
+  21 |         Guides
+  22 |       </ExternalLink>
+  23 |       <ExternalLink href="https://api.emberjs.com">
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gts:23:52:
+  21 |         Guides
+  22 |       </ExternalLink>
+> 23 |       <ExternalLink href="https://api.emberjs.com">
+     |                                                    ^
+  24 |         API Reference
+  25 |       </ExternalLink>
+  26 |       <ExternalLink href="http://new.emberjs.com">
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/footer.gts:26:51:
+  24 |         API Reference
+  25 |       </ExternalLink>
+> 26 |       <ExternalLink href="http://new.emberjs.com">
+     |                                                   ^
+  27 |         Blitz
+  28 |       </ExternalLink>
+  29 |     </nav>
+
+
+error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/menu.gts:32:7:
+  30 | </template>;
+  31 | 
+> 32 | const DefaultTrigger = <template>
+     |       ^
+  33 |   <@menu.Button
+  34 |     {{@trigger}}
+  35 |     class="text-black rounded border bg-white px-2 py-1 -my-1 text-left transition ease-in-out duration-150 sm:text-sm drop-shadow-md hover:drop-shadow-xl focus:ring-4 focus-visible:outline-none ring-ember-brand focus:outline-none"
+
+
+error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/placeholder.gts:9:14:
+   7 | const orGlimdown = (format: string | undefined) => format || 'glimdown';
+   8 | 
+>  9 | export const Placeholder = <template>
+     |              ^
+  10 |   {{#let (service "editor") as |context|}}
+  11 |     <label class="sr-only" for="initial-editor">
+  12 |       Glimmer + Markdown Code Editor
+
+
+error: Non-translated string used (ember-template-lint/no-bare-strings) at src/placeholder.gts:11:49:
+   9 | export const Placeholder = <template>
+  10 |   {{#let (service "editor") as |context|}}
+> 11 |     <label class="sr-only" for="initial-editor">
+     |                                                 ^
+  12 |       Glimmer + Markdown Code Editor
+  13 |     </label>
+  14 | 
+
+
+21 errors found.

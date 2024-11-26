@@ -12,7 +12,8 @@
   "repository": "patricklx/eslint-plugin-ember-template-lint",
   "scripts": {
     "test": "jest",
-    "lint:js": "eslint --cache .",
+    "lint:js": "eslint --cache lib tests",
+    "lint:js:fix": "eslint --cache lib tests --fix",
     "test:watch": "jest --watchAll"
   },
   "dependencies": {
@@ -33,7 +34,7 @@
     "ember-template-lint-plugin-prettier": "^5.0.0",
     "eslint": "^8.41.0",
     "eslint-plugin-jest": "^27.2.1",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-n": "^17.14.0",
     "jest": "^29.5.0"
   },
   "jest": {
