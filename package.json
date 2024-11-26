@@ -11,10 +11,11 @@
   "main": "lib/index.js",
   "repository": "patricklx/eslint-plugin-ember-template-lint",
   "scripts": {
-    "test": "jest",
+    "test": "pnpm run /test:.*/",
+    "test:jest": "jest",
     "lint:js": "eslint --cache lib tests",
     "lint:js:fix": "eslint --cache lib tests --fix",
-    "test:watch": "jest --watchAll"
+    "test-watch": "jest --watchAll"
   },
   "dependencies": {
     "@glimmer/syntax": "^0.93.0",

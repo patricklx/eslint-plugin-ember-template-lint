@@ -37,7 +37,6 @@ function initESLint(options) {
           files: ['**/*.hbs'],
           parser: 'ember-template-lint/lib/parser/hbs-parser',
           extends: [
-            'plugin:ember-template-lint/config',
             'plugin:ember-template-lint/recommended',
           ],
         },
@@ -45,7 +44,6 @@ function initESLint(options) {
           files: ['**/*.gts'],
           parser: 'ember-eslint-parser',
           extends: [
-            'plugin:ember-template-lint/config',
             'plugin:ember-template-lint/recommended',
           ],
         },
