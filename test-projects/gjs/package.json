@@ -2,16 +2,17 @@
   "name": "@test-project/gjs",
   "private": true,
   "scripts": {
-    "test": "printf \"$(eslint . --max-warnings=0)\" | diff -B -w ./result.txt -",
-    "generate-output": "eslint . --max-warnings=0 > ./result.txt"
+    "test": "printf \"$(eslint . --max-warnings=0 -f 'codeframe' )\" | diff -B -w ./result.txt -",
+    "generate-output": "eslint . --max-warnings=0 -f 'codeframe'  > ./result.txt"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "eslint-plugin-ember-template-lint": "workspace:*",
     "ember-eslint-parser": "^0.5.6",
     "eslint": "^8.0.1",
+    "eslint-formatter-codeframe": "^7.32.1",
     "eslint-plugin-ember": "^12.0.0",
+    "eslint-plugin-ember-template-lint": "workspace:*",
     "typescript": "^5.3.3"
   }
 }

@@ -2,22 +2,23 @@
   "name": "@test-project/gts",
   "private": true,
   "scripts": {
-    "test": "printf \"$(eslint . --max-warnings=0)\" | diff -B -w ./result.txt -",
-    "generate-output": "eslint . --max-warnings=0 > ./result.txt",
+    "test": "printf \"$(eslint . --max-warnings=0 -f 'codeframe')\" | diff -B -w ./result.txt -",
+    "generate-output": "eslint . --max-warnings=0 -f 'codeframe' > ./result.txt",
     "types": "tsc --noEmit"
   },
   "devDependencies": {
     "@ember/test-waiters": "^3.1.0",
-    "@glint/template": "^1.3.0",
-    "@glimmer/tracking": "^1.1.2",
     "@glimmer/component": "^1.1.2",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/template": "^1.3.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "eslint-plugin-ember-template-lint": "workspace:*",
     "ember-eslint-parser": "^0.5.6",
     "ember-source": "^5.6.0",
     "eslint": "^8.0.1",
+    "eslint-formatter-codeframe": "^7.32.1",
     "eslint-plugin-ember": "^12.0.0",
+    "eslint-plugin-ember-template-lint": "workspace:*",
     "typescript": "^5.3.3"
   }
 }

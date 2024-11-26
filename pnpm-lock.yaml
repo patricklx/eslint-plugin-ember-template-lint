@@ -70,6 +70,9 @@ importers:
       eslint:
         specifier: ^8.0.1
         version: 8.57.1
+      eslint-formatter-codeframe:
+        specifier: ^7.32.1
+        version: 7.32.1
       eslint-plugin-ember:
         specifier: ^12.0.0
         version: 12.3.3(@babel/core@7.26.0)(@typescript-eslint/parser@8.16.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
@@ -94,6 +97,9 @@ importers:
       eslint:
         specifier: ^8.0.1
         version: 8.57.1
+      eslint-formatter-codeframe:
+        specifier: ^7.32.1
+        version: 7.32.1
       eslint-plugin-ember:
         specifier: ^12.0.0
         version: 12.3.3(@babel/core@7.26.0)(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
@@ -133,6 +139,9 @@ importers:
       eslint:
         specifier: ^8.0.1
         version: 8.57.1
+      eslint-formatter-codeframe:
+        specifier: ^7.32.1
+        version: 7.32.1
       eslint-plugin-ember:
         specifier: ^12.0.0
         version: 12.3.3(@babel/core@7.26.0)(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
@@ -148,6 +157,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@babel/code-frame@7.12.11':
+    resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -268,6 +280,10 @@ packages:
 
   '@babel/helpers@7.26.0':
     resolution: {integrity: sha512-tbhNuIxNcVb21pInl3ZSjksLCvgdZy9KwJ8brv993QtIVKJBBkYXz4q4ZbAv31GdnC+R90np23L5FbEBlthAEw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/highlight@7.25.9':
+    resolution: {integrity: sha512-llL88JShoCsth8fF8R4SJnIn+WLvR6ccFxu1H3FlMhDontdcmZWf2HgIZ7AIqV3Xcck1idlohrN4EUBQz6klbw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/parser@7.26.2':
@@ -2113,6 +2129,10 @@ packages:
     engines: {node: '>=12'}
     peerDependencies:
       eslint: '>=6.0.0'
+
+  eslint-formatter-codeframe@7.32.1:
+    resolution: {integrity: sha512-DK/3Q3+zVKq/7PdSYiCxPrsDF8H/TRMK5n8Hziwr4IMkMy+XiKSwbpj25AdajS63I/B61Snetq4uVvX9fOLyAg==}
+    engines: {node: ^10.12.0 || >=12.0.0}
 
   eslint-formatter-kakoune@1.0.0:
     resolution: {integrity: sha512-Uk/TVLt6Nf6Xoz7C1iYuZjOSdJxe5aaauGRke8JhKeJwD66Y61/pY2FjtLP04Ooq9PwV34bzrkKkU2UZ5FtDRA==}
@@ -4052,6 +4072,10 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
+  '@babel/code-frame@7.12.11':
+    dependencies:
+      '@babel/highlight': 7.25.9
+
   '@babel/code-frame@7.26.2':
     dependencies:
       '@babel/helper-validator-identifier': 7.25.9
@@ -4094,7 +4118,7 @@ snapshots:
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
       eslint: 8.57.1
       eslint-visitor-keys: 2.1.0
-      semver: 6.3.1
+      semver: 7.6.3
 
   '@babel/generator@7.26.2':
     dependencies:
@@ -4233,6 +4257,13 @@ snapshots:
     dependencies:
       '@babel/template': 7.25.9
       '@babel/types': 7.26.0
+
+  '@babel/highlight@7.25.9':
+    dependencies:
+      '@babel/helper-validator-identifier': 7.25.9
+      chalk: 2.4.2
+      js-tokens: 4.0.0
+      picocolors: 1.1.1
 
   '@babel/parser@7.26.2':
     dependencies:
@@ -6980,6 +7011,11 @@ snapshots:
     dependencies:
       eslint: 8.57.1
       semver: 7.6.3
+
+  eslint-formatter-codeframe@7.32.1:
+    dependencies:
+      '@babel/code-frame': 7.12.11
+      chalk: 4.1.2
 
   eslint-formatter-kakoune@1.0.0: {}
 
