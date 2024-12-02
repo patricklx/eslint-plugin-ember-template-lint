@@ -19,7 +19,7 @@ importers:
         version: 8.16.0(typescript@5.7.2)
       ember-eslint-parser:
         specifier: ^0.5.6
-        version: 0.5.6(@babel/core@7.26.0)(@typescript-eslint/parser@8.16.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
+        version: 0.5.7(@babel/core@7.26.0)(@typescript-eslint/parser@8.16.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)
       ember-template-lint:
         specifier: ^6.0.0
         version: 6.0.0
@@ -1985,6 +1985,16 @@ packages:
 
   ember-eslint-parser@0.5.6:
     resolution: {integrity: sha512-mtneR5Z0TlGUR5tutJFv6xOjt5hLk532KoBooEb6rZXTXJbZvzEvXuUrYocCT4Os7IGHp3Elsjgd5tB9ufuPPQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@babel/core': ^7.23.6
+      '@typescript-eslint/parser': '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+
+  ember-eslint-parser@0.5.7:
+    resolution: {integrity: sha512-d0nIQxC6TXsMebi7GcpH6meFDVhTUTYZpQ6Yg5n92+eZHqygAEKWZX55lLa49/wucBXS+Wadp2g6okPcN463aA==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@babel/core': ^7.23.6
@@ -6663,6 +6673,21 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.0
       '@babel/eslint-parser': 7.25.9(@babel/core@7.26.0)(eslint@8.57.1)
+      '@glimmer/syntax': 0.92.3
+      content-tag: 2.0.3
+      eslint-scope: 7.2.2
+      html-tags: 3.3.1
+      mathml-tag-names: 2.1.3
+      svg-tags: 1.0.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.16.0(eslint@8.57.1)(typescript@5.7.2)
+    transitivePeerDependencies:
+      - eslint
+
+  ember-eslint-parser@0.5.7(@babel/core@7.26.0)(@typescript-eslint/parser@8.16.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1):
+    dependencies:
+      '@babel/core': 7.26.0
+      '@babel/eslint-parser': 7.23.10(@babel/core@7.26.0)(eslint@8.57.1)
       '@glimmer/syntax': 0.92.3
       content-tag: 2.0.3
       eslint-scope: 7.2.2
