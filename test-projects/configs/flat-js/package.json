@@ -16,7 +16,7 @@
     "eslint-formatter-codeframe": "^7.32.1",
     "eslint-plugin-ember": "^12.0.0",
     "eslint-plugin-ember-template-lint": "workspace:*",
-    "globals": "^13.24.0"
+    "globals": "^15.13.0"
   },
   "dependencies": {
     "@eslint/js": "^9.16.0"
