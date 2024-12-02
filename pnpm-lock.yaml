@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@glimmer/syntax':
         specifier: ^0.93.0
-        version: 0.93.0
+        version: 0.93.1
       '@typescript-eslint/parser':
         specifier: ^8.16.0
         version: 8.16.0(eslint@8.57.1)(typescript@5.7.2)
@@ -922,8 +922,8 @@ packages:
   '@glimmer/syntax@0.92.3':
     resolution: {integrity: sha512-7wPKQmULyXCYf0KvbPmfrs/skPISH2QGR9atCnmDWnHyLv5SSZVLm1P0Ctrpta6+Ci3uGQb7hGk0IjsLEavcYQ==}
 
-  '@glimmer/syntax@0.93.0':
-    resolution: {integrity: sha512-2L7DT/AR7jQoJT+vUnj2xX+XBMihCutif2AyAXMFTSs/u1UyN5WUOKjEiBp6jN+thf1tdBBzUeVdZhUd/X+VVQ==}
+  '@glimmer/syntax@0.93.1':
+    resolution: {integrity: sha512-Dvq+Ni4Dcpn8kEiYN4ziTQxHrmPSchJCQJppXmFzdz77SFnhl0nWf7W8nnj88DNFEyBzKiTQCyCSuew4jrbgjA==}
 
   '@glimmer/tracking@1.1.2':
     resolution: {integrity: sha512-cyV32zsHh+CnftuRX84ALZpd2rpbDrhLhJnTXn9W//QpqdRZ5rdMsxSY9fOsj0CKEc706tmEU299oNnDc0d7tA==}
@@ -937,8 +937,8 @@ packages:
   '@glimmer/util@0.92.3':
     resolution: {integrity: sha512-K1oH93gGU36slycxJ9CcFpUTsdOc4XQ6RuZFu5oRsxFYtEF5PSu7ik11h58fyeoaWOr1ebfkyAMawbeI2AJ5GA==}
 
-  '@glimmer/util@0.93.0':
-    resolution: {integrity: sha512-C0kJlyG2NKoBYC97xkrvR+imhxKEG4Pki6HdpaYvKk6h2EuOxw6fgBBW45DAPcEkjmNKeVuMGXPzd5nAJih0YQ==}
+  '@glimmer/util@0.93.1':
+    resolution: {integrity: sha512-EFLxpoGY+cEyi/GVyO5acBpyAlf0CLSvGjURbuWcKcOMtESO72KPJvJuLaAcRssHDqKtWKPO/Fs7nNl8wfn7Lg==}
 
   '@glimmer/validator@0.44.0':
     resolution: {integrity: sha512-i01plR0EgFVz69GDrEuFgq1NheIjZcyTy3c7q+w7d096ddPVeVcRzU3LKaqCfovvLJ+6lJx40j45ecycASUUyw==}
@@ -959,8 +959,8 @@ packages:
   '@glimmer/wire-format@0.92.3':
     resolution: {integrity: sha512-gFz81Q9+V7Xs0X8mSq6y8qacHm0dPaGJo2/Bfcsdow1hLOKNgTCLr4XeDBhRML8f6I6Gk9ugH4QDxyIOXOpC4w==}
 
-  '@glimmer/wire-format@0.93.0':
-    resolution: {integrity: sha512-7OxOmiikXcyEJXw44OSYfpUTy877ZiKd0TON/GJpb/Xjb+oX8YQj97nrANMMuw2VnHA94o3qvuQosTXEAC6mrw==}
+  '@glimmer/wire-format@0.93.1':
+    resolution: {integrity: sha512-EHtdlZAZsOMBP6b9YC03OyduswqiT6Ei/mR/N1oR/4LZZ8lOyVgp6Q4H0TQW6jprWEiTMdHaO8/SEGTCrrhtUw==}
 
   '@glint/template@1.5.0':
     resolution: {integrity: sha512-KyQUCWifxl8wDxo3SXzJcGKttHbIPgFBtqsoiu13Edx/o4CgGXr5rrM64jJR7Wvunn8sRM+Rq7Y0cHoB068Wuw==}
@@ -5144,11 +5144,11 @@ snapshots:
       '@handlebars/parser': 2.0.0
       simple-html-tokenizer: 0.5.11
 
-  '@glimmer/syntax@0.93.0':
+  '@glimmer/syntax@0.93.1':
     dependencies:
       '@glimmer/interfaces': 0.93.0
-      '@glimmer/util': 0.93.0
-      '@glimmer/wire-format': 0.93.0
+      '@glimmer/util': 0.93.1
+      '@glimmer/wire-format': 0.93.1
       '@handlebars/parser': 2.0.0
       simple-html-tokenizer: 0.5.11
 
@@ -5170,7 +5170,7 @@ snapshots:
       '@glimmer/env': 0.1.7
       '@glimmer/interfaces': 0.92.3
 
-  '@glimmer/util@0.93.0':
+  '@glimmer/util@0.93.1':
     dependencies:
       '@glimmer/env': 0.1.7
       '@glimmer/interfaces': 0.93.0
@@ -5205,10 +5205,10 @@ snapshots:
       '@glimmer/interfaces': 0.92.3
       '@glimmer/util': 0.92.3
 
-  '@glimmer/wire-format@0.93.0':
+  '@glimmer/wire-format@0.93.1':
     dependencies:
       '@glimmer/interfaces': 0.93.0
-      '@glimmer/util': 0.93.0
+      '@glimmer/util': 0.93.1
 
   '@glint/template@1.5.0': {}
 
