@@ -7,7 +7,7 @@
     "types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@ember/test-waiters": "^3.1.0",
+    "@ember/test-waiters": "^4.0.0",
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
     "@glint/template": "^1.3.0",
