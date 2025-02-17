@@ -18,7 +18,7 @@
     "test-watch": "jest --watchAll"
   },
   "dependencies": {
-    "@glimmer/syntax": "^0.93.0",
+    "@glimmer/syntax": "^0.94.7",
     "@typescript-eslint/parser": "^8.16.0",
     "@typescript-eslint/typescript-estree": "^8.16.0",
     "ember-eslint-parser": "^0.5.6",
