@@ -6,7 +6,7 @@
     "generate-output": "eslint . --max-warnings=0 -f 'codeframe'  > ./result.txt"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^6.21.0",
     "ember-eslint-parser": "^0.5.6",
     "eslint": "^8.0.1",
