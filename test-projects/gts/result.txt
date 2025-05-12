@@ -1,4 +1,4 @@
-error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:29:13:
+error: Unsafe call of a(n) `error` type typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:29:13:
   27 |     let promise = args.promise
   28 |       .then((resolved) => {
 > 29 |         if (isDestroying(this) || isDestroyed(this)) return;
@@ -8,7 +8,7 @@ error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) a
   32 |       })
 
 
-error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:29:35:
+error: Unsafe call of a(n) `error` type typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:29:35:
   27 |     let promise = args.promise
   28 |       .then((resolved) => {
 > 29 |         if (isDestroying(this) || isDestroyed(this)) return;
@@ -18,7 +18,7 @@ error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) a
   32 |       })
 
 
-error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:34:13:
+error: Unsafe call of a(n) `error` type typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:34:13:
   32 |       })
   33 |       .catch((error) => {
 > 34 |         if (isDestroying(this) || isDestroyed(this)) return;
@@ -28,7 +28,7 @@ error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) a
   37 |         this.resolved = undefined;
 
 
-error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:34:35:
+error: Unsafe call of a(n) `error` type typed value (@typescript-eslint/no-unsafe-call) at src/await.gts:34:35:
   32 |       })
   33 |       .catch((error) => {
 > 34 |         if (isDestroying(this) || isDestroyed(this)) return;
@@ -88,43 +88,43 @@ error: Non-translated string used (ember-template-lint/no-bare-strings) at src/c
   42 |       </:options>
 
 
-error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/destructure-to-array.gts:5:11:
+error: Unsafe assignment of an error typed value (@typescript-eslint/no-unsafe-assignment) at src/destructure-to-array.gts:5:11:
   3 | export class DeconstructArray extends Component<unknown> {
   4 |   testFunction = async () => {
 > 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
     |           ^
   6 |     return remaining;
   7 |   }
-  8 |
+  8 | 
 
 
-error: Unsafe call of an `any` typed value (@typescript-eslint/no-unsafe-call) at src/destructure-to-array.gts:5:36:
+error: Unsafe call of a(n) `error` type typed value (@typescript-eslint/no-unsafe-call) at src/destructure-to-array.gts:5:36:
   3 | export class DeconstructArray extends Component<unknown> {
   4 |   testFunction = async () => {
 > 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
     |                                    ^
   6 |     return remaining;
   7 |   }
-  8 |
+  8 | 
 
 
-error: Unsafe member access .all on an `any` value (@typescript-eslint/no-unsafe-member-access) at src/destructure-to-array.gts:5:44:
+error: Unsafe member access .all on an `error` typed value (@typescript-eslint/no-unsafe-member-access) at src/destructure-to-array.gts:5:44:
   3 | export class DeconstructArray extends Component<unknown> {
   4 |   testFunction = async () => {
 > 5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
     |                                            ^
   6 |     return remaining;
   7 |   }
-  8 |
+  8 | 
 
 
-error: Unsafe return of an `any` typed value (@typescript-eslint/no-unsafe-return) at src/destructure-to-array.gts:6:5:
+error: Unsafe return of a value of type error (@typescript-eslint/no-unsafe-return) at src/destructure-to-array.gts:6:5:
   4 |   testFunction = async () => {
   5 |     const [, ...remaining] = await Promise.all([1, 2, 3]);
 > 6 |     return remaining;
     |     ^
   7 |   }
-  8 |
+  8 | 
   9 |   <template>
 
 
@@ -178,7 +178,7 @@ error: Non-translated string used (ember-template-lint/no-bare-strings) at src/f
   29 |     </nav>
 
 
-error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/menu.gts:32:7:
+error: Unsafe assignment of an error typed value (@typescript-eslint/no-unsafe-assignment) at src/menu.gts:32:7:
   30 | </template>;
   31 | 
 > 32 | const DefaultTrigger = <template>
@@ -188,7 +188,7 @@ error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignm
   35 |     class="text-black rounded border bg-white px-2 py-1 -my-1 text-left transition ease-in-out duration-150 sm:text-sm drop-shadow-md hover:drop-shadow-xl focus:ring-4 focus-visible:outline-none ring-ember-brand focus:outline-none"
 
 
-error: Unsafe assignment of an `any` value (@typescript-eslint/no-unsafe-assignment) at src/placeholder.gts:9:14:
+error: Unsafe assignment of an error typed value (@typescript-eslint/no-unsafe-assignment) at src/placeholder.gts:9:14:
    7 | const orGlimdown = (format: string | undefined) => format || 'glimdown';
    8 | 
 >  9 | export const Placeholder = <template>
