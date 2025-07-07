@@ -59,8 +59,8 @@ importers:
         version: 9.27.0
     devDependencies:
       '@babel/eslint-parser':
-        specifier: 7.26.8
-        version: 7.26.8(@babel/core@7.26.0)(eslint@8.57.1)
+        specifier: 7.28.0
+        version: 7.28.0(@babel/core@7.26.0)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
         specifier: 7.27.1
         version: 7.27.1(@babel/core@7.26.0)
@@ -177,8 +177,8 @@ packages:
     resolution: {integrity: sha512-i1SLeK+DzNnQ3LL/CswPCa/E5u4lh1k6IAEphON8F+cXt0t9euTshDru0q7/IqMa1PMPz5RnHuHscF8/ZJsStg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/eslint-parser@7.26.8':
-    resolution: {integrity: sha512-3tBctaHRW6xSub26z7n8uyOTwwUsCdvIug/oxBH9n6yCO5hMj2vwDJAo7RbBMKrM7P+W2j61zLKviJQFGOYKMg==}
+  '@babel/eslint-parser@7.28.0':
+    resolution: {integrity: sha512-N4ntErOlKvcbTt01rr5wj3y55xnIdx1ymrfIr8C2WnM1Y9glFgWaGDEULJIazOX3XM9NRzhfJ6zZnQ1sBNWU+w==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
@@ -2013,8 +2013,8 @@ packages:
     resolution: {integrity: sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  eslint-visitor-keys@4.2.0:
-    resolution: {integrity: sha512-UyLnSehNt62FFhSwjZlHmeokpRK59rcz29j+F1/aDgbkbRTk7wIc9XzdoasMUbRNKDM0qQt/+BJ4BrpFeABemw==}
+  eslint-visitor-keys@4.2.1:
+    resolution: {integrity: sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   eslint@8.57.1:
@@ -3538,7 +3538,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/eslint-parser@7.26.8(@babel/core@7.26.0)(eslint@8.57.1)':
+  '@babel/eslint-parser@7.28.0(@babel/core@7.26.0)(eslint@8.57.1)':
     dependencies:
       '@babel/core': 7.26.0
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
@@ -4399,7 +4399,7 @@ snapshots:
       '@embroider/shared-internals': 3.0.0
       broccoli-funnel: 3.0.8
       common-ancestor-path: 1.0.1
-      semver: 7.6.3
+      semver: 7.7.2
     transitivePeerDependencies:
       - supports-color
 
@@ -4412,7 +4412,7 @@ snapshots:
       find-up: 5.0.0
       lodash: 4.17.21
       resolve: 1.22.8
-      semver: 7.6.3
+      semver: 7.7.2
     optionalDependencies:
       '@glint/template': 1.5.2
     transitivePeerDependencies:
@@ -5114,7 +5114,7 @@ snapshots:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.8.3)
       eslint: 8.57.1
-      semver: 7.6.3
+      semver: 7.7.2
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -5138,12 +5138,12 @@ snapshots:
   '@typescript-eslint/visitor-keys@8.32.0':
     dependencies:
       '@typescript-eslint/types': 8.32.0
-      eslint-visitor-keys: 4.2.0
+      eslint-visitor-keys: 4.2.1
 
   '@typescript-eslint/visitor-keys@8.32.1':
     dependencies:
       '@typescript-eslint/types': 8.32.1
-      eslint-visitor-keys: 4.2.0
+      eslint-visitor-keys: 4.2.1
 
   '@ungap/structured-clone@1.2.0': {}
 
@@ -5825,7 +5825,7 @@ snapshots:
       ember-cli-version-checker: 5.1.2
       ensure-posix-path: 1.1.1
       resolve-package-path: 4.0.3
-      semver: 7.6.3
+      semver: 7.7.2
     transitivePeerDependencies:
       - supports-color
 
@@ -5861,7 +5861,7 @@ snapshots:
   ember-cli-version-checker@5.1.2:
     dependencies:
       resolve-package-path: 3.1.0
-      semver: 7.6.3
+      semver: 7.7.2
       silent-error: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -5869,7 +5869,7 @@ snapshots:
   ember-eslint-parser@0.5.9(@babel/core@7.26.0)(@typescript-eslint/parser@8.32.1(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1):
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/eslint-parser': 7.26.8(@babel/core@7.26.0)(eslint@8.57.1)
+      '@babel/eslint-parser': 7.28.0(@babel/core@7.26.0)(eslint@8.57.1)
       '@glimmer/syntax': 0.92.3
       content-tag: 2.0.3
       eslint-scope: 7.2.2
@@ -6025,7 +6025,7 @@ snapshots:
   eslint-compat-utils@0.5.1(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
-      semver: 7.7.1
+      semver: 7.7.2
 
   eslint-formatter-codeframe@7.32.1:
     dependencies:
@@ -6101,7 +6101,7 @@ snapshots:
 
   eslint-visitor-keys@3.4.3: {}
 
-  eslint-visitor-keys@4.2.0: {}
+  eslint-visitor-keys@4.2.1: {}
 
   eslint@8.57.1:
     dependencies:
